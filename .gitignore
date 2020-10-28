@@ -32,6 +32,8 @@ release
 
 */*/out/
 */*/Output/
+*/*/Listings/
+*/*/Objects/
 
 # flash algo exe file
 *.FLM
