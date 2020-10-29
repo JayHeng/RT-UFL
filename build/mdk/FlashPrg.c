@@ -23,6 +23,7 @@
  */
  
 #include "FlashOS.h"        // FlashOS Structures
+#include "ufl_find_target.h"
 
 /* 
    Mandatory Flash Programming Functions (Called by FlashOS):
@@ -60,8 +61,20 @@
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
-  /* Add your Code */
-  return (0);                                  // Finished without Errors
+    rt_chip_id_t id = ufl_get_imxrt_chip_id();
+    if (id == kChipId_RT6xx)
+    {
+        *(uint32_t *)0x00400000 = 0xdeadbeef;
+    }
+    else if (id == kChipId_RT106x)
+    {
+        *(uint32_t *)0x00001000 = 0xdeadbeef;
+    }
+    else
+    {
+    }
+    
+    return (0);                                  // Finished without Errors
 }
 
 

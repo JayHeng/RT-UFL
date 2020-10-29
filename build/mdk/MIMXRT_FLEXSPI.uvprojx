@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>..\..\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -407,6 +407,21 @@
               <FileName>FlashDev.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\FlashDev.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ufl</GroupName>
+          <Files>
+            <File>
+              <FileName>ufl_find_target.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_find_target.c</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_find_target.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_find_target.h</FilePath>
             </File>
           </Files>
         </Group>
