@@ -5,27 +5,14 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef _UFL_COMMON_H_
-#define _UFL_COMMON_H_
+#ifndef _UFL_FLEXSPI_NOR_FLASH_H_
+#define _UFL_FLEXSPI_NOR_FLASH_H_
 
-#include <stdbool.h>
-#include <stdint.h>
-#include <string.h>
+#include "ufl_common.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
 
-typedef uint32_t status_t;
-
-typedef enum _rt_chip_id
-{
-    kChipId_Invalid = 0xFFU,
-    kChipId_RT6xx   = 1U,
-    kChipId_RT106x  = 2U,
-} rt_chip_id_t;
-
-#define RT_ROM_BASE_CM33 (0x03000000u)
-#define RT_ROM_BASE_CM7  (0x00200000u)
 
 /*******************************************************************************
  * API
@@ -35,10 +22,10 @@ typedef enum _rt_chip_id
 extern "C" {
 #endif /*_cplusplus*/
 
-void ufl_full_setup(void);
+
 
 #if defined(__cplusplus)
 }
 #endif /*_cplusplus*/
 
-#endif /* _UFL_COMMON_H_ */
+#endif /* _UFL_FLEXSPI_NOR_FLASH_IMXRT106X_H_ */
