@@ -6,7 +6,7 @@
  */
 
 #include "ufl_find_target.h"
-#include <string.h>
+#include "core_scb.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -31,12 +31,6 @@ typedef struct _rom_fingerprint
 #define ROM_FP_OFFSET1 (0x8000)
 #define ROM_FP_OFFSET2 (0xa000)
 #define ROM_FP_OFFSET3 (0xc000)
-
-#define RT_ROM_BASE_CM33 (0x03000000u)
-#define RT_ROM_BASE_CM7  (0x00200000u)
-
-#define RT500_ROM_API_TREE_ADDR (0x0302f000u)
-#define RT600_ROM_API_TREE_ADDR (0x0303f000u)
 
 /*******************************************************************************
  * Prototypes
