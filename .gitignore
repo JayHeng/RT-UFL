@@ -12,6 +12,7 @@
 #
 
 /pack/
+/rom/
 
 #
 # Normal rules
@@ -34,6 +35,19 @@ release
 */*/Output/
 */*/Listings/
 */*/Objects/
+*/*/*/Debug/
+*/*/*/Release/
+*/*/*/settings/
+
+# IAR temp files
+EW*.tmp
+EW*.tmp.c
+*.dep
+*.ewt
+*.pbi
+*.pbi.cout
+*.pbd
+*.pbd.browse
 
 # flash algo exe file
 *.FLM
