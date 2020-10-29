@@ -7,6 +7,7 @@
 
 #include "ufl_find_target.h"
 #include "ufl_rom_api.h"
+#include "ufl_hardware_init.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -17,6 +18,7 @@
  ******************************************************************************/
 
 static void ufl_fill_flash_api(rt_chip_id_t chipId);
+static void ufl_init_hardware(rt_chip_id_t chipId);
 
 /*******************************************************************************
  * Variables
@@ -58,10 +60,28 @@ static void ufl_fill_flash_api(rt_chip_id_t chipId)
     }
 }
 
+static void ufl_init_hardware(rt_chip_id_t chipId)
+{
+    switch (chipId)
+    {
+        case kChipId_RT6xx:
+            ufl_init_hardware_imxrt6xx();
+            break;
+
+        case kChipId_RT106x:
+            ufl_init_hardware_imxrt106x();
+            break;
+
+        default:
+            break;
+    }
+}
+
 void ufl_full_setup(void)
 {
     s_imxrtChipId = ufl_get_imxrt_chip_id();
 
     ufl_fill_flash_api(s_imxrtChipId);
+    ufl_init_hardware(s_imxrtChipId);
 }
 
