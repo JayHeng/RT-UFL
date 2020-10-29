@@ -15,6 +15,26 @@
  * Definitions
  ******************************************************************************/
 
+/*
+ *  Serial NOR configuration block
+ */
+typedef struct _flexspi_nor_config
+{
+    uint32_t buffer0[112];
+    uint32_t pageSize;              //!< Page size of Serial NOR
+    uint32_t sectorSize;            //!< Sector size of Serial NOR
+    uint32_t buffer1[14];
+} flexspi_nor_config_t;
+
+/*
+ * Serial NOR Configuration Option
+ */
+typedef struct _serial_nor_config_option
+{
+    uint32_t option0;
+    uint32_t option1;
+} serial_nor_config_option_t;
+
 //!@brief FLEXSPI Flash driver API Interface
 typedef struct _flexspi_nor_flash_driver
 {
