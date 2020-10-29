@@ -6,14 +6,21 @@
 */
 
 #include <stdio.h>
-#include "ufl_find_target.h"
+#include "ufl_rom_api.h"
 /***********************************************************************************************************************
  *  Definitions
  **********************************************************************************************************************/
 
+#define FLASH_BASE_ADDR    0x08000000
+#define FLEXSPI_INSTANCE_0 (0)
+#define FLEXSPI_INSTANCE_SEL FLEXSPI_INSTANCE_0
+
+
 /***********************************************************************************************************************
  *  Variables
  **********************************************************************************************************************/
+
+flexspi_nor_config_t flashConfig = {.pageSize = 0x100};
 
 /***********************************************************************************************************************
  *  Prototypes
@@ -25,18 +32,23 @@
 
 int main()
 {
-    rt_chip_id_t id = ufl_get_imxrt_chip_id();
-	if (id == kChipId_RT6xx)
-	{
-		  *(uint32_t *)0x00400000 = 0xdeadbeef;
-	}
-	else if (id == kChipId_RT106x)
-	{
-		  *(uint32_t *)0x00001000 = 0xdeadbeef;
-	}
-	else
-	{
-	}
+    ufl_full_setup();
+
+    memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
+
+    serial_nor_config_option_t configOption;
+    configOption.option0 = 0xc1503051;
+    configOption.option1 = 0x20000014;
+
+    status_t status = flexspi_nor_auto_config(FLEXSPI_INSTANCE_SEL, &flashConfig, &configOption);
+    if (!status)
+    {
+        status = flexspi_nor_flash_erase(FLEXSPI_INSTANCE_SEL, &flashConfig, 0x1000, flashConfig.sectorSize);
+        if (!status)
+        {
+            while (1);
+        }
+    }
 
     while (1);
 }

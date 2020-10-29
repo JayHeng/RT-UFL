@@ -2118,6 +2118,9 @@
         </settings>
     </configuration>
     <file>
+        <name>$PROJ_DIR$\..\..\..\src\core_scb.h</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\main.c</name>
     </file>
     <file>
@@ -2127,6 +2130,45 @@
         <name>$PROJ_DIR$\system_MIMXRT685S_cm33.c</name>
     </file>
     <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_common.h</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_find_target.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_find_target.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt106x.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt6xx.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt106x.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt6xx.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_main.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt106x.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt6xx.h</name>
     </file>
 </project>
