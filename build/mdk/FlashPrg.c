@@ -27,6 +27,18 @@
 
 flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
+/*
+extern struct FlashDevice const FlashDevice;
+static void update_flash_dev_property(void)
+{
+    struct FlashDevice *flashDevice = (struct FlashDevice *)((uint32_t)(&FlashDevice));
+    flashDevice->DevAdr = g_uflTargetDesc.flashBaseAddr;
+    flashDevice->szDev = 0x800000;
+    flashDevice->szPage = flashConfig.pageSize;
+    flashDevice->sectors[0].szSector = flashConfig.sectorSize;
+}
+*/
+
 /* 
    Mandatory Flash Programming Functions (Called by FlashOS):
                 int Init        (unsigned long adr,   // Initialize Flash
@@ -69,6 +81,8 @@ int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
   serial_nor_config_option_t *configOption = &g_uflTargetDesc.configOption;
   memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
   status_t status = flexspi_nor_auto_config(instance, &flashConfig, configOption);
+
+  //update_flash_dev_property();
 
   return (int)status;
 }
