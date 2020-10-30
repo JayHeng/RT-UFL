@@ -54,6 +54,16 @@ typedef struct
     uint8_t delay_cells; // Data valid time, in terms of delay cells
 } flexspi_dll_time_t;
 
+//!@brief FLEXSPI ROOT CLOCK soruce related definitions
+enum
+{
+    kFlexSpiClockSrc_MainClk = 0,
+    kFlexSpiClockSrc_MainPllClk,
+    kFlexSpiClockSrc_Aux0PllClk,
+    kFlexSpiClockSrc_FFRO_Clk,
+    kFlexSpiClockSrc_Aux1PllClk,
+};
+
 /*******************************************************************************
  * API
  ******************************************************************************/

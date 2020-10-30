@@ -42,7 +42,7 @@ static core_type_t ufl_get_core_type(void);
  * Variables
  ******************************************************************************/
 
-const rom_fingerprint_t g_romFingerprint[] = {
+static const rom_fingerprint_t s_romFingerprint[] = {
     {kChipId_RT6xx,  {0xb108f82a, 0x0200f2c5, 0x0070f104} },        // From ROM 2.0rc5.1
     {kChipId_RT106x, {0xb0893000, 0x80dbf000, 0xf2c44100} },        // From ROM 1.0rc3
 };
@@ -98,12 +98,12 @@ rt_chip_id_t ufl_get_imxrt_chip_id(void)
         content[1] = *(uint32_t *)(rtRomBase + ROM_FP_OFFSET2);
         content[2] = *(uint32_t *)(rtRomBase + ROM_FP_OFFSET3);
 
-        uint32_t idx = sizeof(g_romFingerprint) / sizeof(rom_fingerprint_t);
+        uint32_t idx = sizeof(s_romFingerprint) / sizeof(rom_fingerprint_t);
         while (idx--)
         {
-            if (!memcmp(g_romFingerprint[idx].content, content, sizeof(content)))
+            if (!memcmp(s_romFingerprint[idx].content, content, sizeof(content)))
             {
-                chipId = (rt_chip_id_t)g_romFingerprint[idx].chipId;
+                chipId = (rt_chip_id_t)s_romFingerprint[idx].chipId;
                 break;
             }
         }

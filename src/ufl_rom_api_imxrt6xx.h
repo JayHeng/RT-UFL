@@ -31,16 +31,6 @@ typedef struct _bootloader_tree_imxrt6xx
 
 #define g_bootloaderTree_imxrt6xx  ((bootloader_tree_imxrt6xx_t*)(RT6XX_ROM_API_TREE_ADDR))
 
-//!@brief FLEXSPI ROOT CLOCK soruce related definitions
-enum
-{
-    kFlexSpiClockSrc_MainClk = 0,
-    kFlexSpiClockSrc_MainPllClk,
-    kFlexSpiClockSrc_Aux0PllClk,
-    kFlexSpiClockSrc_FFRO_Clk,
-    kFlexSpiClockSrc_Aux1PllClk,
-};
-
 /*******************************************************************************
  * API
  ******************************************************************************/
