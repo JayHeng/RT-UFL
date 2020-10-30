@@ -52,9 +52,11 @@ typedef struct _target_desc
     uint32_t imxrtChipId;
     uint32_t flexspiInstance;
     uint32_t flashBaseAddr;
-    serial_nor_config_option_t cfgOption;
+    serial_nor_config_option_t configOption;
     flexspi_nor_flash_driver_t flashDriver;
 } ufl_target_desc_t;
+
+extern ufl_target_desc_t g_uflTargetDesc;
 
 /*******************************************************************************
  * API

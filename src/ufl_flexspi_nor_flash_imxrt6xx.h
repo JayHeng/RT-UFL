@@ -13,6 +13,12 @@
  * Definitions
  ******************************************************************************/
 
+#define FLEXSPI_INSTANCE_1st_RT6XX  (0)
+#define FLASH_BASE_ADDR_1st_RT6XX   0x08000000
+
+#define FLEXSPI_INSTANCE_2nd_RT6XX  (1)
+#define FLASH_BASE_ADDR_2nd_RT6XX   0x08000000
+
 //!@brief FlexSPI Memory Configuration Block
 typedef struct _FlexSPIConfig_imxrt6xx
 {

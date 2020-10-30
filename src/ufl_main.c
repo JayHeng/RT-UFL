@@ -16,8 +16,9 @@
  * Prototypes
  ******************************************************************************/
 
-static void ufl_fill_flash_api(rt_chip_id_t chipId);
-static void ufl_init_hardware(rt_chip_id_t chipId);
+static void ufl_fill_flash_api(void);
+static void ufl_init_hardware(void);
+static void ufl_set_target_property(void);
 
 /*******************************************************************************
  * Variables
@@ -29,8 +30,9 @@ ufl_target_desc_t g_uflTargetDesc = {.imxrtChipId = kChipId_Invalid};
  * Code
  ******************************************************************************/
 
-static void ufl_fill_flash_api(rt_chip_id_t chipId)
+static void ufl_fill_flash_api(void)
 {
+    rt_chip_id_t chipId = (rt_chip_id_t)g_uflTargetDesc.imxrtChipId;
     switch (chipId)
     {
         case kChipId_RT6xx:
@@ -59,8 +61,9 @@ static void ufl_fill_flash_api(rt_chip_id_t chipId)
     }
 }
 
-static void ufl_init_hardware(rt_chip_id_t chipId)
+static void ufl_init_hardware(void)
 {
+    rt_chip_id_t chipId = (rt_chip_id_t)g_uflTargetDesc.imxrtChipId;
     switch (chipId)
     {
         case kChipId_RT6xx:
@@ -77,11 +80,38 @@ static void ufl_init_hardware(rt_chip_id_t chipId)
     }
 }
 
+static void ufl_set_target_property(void)
+{
+    rt_chip_id_t chipId = (rt_chip_id_t)g_uflTargetDesc.imxrtChipId;
+    switch (chipId)
+    {
+        case kChipId_RT6xx:
+            g_uflTargetDesc.flexspiInstance   = FLEXSPI_INSTANCE_1st_RT6XX;
+            g_uflTargetDesc.flashBaseAddr     = FLASH_BASE_ADDR_1st_RT6XX;
+            g_uflTargetDesc.configOption.option0 = 0xc1503051;
+            g_uflTargetDesc.configOption.option1 = 0x20000014;
+            break;
+
+        case kChipId_RT106x:
+            g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT106X;
+            g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT106X;
+            g_uflTargetDesc.configOption.option0 = 0xc0000006;
+            g_uflTargetDesc.configOption.option1 = 0x0;
+            break;
+
+        case kChipId_Invalid:
+        default:
+            break;
+    }
+}
+
 void ufl_full_setup(void)
 {
-    g_uflTargetDesc.imxrtChipId = (uint32_t)ufl_get_imxrt_chip_id();
+    rt_chip_id_t chipId = ufl_get_imxrt_chip_id();
+    g_uflTargetDesc.imxrtChipId = (uint32_t)chipId;
 
-    ufl_fill_flash_api((rt_chip_id_t)g_uflTargetDesc.imxrtChipId);
-    ufl_init_hardware((rt_chip_id_t)g_uflTargetDesc.imxrtChipId);
+    ufl_fill_flash_api();
+    ufl_init_hardware();
+    ufl_set_target_property();
 }
 
