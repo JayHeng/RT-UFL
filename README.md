@@ -1,6 +1,6 @@
-# RT-UniversalFlashloader
+# RT-UFL (Universal FlashLoader)
 
-　　RT-UniversalFlashloader is a universal flashloader, one .FLM file for all i.MXRT chips, it should be integrated into Segger driver (or Keil MDK), then you can download and debug MCUXpresso SDK XIP project by J-Link.
+　　RT-UFL is a universal flashloader, one .FLM file for all i.MXRT chips, it should be integrated into Segger driver (or Keil MDK), then you can download and debug MCUXpresso SDK XIP project by J-Link.
 
 　　The main features of RT-UniversalFlashloader：
 
