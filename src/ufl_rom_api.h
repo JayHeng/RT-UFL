@@ -20,10 +20,17 @@
  */
 typedef struct _flexspi_nor_config
 {
-    uint32_t buffer0[112];
+    uint32_t cfg0[20];
+    uint32_t sflashA1Size;               //!< [0x050-0x053] Size of Flash connected to A1
+    uint32_t sflashA2Size;               //!< [0x054-0x057] Size of Flash connected to A2
+    uint32_t sflashB1Size;               //!< [0x058-0x05b] Size of Flash connected to B1
+    uint32_t sflashB2Size;               //!< [0x05c-0x05f] Size of Flash connected to B2
+    uint32_t cfg1[88];
     uint32_t pageSize;              //!< Page size of Serial NOR
     uint32_t sectorSize;            //!< Sector size of Serial NOR
-    uint32_t buffer1[14];
+    uint32_t cfg2[2];
+    uint32_t blockSize;             //!< Block size
+    uint32_t cfg3[11];
 } flexspi_nor_config_t;
 
 /*
