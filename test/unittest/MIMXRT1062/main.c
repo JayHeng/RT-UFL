@@ -11,15 +11,11 @@
  *  Definitions
  **********************************************************************************************************************/
 
-#define FLASH_BASE_ADDR    0x60000000
-#define FLEXSPI_INSTANCE_0 (0)
-#define FLEXSPI_INSTANCE_SEL FLEXSPI_INSTANCE_0
-
 /***********************************************************************************************************************
  *  Variables
  **********************************************************************************************************************/
 
-flexspi_nor_config_t flashConfig = {.pageSize = 0x100};
+flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 /***********************************************************************************************************************
  *  Prototypes
@@ -32,17 +28,15 @@ flexspi_nor_config_t flashConfig = {.pageSize = 0x100};
 int main()
 {
     ufl_full_setup();
+    uint32_t instance = g_uflTargetDesc.flexspiInstance;
+    serial_nor_config_option_t *configOption = &g_uflTargetDesc.configOption;
 
     memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
 
-    serial_nor_config_option_t configOption;
-    configOption.option0 = 0xc0000006;
-    configOption.option1 = 0;
-
-    status_t status = flexspi_nor_auto_config(FLEXSPI_INSTANCE_SEL, &flashConfig, &configOption);
+    status_t status = flexspi_nor_auto_config(instance, &flashConfig, configOption);
     if (!status)
     {
-        status = flexspi_nor_flash_erase(FLEXSPI_INSTANCE_SEL, &flashConfig, 0x1000, flashConfig.sectorSize);
+        status = flexspi_nor_flash_erase(instance, &flashConfig, 0x1000, flashConfig.sectorSize);
         if (!status)
         {
             while (1);
