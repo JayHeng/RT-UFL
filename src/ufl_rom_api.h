@@ -47,6 +47,15 @@ typedef struct _flexspi_nor_flash_driver
     status_t (*get_config)(uint32_t instance, void *config, void *option);
 } flexspi_nor_flash_driver_t;
 
+typedef struct _target_desc
+{
+    uint32_t imxrtChipId;
+    uint32_t flexspiInstance;
+    uint32_t flashBaseAddr;
+    serial_nor_config_option_t cfgOption;
+    flexspi_nor_flash_driver_t flashDriver;
+} ufl_target_desc_t;
+
 /*******************************************************************************
  * API
  ******************************************************************************/
