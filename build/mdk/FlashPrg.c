@@ -23,7 +23,9 @@
  */
  
 #include "FlashOS.h"        // FlashOS Structures
-#include "ufl_find_target.h"
+#include "ufl_rom_api.h"
+
+flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 /* 
    Mandatory Flash Programming Functions (Called by FlashOS):
@@ -61,20 +63,14 @@
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
-    rt_chip_id_t id = ufl_get_imxrt_chip_id();
-    if (id == kChipId_RT6xx)
-    {
-        *(uint32_t *)0x00400000 = 0xdeadbeef;
-    }
-    else if (id == kChipId_RT106x)
-    {
-        *(uint32_t *)0x00001000 = 0xdeadbeef;
-    }
-    else
-    {
-    }
-    
-    return (0);                                  // Finished without Errors
+  ufl_full_setup();
+
+  uint32_t instance = g_uflTargetDesc.flexspiInstance;
+  serial_nor_config_option_t *configOption = &g_uflTargetDesc.configOption;
+  memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
+  status_t status = flexspi_nor_auto_config(instance, &flashConfig, configOption);
+
+  return (int)status;
 }
 
 
@@ -98,8 +94,11 @@ int UnInit (unsigned long fnc) {
 
 int EraseChip (void) {
 
-  /* Add your Code */
-  return (0);                                  // Finished without Errors
+  uint32_t instance = g_uflTargetDesc.flexspiInstance;
+  /*Erase all*/
+  status_t status =  flexspi_nor_flash_erase_all(instance, &flashConfig);
+  
+  return (int)status;
 }
 
 
@@ -111,8 +110,12 @@ int EraseChip (void) {
 
 int EraseSector (unsigned long adr) {
 
-  /* Add your Code */
-  return (0);                                  // Finished without Errors
+  uint32_t instance = g_uflTargetDesc.flexspiInstance;
+  uint32_t baseAddr = g_uflTargetDesc.flashBaseAddr;
+  /*Erase Sector*/
+  status_t status =  flexspi_nor_flash_erase(instance, &flashConfig, adr - baseAddr, flashConfig.sectorSize);
+  
+  return (int)status;
 }
 
 
@@ -126,6 +129,16 @@ int EraseSector (unsigned long adr) {
 
 int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
 
-  /* Add your Code */
-  return (0);                                  // Finished without Errors
+  status_t status = 0;
+  uint32_t instance = g_uflTargetDesc.flexspiInstance;
+  uint32_t baseAddr = g_uflTargetDesc.flashBaseAddr;
+
+  for(uint32_t size = 0; size < sz; size+=flashConfig.pageSize,
+                                     buf+=flashConfig.pageSize,
+                                     adr+=flashConfig.pageSize)
+  {
+    status =  flexspi_nor_flash_page_program(instance, &flashConfig, adr - baseAddr, (uint32_t *)buf);
+  }
+
+  return (int)status;
 }

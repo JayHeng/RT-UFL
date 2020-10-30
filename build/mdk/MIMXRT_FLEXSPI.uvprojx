@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\src</IncludePath>
+              <IncludePath>..\..\src;..\..\CMSIS\Core\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -422,6 +422,66 @@
               <FileName>ufl_find_target.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_find_target.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_common.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_flexspi_nor_flash.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_flexspi_nor_flash.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_flexspi_nor_flash_imxrt6xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt6xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_flexspi_nor_flash_imxrt106x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt106x.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_hardware_init.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_hardware_init.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_hardware_init_imxrt6xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_hardware_init_imxrt6xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_hardware_init_imxrt106x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_hardware_init_imxrt106x.c</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_main.c</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_rom_api.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_rom_api.c</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_rom_api.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_rom_api.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_rom_api_imxrt6xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_rom_api_imxrt6xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_rom_api_imxrt106x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_rom_api_imxrt106x.h</FilePath>
             </File>
           </Files>
         </Group>
