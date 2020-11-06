@@ -167,9 +167,20 @@ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
     uint32_t instance = g_uflTargetDesc.flexspiInstance;
     uint32_t baseAddr = g_uflTargetDesc.flashBaseAddr;
 
-    for(uint32_t size = 0; size < sz; size+=flashConfig.pageSize,
-                                       buf+=flashConfig.pageSize,
-                                       adr+=flashConfig.pageSize)
+    if (g_uflTargetDesc.isFlashPageProgram)
+    {
+        for(uint32_t size = 0; size < sz; size+=flashConfig.pageSize,
+                                           buf+=flashConfig.pageSize,
+                                           adr+=flashConfig.pageSize)
+        {
+            status =  flexspi_nor_flash_page_program(instance, &flashConfig, adr - baseAddr, (uint32_t *)buf);
+            if (status != kStatus_Success)
+            {
+                return (1);
+            }
+        }
+    }
+    else
     {
         status =  flexspi_nor_flash_page_program(instance, &flashConfig, adr - baseAddr, (uint32_t *)buf);
         if (status != kStatus_Success)
