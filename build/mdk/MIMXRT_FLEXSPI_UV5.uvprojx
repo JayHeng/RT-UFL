@@ -48,14 +48,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Objects\</OutputDirectory>
+          <OutputDirectory>.\UV5_Objects\</OutputDirectory>
           <OutputName>MIMXRT_FLEXSPI_UFL</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\Listings\</ListingPath>
+          <ListingPath>.\UV5_Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -82,7 +82,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>cmd.exe /C copy "Objects\%L" ".\@L.FLM"</UserProg1Name>
+            <UserProg1Name>cmd.exe /C copy "UV5_Objects\%L" ".\@L.FLM"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -414,6 +414,11 @@
           <GroupName>ufl</GroupName>
           <Files>
             <File>
+              <FileName>ufl_common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_common.h</FilePath>
+            </File>
+            <File>
               <FileName>ufl_find_target.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\src\ufl_find_target.c</FilePath>
@@ -422,11 +427,6 @@
               <FileName>ufl_find_target.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_find_target.h</FilePath>
-            </File>
-            <File>
-              <FileName>ufl_common.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\src\ufl_common.h</FilePath>
             </File>
             <File>
               <FileName>ufl_flexspi_nor_flash.h</FileName>
