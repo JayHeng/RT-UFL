@@ -6,6 +6,7 @@
  */
 
 #include "ufl_hardware_init.h"
+#include "devices/MIMXRT1062.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -29,7 +30,6 @@
 
 void ufl_init_hardware_imxrt106x(void)
 {
-    /*
     // Disable Watchdog Power Down Counter
     WDOG1->WMCR &= ~WDOG_WMCR_PDE_MASK;
     WDOG2->WMCR &= ~WDOG_WMCR_PDE_MASK;
@@ -102,6 +102,5 @@ void ufl_init_hardware_imxrt106x(void)
         CCM_ANALOG->PLL_SYS &= ~CCM_ANALOG_PLL_SYS_BYPASS_MASK;
         CCM_ANALOG->PLL_USB1 &= ~CCM_ANALOG_PLL_USB1_BYPASS_MASK;
     }
-    */
 }
 
