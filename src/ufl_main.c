@@ -86,8 +86,8 @@ static void ufl_set_target_property(void)
     switch (chipId)
     {
         case kChipId_RT6xx:
-            g_uflTargetDesc.flexspiInstance   = FLEXSPI_INSTANCE_1st_RT6XX;
-            g_uflTargetDesc.flashBaseAddr     = FLASH_BASE_ADDR_1st_RT6XX;
+            g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT6XX;
+            g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT6XX;
             g_uflTargetDesc.configOption.option0 = 0xc1503051;
             g_uflTargetDesc.configOption.option1 = 0x20000014;
             break;

@@ -15,6 +15,12 @@
  * Definitions
  ******************************************************************************/
 
+/*! @brief Generic status return codes. */
+enum
+{
+    kStatus_Success = 0U,
+};
+
 typedef uint32_t status_t;
 
 #define MEM_WriteU32(addr, value)  (*((volatile uint32_t *)(addr)) = value)

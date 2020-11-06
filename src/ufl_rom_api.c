@@ -72,7 +72,7 @@ status_t flexspi_nor_auto_config(uint32_t instance, void *config, void *option)
     {
     }
     status_t status = flexspi_nor_get_config(instance, config, option);
-    if (status != 0)
+    if (status != kStatus_Success)
     {
         return status;
     }
