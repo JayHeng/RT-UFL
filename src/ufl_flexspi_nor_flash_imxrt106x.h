@@ -132,7 +132,7 @@ typedef struct _flexspi_nor_flash_driver_imxrt106x
 {
     uint32_t version;
     status_t (*init)(uint32_t instance, void *config);
-    status_t (*page_program)(uint32_t instance, void *config, uint32_t dst_addr, const uint32_t *src);
+    status_t (*program)(uint32_t instance, void *config, uint32_t dst_addr, const uint32_t *src);
     status_t (*erase_all)(uint32_t instance, void *config);
     status_t (*erase)(uint32_t instance, void *config, uint32_t start, uint32_t lengthInBytes);
     status_t (*read)(uint32_t instance, void *config, uint32_t *dst, uint32_t addr, uint32_t lengthInBytes);

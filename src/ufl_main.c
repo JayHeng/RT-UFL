@@ -38,6 +38,7 @@ static void ufl_fill_flash_api(void)
         case kChipId_RT6xx:
             g_uflTargetDesc.flashDriver.init             = g_bootloaderTree_imxrt6xx->flexspiNorDriver->init;
             g_uflTargetDesc.flashDriver.page_program     = g_bootloaderTree_imxrt6xx->flexspiNorDriver->page_program;
+            g_uflTargetDesc.isFlashPageProgram           = true;
             g_uflTargetDesc.flashDriver.erase_all        = g_bootloaderTree_imxrt6xx->flexspiNorDriver->erase_all;
             g_uflTargetDesc.flashDriver.erase            = g_bootloaderTree_imxrt6xx->flexspiNorDriver->erase;
             g_uflTargetDesc.flashDriver.read             = g_bootloaderTree_imxrt6xx->flexspiNorDriver->read;
@@ -47,7 +48,8 @@ static void ufl_fill_flash_api(void)
 
         case kChipId_RT106x:
             g_uflTargetDesc.flashDriver.init             = g_bootloaderTree_imxrt106x->flexspiNorDriver->init;
-            g_uflTargetDesc.flashDriver.page_program     = g_bootloaderTree_imxrt106x->flexspiNorDriver->page_program;
+            g_uflTargetDesc.flashDriver.page_program     = g_bootloaderTree_imxrt106x->flexspiNorDriver->program;
+            g_uflTargetDesc.isFlashPageProgram           = false;
             g_uflTargetDesc.flashDriver.erase_all        = g_bootloaderTree_imxrt106x->flexspiNorDriver->erase_all;
             g_uflTargetDesc.flashDriver.erase            = g_bootloaderTree_imxrt106x->flexspiNorDriver->erase;
             g_uflTargetDesc.flashDriver.read             = g_bootloaderTree_imxrt106x->flexspiNorDriver->read;

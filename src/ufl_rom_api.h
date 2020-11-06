@@ -61,6 +61,7 @@ typedef struct _target_desc
     uint32_t flashBaseAddr;
     serial_nor_config_option_t configOption;
     flexspi_nor_flash_driver_t flashDriver;
+    bool isFlashPageProgram;
 } ufl_target_desc_t;
 
 extern ufl_target_desc_t g_uflTargetDesc;
