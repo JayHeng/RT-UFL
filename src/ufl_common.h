@@ -29,8 +29,9 @@ typedef uint32_t status_t;
 typedef enum _rt_chip_id
 {
     kChipId_Invalid = 0xFFU,
-    kChipId_RT6xx   = 1U,
-    kChipId_RT106x  = 2U,
+    kChipId_RT5xx   = 1U,
+    kChipId_RT6xx   = 2U,
+    kChipId_RT106x  = 3U,
 } rt_chip_id_t;
 
 #define RT_ROM_BASE_CM33 (0x03000000u)

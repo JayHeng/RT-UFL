@@ -43,6 +43,7 @@ static core_type_t ufl_get_core_type(void);
  ******************************************************************************/
 
 static const rom_fingerprint_t s_romFingerprint[] = {
+    {kChipId_RT5xx,  {0xf44f0240, 0xfbb0bd10, 0x99079108} },        // From ROM 2.0rc4
     {kChipId_RT6xx,  {0xb108f82a, 0x0200f2c5, 0x0070f104} },        // From ROM 2.0rc5.1
     {kChipId_RT106x, {0xb0893000, 0x80dbf000, 0xf2c44100} },        // From ROM 1.0rc3
 };

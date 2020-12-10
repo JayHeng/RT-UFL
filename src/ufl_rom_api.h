@@ -9,6 +9,7 @@
 #define _UFL_ROM_API_H_
 
 #include "ufl_flexspi_nor_flash.h"
+#include "ufl_rom_api_imxrt5xx.h"
 #include "ufl_rom_api_imxrt6xx.h"
 #include "ufl_rom_api_imxrt106x.h"
 /*******************************************************************************

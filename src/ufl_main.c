@@ -35,6 +35,17 @@ static void ufl_fill_flash_api(void)
     rt_chip_id_t chipId = (rt_chip_id_t)g_uflTargetDesc.imxrtChipId;
     switch (chipId)
     {
+        case kChipId_RT5xx:
+            g_uflTargetDesc.flashDriver.init             = g_bootloaderTree_imxrt5xx->flexspiNorDriver->init;
+            g_uflTargetDesc.flashDriver.page_program     = g_bootloaderTree_imxrt5xx->flexspiNorDriver->page_program;
+            g_uflTargetDesc.isFlashPageProgram           = true;
+            g_uflTargetDesc.flashDriver.erase_all        = g_bootloaderTree_imxrt5xx->flexspiNorDriver->erase_all;
+            g_uflTargetDesc.flashDriver.erase            = g_bootloaderTree_imxrt5xx->flexspiNorDriver->erase;
+            g_uflTargetDesc.flashDriver.read             = g_bootloaderTree_imxrt5xx->flexspiNorDriver->read;
+            g_uflTargetDesc.flashDriver.set_clock_source = g_bootloaderTree_imxrt5xx->flexspiNorDriver->set_clock_source;
+            g_uflTargetDesc.flashDriver.get_config       = g_bootloaderTree_imxrt5xx->flexspiNorDriver->get_config;
+            break;
+
         case kChipId_RT6xx:
             g_uflTargetDesc.flashDriver.init             = g_bootloaderTree_imxrt6xx->flexspiNorDriver->init;
             g_uflTargetDesc.flashDriver.page_program     = g_bootloaderTree_imxrt6xx->flexspiNorDriver->page_program;
@@ -68,6 +79,10 @@ static void ufl_init_hardware(void)
     rt_chip_id_t chipId = (rt_chip_id_t)g_uflTargetDesc.imxrtChipId;
     switch (chipId)
     {
+        case kChipId_RT5xx:
+            ufl_init_hardware_imxrt5xx();
+            break;
+
         case kChipId_RT6xx:
             ufl_init_hardware_imxrt6xx();
             break;
@@ -87,6 +102,13 @@ static void ufl_set_target_property(void)
     rt_chip_id_t chipId = (rt_chip_id_t)g_uflTargetDesc.imxrtChipId;
     switch (chipId)
     {
+        case kChipId_RT5xx:
+            g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT5XX;
+            g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT5XX;
+            g_uflTargetDesc.configOption.option0 = 0xc0403004;
+            g_uflTargetDesc.configOption.option1 = 0x0;
+            break;
+
         case kChipId_RT6xx:
             g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT6XX;
             g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT6XX;

@@ -20,6 +20,8 @@
 extern "C" {
 #endif /*_cplusplus*/
 
+void ufl_init_hardware_imxrt5xx(void);
+
 void ufl_init_hardware_imxrt6xx(void);
 
 void ufl_init_hardware_imxrt106x(void);

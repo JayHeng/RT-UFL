@@ -60,7 +60,7 @@ enum
     kFlexSpiClockSrc_MainClk = 0,
     kFlexSpiClockSrc_MainPllClk,
     kFlexSpiClockSrc_Aux0PllClk,
-    kFlexSpiClockSrc_FFRO_Clk,
+    kFlexSpiClockSrc_FFRO_Clk, // kFlexSpiClockSrc_FRO192M_Clk
     kFlexSpiClockSrc_Aux1PllClk,
 };
 
