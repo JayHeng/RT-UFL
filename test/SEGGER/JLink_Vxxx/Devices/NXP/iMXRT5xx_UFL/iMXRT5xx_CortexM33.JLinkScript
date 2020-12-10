@@ -9,6 +9,21 @@
 
 /*********************************************************************
 *
+*       ResetTarget
+*/
+void ResetTarget(void) {
+  //
+  // This device requires a special reset as default reset does not work for this device.
+  // TBD
+  //
+  JLINK_SYS_Report("******************************************************");
+  JLINK_SYS_Report("J-Link script: ResetTarget()");
+  JLINK_SYS_Report("******************************************************");
+  JLINK_TARGET_Halt(); // Make sure that the CPU is halted when reset is called
+}
+
+/*********************************************************************
+*
 *       InitTarget
 */
 void InitTarget(void) {
