@@ -473,6 +473,11 @@
               <FilePath>..\..\src\ufl_flexspi_nor_flash.h</FilePath>
             </File>
             <File>
+              <FileName>ufl_flexspi_nor_flash_imxrt5xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt5xx.h</FilePath>
+            </File>
+            <File>
               <FileName>ufl_flexspi_nor_flash_imxrt6xx.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt6xx.h</FilePath>
@@ -486,6 +491,11 @@
               <FileName>ufl_hardware_init.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_hardware_init.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_hardware_init_imxrt5xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_hardware_init_imxrt5xx.c</FilePath>
             </File>
             <File>
               <FileName>ufl_hardware_init_imxrt6xx.c</FileName>
@@ -562,6 +572,11 @@
               <FileName>ufl_rom_api.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_rom_api.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_rom_api_imxrt5xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_rom_api_imxrt5xx.h</FilePath>
             </File>
             <File>
               <FileName>ufl_rom_api_imxrt6xx.h</FileName>

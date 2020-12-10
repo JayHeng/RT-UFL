@@ -24,8 +24,7 @@
  
 #include "FlashOS.h"        // FlashOS Structures
 
-// MIMXRT685-EVK
-/*
+// MIMXRT595-EVK, MIMXRT685-EVK
 struct FlashDevice const FlashDevice  =  {
    FLASH_DRV_VERS,             // Driver Version, do not modify!
    "MIMXRT_FLEXSPI",           // Device Name 
@@ -42,9 +41,9 @@ struct FlashDevice const FlashDevice  =  {
    0x01000, 0x0,               // sectors are 4 KB
    SECTOR_END
 };
-*/
 
 // MIMXRT1060-EVK
+/*
 struct FlashDevice const FlashDevice = {
    FLASH_DRV_VERS,             // Driver Version, do not modify!
    "MIMXRT_FLEXSPI",           // Device Name
@@ -61,4 +60,5 @@ struct FlashDevice const FlashDevice = {
    0x1000, 0x00000000,         // Sector Size  4kB (256 Sectors)
    SECTOR_END
 };
+*/
 
