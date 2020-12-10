@@ -51,7 +51,7 @@
   <Device>
     <ChipInfo      Vendor="NXP"
                    Name="MIMXRT1062_UFL"
-                   WorkRAMAddr="0x20000000"
+                   WorkRAMAddr="0x00000000"
                    WorkRAMSize="0x00080000"
                    Core="JLINK_CORE_CORTEX_M7"
                    JLinkScriptFile="Devices/NXP/iMXRT_UFL/iMXRT_CortexM.JLinkScript"
