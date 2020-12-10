@@ -63,4 +63,21 @@
                    LoaderType="FLASH_ALGO_TYPE_OPEN" />
   </Device>
 
+  <!--                 -->
+  <!-- NXP (iMXRT117x) -->
+  <!--                 -->
+  <Device>
+    <ChipInfo      Vendor="NXP"
+                   Name="MIMXRT1176_UFL"
+                   WorkRAMAddr="0x00000000"
+                   WorkRAMSize="0x00080000"
+                   Core="JLINK_CORE_CORTEX_M7"
+                   Aliases="MIMXRT1176DVMAA" />
+    <FlashBankInfo Name="QSPI Flash" 
+                   BaseAddr="0x30000000"
+                   MaxSize="0x04000000"
+                   Loader="Devices/NXP/iMXRT117x_UFL/MIMXRT117x_EVK_FLEXSPI.FLM"
+                   LoaderType="FLASH_ALGO_TYPE_OPEN" />
+  </Device>
+
 </DataBase>
