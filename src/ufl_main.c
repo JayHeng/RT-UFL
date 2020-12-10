@@ -109,6 +109,8 @@ static void ufl_set_target_property(void)
 
 void ufl_full_setup(void)
 {
+    memset((void *)&g_uflTargetDesc, 0U, sizeof(ufl_target_desc_t));
+
     rt_chip_id_t chipId = ufl_get_imxrt_chip_id();
     g_uflTargetDesc.imxrtChipId = (uint32_t)chipId;
 
