@@ -47,11 +47,11 @@ void ufl_init_hardware_imxrt6xx(void)
     MEM_WriteU32(0x4000263C, 0xFFFFFFFF);
 
     // PMC CTRL APPLYCFG
-    *((volatile uint32_t *)0x4013500C) = *((volatile uint32_t *)0x4013500C) | 1;
+    MEM_WriteU32(0x4013500C, MEM_ReadU32(0x4013500C) | 1);
     // WAIT PMC update done
     do 
     {
-        v = *((volatile uint32_t *)0x40135004) & 1;
+        v = MEM_ReadU32(0x40135004) & 1;
     } while (v);
 
     // MAINCLKSELA

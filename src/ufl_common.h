@@ -23,6 +23,9 @@ enum
 
 typedef uint32_t status_t;
 
+#define MEM_WriteU16(addr, value)  (*((volatile uint16_t *)(addr)) = value)
+#define MEM_ReadU16(addr)          (*((volatile uint16_t *)(addr)))
+
 #define MEM_WriteU32(addr, value)  (*((volatile uint32_t *)(addr)) = value)
 #define MEM_ReadU32(addr)          (*((volatile uint32_t *)(addr)))
 
