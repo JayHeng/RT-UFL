@@ -350,7 +350,7 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
-                    <state>$PROJ_DIR$/..</state>
+                    <state>$PROJ_DIR$/</state>
                     <state>$PROJ_DIR$/../../../src</state>
                     <state>$TOOLKIT_DIR$\CMSIS\Core\Include</state>
                 </option>
@@ -2145,6 +2145,12 @@
         <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt106x.h</name>
     </file>
     <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt117x.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt5xx.h</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt6xx.h</name>
     </file>
     <file>
@@ -2152,6 +2158,12 @@
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt106x.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt117x.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt5xx.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt6xx.c</name>
@@ -2167,6 +2179,12 @@
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt106x.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt117x.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt5xx.h</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt6xx.h</name>

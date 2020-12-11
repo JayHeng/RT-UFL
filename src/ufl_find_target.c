@@ -6,7 +6,11 @@
  */
 
 #include "ufl_find_target.h"
+#if defined(CPU_MIMXRT1176DVMAA_cm7)
 #include "core_cm7.h"
+#else
+#include "core_scb.h"
+#endif
 /*******************************************************************************
  * Definitions
  ******************************************************************************/

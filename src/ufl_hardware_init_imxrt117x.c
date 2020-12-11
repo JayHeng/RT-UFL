@@ -6,7 +6,9 @@
  */
 
 #include "ufl_hardware_init.h"
+#if defined(CPU_MIMXRT1176DVMAA_cm7)
 #include "fsl_clock.h"
+#endif
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -28,6 +30,7 @@
  * Code
  ******************************************************************************/
 
+#if defined(CPU_MIMXRT1176DVMAA_cm7)
 static void restore_clock(void)
 {
     uint32_t i = 0;
@@ -36,9 +39,11 @@ static void restore_clock(void)
         CCM->CLOCK_ROOT[i].CONTROL = 0;
     }
 }
+#endif
 
 void ufl_init_hardware_imxrt117x(void)
 {
+#if defined(CPU_MIMXRT1176DVMAA_cm7)
     if ((*(uint32_t *)0x40C84800) == 0x1170A0)
     {
         if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR))
@@ -69,5 +74,6 @@ void ufl_init_hardware_imxrt117x(void)
 
     SRC->GPR[9]            = 0;
     IOMUXC_LPSR_GPR->GPR26 = 0x4200;
+#endif
 }
 

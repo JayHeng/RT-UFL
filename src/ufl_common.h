@@ -11,20 +11,22 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
+#if defined(CPU_MIMXRT1176DVMAA_cm7)
 #include "fsl_common.h"
+#endif
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
 
 /*! @brief Generic status return codes. */
-/*
+#if !defined(CPU_MIMXRT1176DVMAA_cm7)
 enum
 {
     kStatus_Success = 0U,
 };
 
 typedef uint32_t status_t;
-*/
+#endif
 
 #define MEM_WriteU16(addr, value)  (*((volatile uint16_t *)(addr)) = value)
 #define MEM_ReadU16(addr)          (*((volatile uint16_t *)(addr)))
