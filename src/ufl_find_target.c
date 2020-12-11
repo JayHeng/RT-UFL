@@ -28,9 +28,9 @@ typedef struct _rom_fingerprint
     uint32_t content[3];
 } rom_fingerprint_t;
 
-#define ROM_FP_OFFSET1 (0x8000)
-#define ROM_FP_OFFSET2 (0xa000)
-#define ROM_FP_OFFSET3 (0xc000)
+#define ROM_FP_OFFSET1 (0x18000)
+#define ROM_FP_OFFSET2 (0x1a000)
+#define ROM_FP_OFFSET3 (0x1c000)
 
 /*******************************************************************************
  * Prototypes
@@ -43,9 +43,10 @@ static core_type_t ufl_get_core_type(void);
  ******************************************************************************/
 
 static const rom_fingerprint_t s_romFingerprint[] = {
-    {kChipId_RT5xx,  {0xf44f0240, 0xfbb0bd10, 0x99079108} },        // From ROM 2.0rc4
-    {kChipId_RT6xx,  {0xb108f82a, 0x0200f2c5, 0x0070f104} },        // From ROM 2.0rc5.1
-    {kChipId_RT106x, {0xb0893000, 0x80dbf000, 0xf2c44100} },        // From ROM 1.0rc3
+    {kChipId_RT5xx,  {0x00000000, 0x669ff643, 0xa8017026} },        // From ROM 2.0rc4
+    {kChipId_RT6xx,  {0x09657b04, 0xf2406510, 0x240046a2} },        // From ROM 2.0rc5.1
+    {kChipId_RT106x, {0x4608aa04, 0x2a01b132, 0x000000b4} },        // From ROM 1.0rc3
+    {kChipId_RT117x, {0xf24a0110, 0x9909a810, 0xf44f6030} },        // From ROM 2.0rc4.1
 };
 
 /*******************************************************************************

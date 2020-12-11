@@ -26,6 +26,8 @@ void ufl_init_hardware_imxrt6xx(void);
 
 void ufl_init_hardware_imxrt106x(void);
 
+void ufl_init_hardware_imxrt117x(void);
+
 #if defined(__cplusplus)
 }
 #endif /*_cplusplus*/

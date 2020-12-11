@@ -12,6 +12,7 @@
 #include "ufl_rom_api_imxrt5xx.h"
 #include "ufl_rom_api_imxrt6xx.h"
 #include "ufl_rom_api_imxrt106x.h"
+#include "ufl_rom_api_imxrt117x.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/

@@ -68,6 +68,17 @@ static void ufl_fill_flash_api(void)
             g_uflTargetDesc.flashDriver.get_config       = g_bootloaderTree_imxrt106x->flexspiNorDriver->get_config;
             break;
 
+        case kChipId_RT117x:
+            g_uflTargetDesc.flashDriver.init             = g_bootloaderTree_imxrt117x->flexspiNorDriver->init;
+            g_uflTargetDesc.flashDriver.page_program     = g_bootloaderTree_imxrt117x->flexspiNorDriver->page_program;
+            g_uflTargetDesc.isFlashPageProgram           = true;
+            g_uflTargetDesc.flashDriver.erase_all        = g_bootloaderTree_imxrt117x->flexspiNorDriver->erase_all;
+            g_uflTargetDesc.flashDriver.erase            = g_bootloaderTree_imxrt117x->flexspiNorDriver->erase;
+            g_uflTargetDesc.flashDriver.read             = g_bootloaderTree_imxrt117x->flexspiNorDriver->read;
+            g_uflTargetDesc.flashDriver.set_clock_source = NULL;
+            g_uflTargetDesc.flashDriver.get_config       = g_bootloaderTree_imxrt117x->flexspiNorDriver->get_config;
+            break;
+
         case kChipId_Invalid:
         default:
             break;
@@ -89,6 +100,10 @@ static void ufl_init_hardware(void)
 
         case kChipId_RT106x:
             ufl_init_hardware_imxrt106x();
+            break;
+
+        case kChipId_RT117x:
+            ufl_init_hardware_imxrt117x();
             break;
 
         case kChipId_Invalid:
@@ -119,6 +134,13 @@ static void ufl_set_target_property(void)
         case kChipId_RT106x:
             g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT106X;
             g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT106X;
+            g_uflTargetDesc.configOption.option0 = 0xc0000006;
+            g_uflTargetDesc.configOption.option1 = 0x0;
+            break;
+
+        case kChipId_RT117x:
+            g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT117X;
+            g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT117X;
             g_uflTargetDesc.configOption.option0 = 0xc0000006;
             g_uflTargetDesc.configOption.option1 = 0x0;
             break;
