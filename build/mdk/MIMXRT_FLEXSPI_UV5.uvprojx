@@ -326,7 +326,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
-            <uGnu>0</uGnu>
+            <uGnu>1</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
@@ -375,7 +375,7 @@
             <IncludeLibsPath></IncludeLibsPath>
             <Misc>--diag_suppress L6305 --entry 0xc001</Misc>
             <LinkerInputFile></LinkerInputFile>
-            <DisabledWarnings></DisabledWarnings>
+            <DisabledWarnings>6412</DisabledWarnings>
           </LDads>
         </TargetArmAds>
       </TargetOption>
