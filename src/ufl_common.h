@@ -54,7 +54,7 @@ typedef enum _rt_chip_id
 extern "C" {
 #endif /*_cplusplus*/
 
-void ufl_full_setup(void);
+status_t ufl_full_setup(void);
 
 #if defined(__cplusplus)
 }

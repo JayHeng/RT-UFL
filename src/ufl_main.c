@@ -8,6 +8,7 @@
 #include "ufl_find_target.h"
 #include "ufl_rom_api.h"
 #include "ufl_hardware_init.h"
+#include "ufl_auto_probe_flash.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -151,15 +152,29 @@ static void ufl_set_target_property(void)
     }
 }
 
-void ufl_full_setup(void)
+status_t ufl_full_setup(void)
 {
-    memset((void *)&g_uflTargetDesc, 0U, sizeof(ufl_target_desc_t));
+    static bool isSetupDone = false;
+    status_t status = kStatus_Success;
 
-    rt_chip_id_t chipId = ufl_get_imxrt_chip_id();
-    g_uflTargetDesc.imxrtChipId = (uint32_t)chipId;
+    //if (!isSetupDone)
+    {
+        memset((void *)&g_uflTargetDesc, 0U, sizeof(ufl_target_desc_t));
 
-    ufl_fill_flash_api();
-    ufl_init_hardware();
-    ufl_set_target_property();
+        rt_chip_id_t chipId = ufl_get_imxrt_chip_id();
+        g_uflTargetDesc.imxrtChipId = (uint32_t)chipId;
+
+        ufl_fill_flash_api();
+        ufl_init_hardware();
+        ufl_set_target_property();
+
+        status = ufl_auto_probe();
+        if (status == kStatus_Success)
+        {
+            isSetupDone = true;
+        }
+    }
+
+    return status;
 }
 

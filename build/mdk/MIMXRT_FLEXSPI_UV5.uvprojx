@@ -479,11 +479,6 @@
               <FilePath>..\..\src\ufl_hardware_init_imxrt117x.c</FilePath>
             </File>
             <File>
-              <FileName>ufl_main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\src\ufl_main.c</FilePath>
-            </File>
-            <File>
               <FileName>ufl_rom_api.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\src\ufl_rom_api.c</FilePath>
@@ -563,6 +558,21 @@
               <FileName>ufl_rom_api_imxrt117x.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_rom_api_imxrt117x.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_auto_probe_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_auto_probe_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_auto_probe_flash.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_auto_probe_flash.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_main.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -75,14 +75,7 @@ static void update_flash_dev_property(void)
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
-    ufl_full_setup();
-
-    status_t status = kStatus_Success;
-    uint32_t instance = g_uflTargetDesc.flexspiInstance;
-    serial_nor_config_option_t *configOption = &g_uflTargetDesc.configOption;
-
-    memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
-    status = flexspi_nor_auto_config(instance, &flashConfig, configOption);
+    status_t status = ufl_full_setup();
     if (status != kStatus_Success)
     {
         return (1);
