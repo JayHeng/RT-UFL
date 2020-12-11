@@ -376,9 +376,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define></Define>
+              <Define>CPU_MIMXRT1176DVMAA_cm7</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\src;..\..\CMSIS\Core\Include</IncludePath>
+              <IncludePath>..\..\src;..\..\src\devices;..\..\CMSIS\Core\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -488,6 +488,11 @@
               <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt106x.h</FilePath>
             </File>
             <File>
+              <FileName>ufl_flexspi_nor_flash_imxrt117x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt117x.h</FilePath>
+            </File>
+            <File>
               <FileName>ufl_hardware_init.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_hardware_init.h</FilePath>
@@ -506,6 +511,11 @@
               <FileName>ufl_hardware_init_imxrt106x.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\src\ufl_hardware_init_imxrt106x.c</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_hardware_init_imxrt117x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_hardware_init_imxrt117x.c</FilePath>
             </File>
             <File>
               <FileName>ufl_main.c</FileName>
@@ -587,6 +597,36 @@
               <FileName>ufl_rom_api_imxrt106x.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_rom_api_imxrt106x.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_rom_api_imxrt117x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_rom_api_imxrt117x.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Device Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>fsl_anatop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\devices\fsl_anatop.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_anatop_ai.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\devices\fsl_anatop_ai.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\devices\fsl_clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\devices\fsl_common.c</FilePath>
             </File>
           </Files>
         </Group>

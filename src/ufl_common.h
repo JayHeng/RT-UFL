@@ -11,17 +11,20 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
+#include "fsl_common.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
 
 /*! @brief Generic status return codes. */
+/*
 enum
 {
     kStatus_Success = 0U,
 };
 
 typedef uint32_t status_t;
+*/
 
 #define MEM_WriteU16(addr, value)  (*((volatile uint16_t *)(addr)) = value)
 #define MEM_ReadU16(addr)          (*((volatile uint16_t *)(addr)))
