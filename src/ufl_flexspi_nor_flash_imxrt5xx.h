@@ -13,11 +13,13 @@
  * Definitions
  ******************************************************************************/
 
-#define FLEXSPI_INSTANCE_1st_RT5XX  (1)
-#define FLASH_BASE_ADDR_1st_RT5XX   0x08000000
+#define MIMXRT5XX_1st_FLEXSPI_INSTANCE      (1)
+#define MIMXRT5XX_1st_FLEXSPI_BASE          (0x40134000u)
+#define MIMXRT5XX_1st_FLEXSPI_AMBA_BASE     (0x08000000)
 
-#define FLEXSPI_INSTANCE_2nd_RT5XX  (2)
-#define FLASH_BASE_ADDR_2nd_RT5XX   0x08000000
+#define MIMXRT5XX_2nd_FLEXSPI_INSTANCE      (2)
+#define MIMXRT5XX_2nd_FLEXSPI_BASE          (0x4013C000u)
+#define MIMXRT5XX_2nd_FLEXSPI_AMBA_BASE     (0x28000000)
 
 //!@brief FlexSPI Memory Configuration Block
 typedef struct _FlexSPIConfig_imxrt5xx

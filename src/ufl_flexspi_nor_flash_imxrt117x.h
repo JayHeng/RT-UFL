@@ -13,11 +13,13 @@
  * Definitions
  ******************************************************************************/
 
-#define FLEXSPI_INSTANCE_1st_RT117X  (1)
-#define FLASH_BASE_ADDR_1st_RT117X   0x30000000
+#define MIMXRT117X_1st_FLEXSPI_INSTANCE      (1)
+#define MIMXRT117X_1st_FLEXSPI_BASE          (0x400CC000u)
+#define MIMXRT117X_1st_FLEXSPI_AMBA_BASE     (0x30000000U)
 
-#define FLEXSPI_INSTANCE_2nd_RT117X  (2)
-#define FLASH_BASE_ADDR_2nd_RT117X   0x60000000
+#define MIMXRT117X_2nd_FLEXSPI_INSTANCE      (2)
+#define MIMXRT117X_2nd_FLEXSPI_BASE          (0x400D0000u)
+#define MIMXRT117X_2nd_FLEXSPI_AMBA_BASE     (0x60000000U)
 
 //!@brief FlexSPI Memory Configuration Block
 typedef struct _FlexSPIConfig_imxrt117x

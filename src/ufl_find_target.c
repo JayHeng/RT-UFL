@@ -46,6 +46,7 @@ static core_type_t ufl_get_core_type(void);
  * Variables
  ******************************************************************************/
 
+// Keep ROM contents of three positions
 static const rom_fingerprint_t s_romFingerprint[] = {
     {kChipId_RT5xx,  {0x00000000, 0x669ff643, 0xa8017026} },        // From ROM 2.0rc4
     {kChipId_RT6xx,  {0x09657b04, 0xf2406510, 0x240046a2} },        // From ROM 2.0rc5.1
@@ -85,7 +86,9 @@ rt_chip_id_t ufl_get_imxrt_chip_id(void)
     core_type_t coreType;
     uint32_t rtRomBase = 0;
 
+    // Get cortex-m core type by SCB->CPUID.
     coreType = ufl_get_core_type();
+    // For i.MXRTxxx and i.MXRT1xxx, ROM base addresses are different
     if (kCoreType_CM33 == coreType)
     {
         rtRomBase = RT_ROM_BASE_CM33;
@@ -104,6 +107,7 @@ rt_chip_id_t ufl_get_imxrt_chip_id(void)
         content[1] = *(uint32_t *)(rtRomBase + ROM_FP_OFFSET2);
         content[2] = *(uint32_t *)(rtRomBase + ROM_FP_OFFSET3);
 
+        // Find dedicated i.MXRT part number according to ROM contents
         uint32_t idx = sizeof(s_romFingerprint) / sizeof(rom_fingerprint_t);
         while (idx--)
         {

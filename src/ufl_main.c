@@ -119,31 +119,35 @@ static void ufl_set_target_property(void)
     switch (chipId)
     {
         case kChipId_RT5xx:
-            g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT5XX;
-            g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT5XX;
-            g_uflTargetDesc.configOption.option0 = 0xc0403004;
-            g_uflTargetDesc.configOption.option1 = 0x0;
+            g_uflTargetDesc.flexspiInstance = MIMXRT5XX_1st_FLEXSPI_INSTANCE;
+            g_uflTargetDesc.flexspiBaseAddr = MIMXRT5XX_1st_FLEXSPI_BASE;
+            g_uflTargetDesc.flashBaseAddr   = MIMXRT5XX_1st_FLEXSPI_AMBA_BASE;
+            //g_uflTargetDesc.configOption.option0.U = 0xc0403004;
+            //g_uflTargetDesc.configOption.option1.U = 0x0;
             break;
 
         case kChipId_RT6xx:
-            g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT6XX;
-            g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT6XX;
-            g_uflTargetDesc.configOption.option0 = 0xc1503051;
-            g_uflTargetDesc.configOption.option1 = 0x20000014;
+            g_uflTargetDesc.flexspiInstance = MIMXRT6XX_1st_FLEXSPI_INSTANCE;
+            g_uflTargetDesc.flexspiBaseAddr = MIMXRT6XX_1st_FLEXSPI_BASE;
+            g_uflTargetDesc.flashBaseAddr   = MIMXRT6XX_1st_FLEXSPI_AMBA_BASE;
+            //g_uflTargetDesc.configOption.option0.U = 0xc1503051;
+            //g_uflTargetDesc.configOption.option1.U = 0x20000014;
             break;
 
         case kChipId_RT106x:
-            g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT106X;
-            g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT106X;
-            g_uflTargetDesc.configOption.option0 = 0xc0000006;
-            g_uflTargetDesc.configOption.option1 = 0x0;
+            g_uflTargetDesc.flexspiInstance = MIMXRT106X_1st_FLEXSPI_INSTANCE;
+            g_uflTargetDesc.flexspiBaseAddr = MIMXRT106X_1st_FLEXSPI_BASE;
+            g_uflTargetDesc.flashBaseAddr   = MIMXRT106X_1st_FLEXSPI_AMBA_BASE;
+            //g_uflTargetDesc.configOption.option0.U = 0xc0000006;
+            //g_uflTargetDesc.configOption.option1.U = 0x0;
             break;
 
         case kChipId_RT117x:
-            g_uflTargetDesc.flexspiInstance = FLEXSPI_INSTANCE_1st_RT117X;
-            g_uflTargetDesc.flashBaseAddr   = FLASH_BASE_ADDR_1st_RT117X;
-            g_uflTargetDesc.configOption.option0 = 0xc0000006;
-            g_uflTargetDesc.configOption.option1 = 0x0;
+            g_uflTargetDesc.flexspiInstance = MIMXRT117X_1st_FLEXSPI_INSTANCE;
+            g_uflTargetDesc.flexspiBaseAddr = MIMXRT117X_1st_FLEXSPI_BASE;
+            g_uflTargetDesc.flashBaseAddr   = MIMXRT117X_1st_FLEXSPI_AMBA_BASE;
+            //g_uflTargetDesc.configOption.option0.U = 0xc0000006;
+            //g_uflTargetDesc.configOption.option1.U = 0x0;
             break;
 
         case kChipId_Invalid:
@@ -154,13 +158,22 @@ static void ufl_set_target_property(void)
 
 status_t ufl_full_setup(void)
 {
-    static bool isSetupDone = false;
+    static bool isFirstTimeInit = true;
     status_t status = kStatus_Success;
 
-    //if (!isSetupDone)
+    // ufl_full_setup() is called in Init(), the Init() is called by 
+    //   Erase/Program/verify operation everytime.
+    // As we have auto probe feature, this featue can be used to find 
+    //   proper flash config option.
+    // If we have found proper option by auto probe, we don't need to 
+    //   do auto probe anymore. so we just need to init g_uflTargetDesc once.
+    if (isFirstTimeInit)
     {
         memset((void *)&g_uflTargetDesc, 0U, sizeof(ufl_target_desc_t));
+        isFirstTimeInit = false;
+    }
 
+    {
         rt_chip_id_t chipId = ufl_get_imxrt_chip_id();
         g_uflTargetDesc.imxrtChipId = (uint32_t)chipId;
 
@@ -169,10 +182,6 @@ status_t ufl_full_setup(void)
         ufl_set_target_property();
 
         status = ufl_auto_probe();
-        if (status == kStatus_Success)
-        {
-            isSetupDone = true;
-        }
     }
 
     return status;

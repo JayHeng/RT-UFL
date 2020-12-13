@@ -40,8 +40,36 @@ typedef struct _flexspi_nor_config
  */
 typedef struct _serial_nor_config_option
 {
-    uint32_t option0;
-    uint32_t option1;
+    union
+    {
+        struct
+        {
+            uint32_t max_freq : 4;          //!< Maximum supported Frequency
+            uint32_t misc_mode : 4;         //!< miscellaneous mode
+            uint32_t quad_mode_setting : 4; //!< Quad mode setting
+            uint32_t cmd_pads : 4;          //!< Command pads
+            uint32_t query_pads : 4;        //!< SFDP read pads
+            uint32_t device_type : 4;       //!< Device type
+            uint32_t option_size : 4;       //!< Option size, in terms of uint32_t, size = (option_size + 1) * 4
+            uint32_t tag : 4;               //!< Tag, must be 0x0E
+        } B;
+        uint32_t U;
+    } option0;
+
+    union
+    {
+        struct
+        {
+            uint32_t dummy_cycles : 8;     //!< Dummy cycles before read
+            uint32_t status_override : 8;  //!< Override status register value during device mode configuration
+            uint32_t pinmux_group : 4;     //!< The pinmux group selection
+            uint32_t dqs_pinmux_group : 4; //!< The DQS Pinmux Group Selection
+            uint32_t drive_strength : 4;   //!< The Drive Strength of FlexSPI Pads
+            uint32_t flash_connection : 4; //!< Flash connection option: 0 - Single Flash connected to port A, 1 -
+            //! Parallel mode, 2 - Single Flash connected to Port B
+        } B;
+        uint32_t U;
+    } option1;
 } serial_nor_config_option_t;
 
 //!@brief FLEXSPI Flash driver API Interface
@@ -60,6 +88,7 @@ typedef struct _target_desc
 {
     uint32_t imxrtChipId;
     uint32_t flexspiInstance;
+    uint32_t flexspiBaseAddr;
     uint32_t flashBaseAddr;
     serial_nor_config_option_t configOption;
     flexspi_nor_flash_driver_t flashDriver;
