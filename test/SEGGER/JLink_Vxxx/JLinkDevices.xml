@@ -4,7 +4,7 @@
   <!--                 -->
   <Device>
     <ChipInfo      Vendor="NXP"
-                   Name="MIMXRT595_UFL"
+                   Name="MIMXRT500_UFL"
                    WorkRAMAddr="0x00000000"
                    WorkRAMSize="0x00500000"
                    Core="JLINK_CORE_CORTEX_M33"
@@ -22,7 +22,7 @@
   <!--                 -->
   <Device>
     <ChipInfo      Vendor="NXP"
-                   Name="MIMXRT685_UFL"
+                   Name="MIMXRT600_UFL"
                    WorkRAMAddr="0x00000000"
                    WorkRAMSize="0x00480000"
                    Core="JLINK_CORE_CORTEX_M33"
@@ -40,7 +40,7 @@
   <!--                 -->
   <Device>
     <ChipInfo      Vendor="NXP"
-                   Name="MIMXRT1062_UFL"
+                   Name="MIMXRT1060_UFL"
                    WorkRAMAddr="0x00000000"
                    WorkRAMSize="0x00080000"
                    Core="JLINK_CORE_CORTEX_M7"
@@ -57,7 +57,7 @@
   <!--                 -->
   <Device>
     <ChipInfo      Vendor="NXP"
-                   Name="MIMXRT1176_UFL"
+                   Name="MIMXRT1170_UFL"
                    WorkRAMAddr="0x00000000"
                    WorkRAMSize="0x00080000"
                    Core="JLINK_CORE_CORTEX_M7"
