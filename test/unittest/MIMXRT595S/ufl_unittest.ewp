@@ -117,7 +117,7 @@
                 <option>
                     <name>GBECoreSlave</name>
                     <version>28</version>
-                    <state>41</state>
+                    <state>59</state>
                 </option>
                 <option>
                     <name>OGUseCmsis</name>
@@ -134,7 +134,7 @@
                 <option>
                     <name>CoreVariant</name>
                     <version>28</version>
-                    <state>41</state>
+                    <state>59</state>
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
@@ -157,7 +157,7 @@
                 <option>
                     <name>GFPUCoreSlave2</name>
                     <version>28</version>
-                    <state>41</state>
+                    <state>59</state>
                 </option>
                 <option>
                     <name>OGCMSISPackSelectDevice</name>
@@ -198,7 +198,7 @@
                 </option>
                 <option>
                     <name>DSPExtension</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>TrustZone</name>
@@ -226,7 +226,7 @@
                     <name>CCDefines</name>
                     <state>DEBUG</state>
                     <state>UNIT_TEST</state>
-                    <state>CPU_MIMXRT1062CVJ5A</state>
+                    <state>CPU_MIMXRT595SFFOB_cm33</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -777,7 +777,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$\MIMXRT1062xxxxx_ram.icf</state>
+                    <state>$PROJ_DIR$\MIMXRT595Sxxxx_cm33_ram.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -1177,7 +1177,7 @@
                 <option>
                     <name>GBECoreSlave</name>
                     <version>28</version>
-                    <state>41</state>
+                    <state>59</state>
                 </option>
                 <option>
                     <name>OGUseCmsis</name>
@@ -1194,7 +1194,7 @@
                 <option>
                     <name>CoreVariant</name>
                     <version>28</version>
-                    <state>41</state>
+                    <state>59</state>
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
@@ -1217,7 +1217,7 @@
                 <option>
                     <name>GFPUCoreSlave2</name>
                     <version>28</version>
-                    <state>41</state>
+                    <state>59</state>
                 </option>
                 <option>
                     <name>OGCMSISPackSelectDevice</name>
@@ -1258,7 +1258,7 @@
                 </option>
                 <option>
                     <name>DSPExtension</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>TrustZone</name>
@@ -1285,7 +1285,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>NDEBUG</state>
-                    <state>CPU_MIMXRT1062CVJ5A</state>
+                    <state>CPU_MIMXRT685SFAWBR_cm33</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -1835,7 +1835,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$\MIMXRT1062xxxxx_ram.icf</state>
+                    <state>$PROJ_DIR$\MIMXRT685Sxxxx_cm33_ram.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -2123,10 +2123,10 @@
         <name>$PROJ_DIR$\main.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\startup_MIMXRT1062.s</name>
+        <name>$PROJ_DIR$\startup_MIMXRT595S_cm33.s</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\system_MIMXRT1062.c</name>
+        <name>$PROJ_DIR$\system_MIMXRT595S_cm33.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_auto_probe_flash.c</name>
