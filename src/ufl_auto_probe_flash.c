@@ -50,12 +50,13 @@ static const serial_nor_config_option_t s_flashConfigOpt[] = {
     // For Normal Quad, eg. IS25LP064A, GD25LB256E
     {.option0.U = 0xc0000001, .option1.U = 0x00000000},
 
-    // For Normal HyperBus, eg. S26KS512S, IS26KS512S
-    {.option0.U = 0xc0233001, .option1.U = 0x00000000},
-
     // For Normal Octal, eg. MX25UM51345G
     {.option0.U = 0xc0403001, .option1.U = 0x00000000},
     {.option0.U = 0xc1503051, .option1.U = 0x20000014},
+
+    // For Normal HyperBus, eg. S26KS512S, IS26KS512S
+    {.option0.U = 0xc0233001, .option1.U = 0x00000000},
+
     // For Normal Octal, eg. MX25UM51245G
     {.option0.U = 0xc0403031, .option1.U = 0x00000000},
 
@@ -147,6 +148,7 @@ status_t ufl_auto_probe(void)
                             // Only when higher freq of current option wasn't failed ever, then 
                             //   we will try higher freq of current option.
                             if ((!isHigherFreqFailed) &&
+                                (option.option1.U == 0) &&
                                 (option.option0.B.max_freq < kSerialNorCfgOption_MaxFreq))
                             {
                                 isLowerFreqPassed = true;
