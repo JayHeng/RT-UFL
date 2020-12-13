@@ -225,6 +225,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>DEBUG</state>
+                    <state>UNIT_TEST</state>
                     <state>CPU_MIMXRT1062CVJ5A</state>
                 </option>
                 <option>
@@ -2125,6 +2126,12 @@
     </file>
     <file>
         <name>$PROJ_DIR$\system_MIMXRT1062.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_auto_probe_flash.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_auto_probe_flash.h</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_common.h</name>

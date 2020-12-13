@@ -60,7 +60,7 @@
                 </option>
                 <option>
                     <name>CExtraOptions</name>
-                    <state>--jlink_script_file=$PROJ_DIR$/../../SEGGER/JLink_Vxxx/Devices/NXP/iMXRT6xx_UFL/iMXRT6xx_CortexM33.JLinkScript</state>
+                    <state>--jlink_script_file=$PROJ_DIR$/../../SEGGER/JLink_Vxxx/Devices/NXP/iMXRT_UFL/iMXRT6xx_CortexM33.JLinkScript</state>
                 </option>
                 <option>
                     <name>CFpuProcessor</name>

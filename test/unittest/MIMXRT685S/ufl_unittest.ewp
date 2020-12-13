@@ -225,6 +225,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>DEBUG</state>
+                    <state>UNIT_TEST</state>
                     <state>CPU_MIMXRT685SFAWBR_cm33</state>
                 </option>
                 <option>
@@ -352,6 +353,7 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$/</state>
                     <state>$PROJ_DIR$/../../../src</state>
+                    <state>$PROJ_DIR$/../../../src/devices</state>
                     <state>$TOOLKIT_DIR$\CMSIS\Core\Include</state>
                 </option>
                 <option>
@@ -2118,9 +2120,6 @@
         </settings>
     </configuration>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\core_scb.h</name>
-    </file>
-    <file>
         <name>$PROJ_DIR$\main.c</name>
     </file>
     <file>
@@ -2128,6 +2127,12 @@
     </file>
     <file>
         <name>$PROJ_DIR$\system_MIMXRT685S_cm33.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_auto_probe_flash.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_auto_probe_flash.h</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_common.h</name>
