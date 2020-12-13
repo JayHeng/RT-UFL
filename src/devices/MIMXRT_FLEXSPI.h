@@ -46,7 +46,27 @@
 #ifndef _MIMXRT_FLEXSPI_H_
 #define _MIMXRT_FLEXSPI_H_                      /**< Symbol preventing repeated inclusion */
 
-#include "core_cm7.h"                 /* Core Peripheral Access Layer */
+
+/* IO definitions (access restrictions to peripheral registers) */
+/**
+    \defgroup CMSIS_glob_defs CMSIS Global Defines
+
+    <strong>IO Type Qualifiers</strong> are used
+    \li to specify the access to peripheral variables.
+    \li for automatic generation of peripheral register debug information.
+*/
+#ifdef __cplusplus
+  #define   ___I     volatile             /*!< Defines 'read only' permissions */
+#else
+  #define   ___I     volatile const       /*!< Defines 'read only' permissions */
+#endif
+#define     ___O     volatile             /*!< Defines 'write only' permissions */
+#define     ___IO    volatile             /*!< Defines 'read / write' permissions */
+
+/* following defines should be used for structure members */
+#define     ___IM     volatile const      /*! Defines 'read only' structure member permissions */
+#define     ___OM     volatile            /*! Defines 'write only' structure member permissions */
+#define     ___IOM    volatile            /*! Defines 'read / write' structure member permissions */
 
 /* ----------------------------------------------------------------------------
    -- Device Peripheral Access Layer
@@ -87,41 +107,41 @@
 
 /** FLEXSPI - Register Layout Typedef */
 typedef struct {
-  __IO uint32_t MCR0;                              /**< Module Control Register 0, offset: 0x0 */
-  __IO uint32_t MCR1;                              /**< Module Control Register 1, offset: 0x4 */
-  __IO uint32_t MCR2;                              /**< Module Control Register 2, offset: 0x8 */
-  __IO uint32_t AHBCR;                             /**< AHB Bus Control Register, offset: 0xC */
-  __IO uint32_t INTEN;                             /**< Interrupt Enable Register, offset: 0x10 */
-  __IO uint32_t INTR;                              /**< Interrupt Register, offset: 0x14 */
-  __IO uint32_t LUTKEY;                            /**< LUT Key Register, offset: 0x18 */
-  __IO uint32_t LUTCR;                             /**< LUT Control Register, offset: 0x1C */
-  __IO uint32_t AHBRXBUFCR0[8];                    /**< AHB RX Buffer 0 Control Register 0..AHB RX Buffer 7 Control Register 0, array offset: 0x20, array step: 0x4 */
+  ___IO uint32_t MCR0;                              /**< Module Control Register 0, offset: 0x0 */
+  ___IO uint32_t MCR1;                              /**< Module Control Register 1, offset: 0x4 */
+  ___IO uint32_t MCR2;                              /**< Module Control Register 2, offset: 0x8 */
+  ___IO uint32_t AHBCR;                             /**< AHB Bus Control Register, offset: 0xC */
+  ___IO uint32_t INTEN;                             /**< Interrupt Enable Register, offset: 0x10 */
+  ___IO uint32_t INTR;                              /**< Interrupt Register, offset: 0x14 */
+  ___IO uint32_t LUTKEY;                            /**< LUT Key Register, offset: 0x18 */
+  ___IO uint32_t LUTCR;                             /**< LUT Control Register, offset: 0x1C */
+  ___IO uint32_t AHBRXBUFCR0[8];                    /**< AHB RX Buffer 0 Control Register 0..AHB RX Buffer 7 Control Register 0, array offset: 0x20, array step: 0x4 */
        uint8_t RESERVED_0[32];
-  __IO uint32_t FLSHCR0[4];                        /**< Flash Control Register 0, array offset: 0x60, array step: 0x4 */
-  __IO uint32_t FLSHCR1[4];                        /**< Flash Control Register 1, array offset: 0x70, array step: 0x4 */
-  __IO uint32_t FLSHCR2[4];                        /**< Flash Control Register 2, array offset: 0x80, array step: 0x4 */
+  ___IO uint32_t FLSHCR0[4];                        /**< Flash Control Register 0, array offset: 0x60, array step: 0x4 */
+  ___IO uint32_t FLSHCR1[4];                        /**< Flash Control Register 1, array offset: 0x70, array step: 0x4 */
+  ___IO uint32_t FLSHCR2[4];                        /**< Flash Control Register 2, array offset: 0x80, array step: 0x4 */
        uint8_t RESERVED_1[4];
-  __IO uint32_t FLSHCR4;                           /**< Flash Control Register 4, offset: 0x94 */
+  ___IO uint32_t FLSHCR4;                           /**< Flash Control Register 4, offset: 0x94 */
        uint8_t RESERVED_2[8];
-  __IO uint32_t IPCR0;                             /**< IP Control Register 0, offset: 0xA0 */
-  __IO uint32_t IPCR1;                             /**< IP Control Register 1, offset: 0xA4 */
+  ___IO uint32_t IPCR0;                             /**< IP Control Register 0, offset: 0xA0 */
+  ___IO uint32_t IPCR1;                             /**< IP Control Register 1, offset: 0xA4 */
        uint8_t RESERVED_3[8];
-  __IO uint32_t IPCMD;                             /**< IP Command Register, offset: 0xB0 */
-  __IO uint32_t DLPR;                              /**< Data Learn Pattern Register, offset: 0xB4 */
-  __IO uint32_t IPRXFCR;                           /**< IP RX FIFO Control Register, offset: 0xB8 */
-  __IO uint32_t IPTXFCR;                           /**< IP TX FIFO Control Register, offset: 0xBC */
-  __IO uint32_t DLLCR[2];                          /**< DLL Control Register 0, array offset: 0xC0, array step: 0x4 */
+  ___IO uint32_t IPCMD;                             /**< IP Command Register, offset: 0xB0 */
+  ___IO uint32_t DLPR;                              /**< Data Learn Pattern Register, offset: 0xB4 */
+  ___IO uint32_t IPRXFCR;                           /**< IP RX FIFO Control Register, offset: 0xB8 */
+  ___IO uint32_t IPTXFCR;                           /**< IP TX FIFO Control Register, offset: 0xBC */
+  ___IO uint32_t DLLCR[2];                          /**< DLL Control Register 0, array offset: 0xC0, array step: 0x4 */
        uint8_t RESERVED_4[24];
-  __I  uint32_t STS0;                              /**< Status Register 0, offset: 0xE0 */
-  __I  uint32_t STS1;                              /**< Status Register 1, offset: 0xE4 */
-  __I  uint32_t STS2;                              /**< Status Register 2, offset: 0xE8 */
-  __I  uint32_t AHBSPNDSTS;                        /**< AHB Suspend Status Register, offset: 0xEC */
-  __I  uint32_t IPRXFSTS;                          /**< IP RX FIFO Status Register, offset: 0xF0 */
-  __I  uint32_t IPTXFSTS;                          /**< IP TX FIFO Status Register, offset: 0xF4 */
+  ___I  uint32_t STS0;                              /**< Status Register 0, offset: 0xE0 */
+  ___I  uint32_t STS1;                              /**< Status Register 1, offset: 0xE4 */
+  ___I  uint32_t STS2;                              /**< Status Register 2, offset: 0xE8 */
+  ___I  uint32_t AHBSPNDSTS;                        /**< AHB Suspend Status Register, offset: 0xEC */
+  ___I  uint32_t IPRXFSTS;                          /**< IP RX FIFO Status Register, offset: 0xF0 */
+  ___I  uint32_t IPTXFSTS;                          /**< IP TX FIFO Status Register, offset: 0xF4 */
        uint8_t RESERVED_5[8];
-  __I  uint32_t RFDR[32];                          /**< IP RX FIFO Data Register 0..IP RX FIFO Data Register 31, array offset: 0x100, array step: 0x4 */
-  __O  uint32_t TFDR[32];                          /**< IP TX FIFO Data Register 0..IP TX FIFO Data Register 31, array offset: 0x180, array step: 0x4 */
-  __IO uint32_t LUT[128];                          /**< LUT 0..LUT 127, array offset: 0x200, array step: 0x4 */
+  ___I  uint32_t RFDR[32];                          /**< IP RX FIFO Data Register 0..IP RX FIFO Data Register 31, array offset: 0x100, array step: 0x4 */
+  ___O  uint32_t TFDR[32];                          /**< IP TX FIFO Data Register 0..IP TX FIFO Data Register 31, array offset: 0x180, array step: 0x4 */
+  ___IO uint32_t LUT[128];                          /**< LUT 0..LUT 127, array offset: 0x200, array step: 0x4 */
 } FLEXSPI_Type;
 
 /*!

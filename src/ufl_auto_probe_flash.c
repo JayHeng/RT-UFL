@@ -55,6 +55,12 @@ static void flexspi_wait_idle(FLEXSPI_Type *base)
     }
 }
 
+static void flexspi_error_handler(FLEXSPI_Type *base)
+{
+    flexspi_sw_reset(base);
+    flexspi_wait_idle(base);
+}
+
 status_t ufl_auto_probe(void)
 {
     status_t status = kStatus_Success;
@@ -64,20 +70,20 @@ status_t ufl_auto_probe(void)
     if (g_uflTargetDesc.configOption.option0.B.tag == kSerialNorCfgOption_Tag)
     {
         memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
-        status_t status = flexspi_nor_auto_config(instance, &flashConfig, &g_uflTargetDesc.configOption);
+        status = flexspi_nor_auto_config(instance, &flashConfig, &g_uflTargetDesc.configOption);
     }
     else
     {
         FLEXSPI_Type *base = (FLEXSPI_Type *)g_uflTargetDesc.flexspiBaseAddr;
+        const serial_nor_config_option_t *option;
         uint32_t retryCnt = sizeof(s_flashConfigOpt) / sizeof(serial_nor_config_option_t);
 
         // Try all kinds of flash config options until we find proper option.
         for (uint32_t idx = 0; idx < retryCnt; idx++)
         {
-            const serial_nor_config_option_t *option;
             register uint32_t delaycnt;
-
             memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
+
             // Wait until the FLEXSPI is idle
             delaycnt = 10000u;
             while(delaycnt--)
@@ -87,23 +93,27 @@ status_t ufl_auto_probe(void)
             status = flexspi_nor_get_config(instance, &flashConfig, (void *)option);
             if (status != kStatus_Success)
             {
-                flexspi_sw_reset(base);
-                flexspi_wait_idle(base);
+                flexspi_error_handler(base);
+                continue;
             }
-            else
+            status = flexspi_nor_flash_init(instance, &flashConfig);
+            if (status != kStatus_Success)
             {
-                status = flexspi_nor_flash_init(instance, &flashConfig);
-                if (status != kStatus_Success)
-                {
-                    flexspi_sw_reset(base);
-                    flexspi_wait_idle(base);
-                }
-                else
-                {
-                    g_uflTargetDesc.configOption.option0.U = option->option0.U;
-                    g_uflTargetDesc.configOption.option1.U = option->option1.U;
-                    break;
-                }
+                flexspi_error_handler(base);
+                continue;
+            }
+            status = flexspi_nor_flash_erase(instance, &flashConfig, 0x0, flashConfig.sectorSize);
+            if (status != kStatus_Success)
+            {
+                flexspi_error_handler(base);
+                continue;
+            }
+            status = flexspi_nor_flash_page_program(instance, &flashConfig, 0x0, (uint32_t *)&flashConfig);
+            if (status == kStatus_Success)
+            {
+                g_uflTargetDesc.configOption.option0.U = option->option0.U;
+                g_uflTargetDesc.configOption.option1.U = option->option1.U;
+                break;
             }
         }
     }
