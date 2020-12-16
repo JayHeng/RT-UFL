@@ -775,7 +775,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$\FlashIMXRT_RAM512K.icf</state>
+                    <state>$PROJ_DIR$\FlashIMXRT_RAM64K.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
