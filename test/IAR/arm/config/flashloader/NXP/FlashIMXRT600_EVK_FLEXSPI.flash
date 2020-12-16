@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_device>
+  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT600_EVK_FLEXSPI.out</exe>
+  <page>256</page>
+  <block>16384 0x1000</block>
+  <flash_base>0x08000000</flash_base>
+  <macro>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT600_EVK_FLEXSPI.mac</macro>
+  <aggregate>1</aggregate>
+</flash_device>

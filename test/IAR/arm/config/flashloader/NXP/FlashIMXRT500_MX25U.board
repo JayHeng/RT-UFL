@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_board>
+  <pass>
+    <loader>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT500_MX25U.flash</loader>
+    <range>CODE 0x08000000 0x0fffffff</range>
+    <args>--MxicOct</args>
+  </pass>
+  <pass>
+    <loader>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT500_MX25U.flash</loader>
+    <range>CODE 0x18000000 0x1fffffff</range>
+    <rel_offset>-0x10000000</rel_offset>
+    <args>--MxicOct</args>
+  </pass>
+</flash_board>
+
