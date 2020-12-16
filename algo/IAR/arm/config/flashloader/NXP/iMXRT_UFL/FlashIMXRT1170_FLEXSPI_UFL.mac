@@ -1,0 +1,45 @@
+
+_disableM4Cache()
+{
+  __writeMemory32(0x00000000,0xE0082000,"Memory");
+  __writeMemory32(0x00000000,0xE0082800,"Memory");  
+} 
+
+_disableM7Cache()
+{
+__var tmp;
+
+  tmp = __readMemory32(0xE000ED14,"Memory") & ~(3<<16);  
+  __writeMemory32(tmp,0xE000ED14,"Memory");
+} 
+
+execUserFlashInit()  // Called by debugger before loading flash loader in RAM.
+{
+__var tmp;
+__var cpu;
+  
+  cpu = __probeCmd("emu BoardDID");
+
+  /*Make sure both cores are stopped*/
+
+  tmp = __readMemory32(0x40c04000,"Memory");
+  
+//  if(tmp & 0x2)
+  {
+    _haltM7Core();
+  }
+
+  if(tmp & 0x1)
+  {
+    _haltM4Core();
+  }
+  
+  if("CM4" == cpu)
+  {
+    _disableM4Cache(); 
+  }
+  else
+  {
+    _disableM7Cache();
+  }
+}

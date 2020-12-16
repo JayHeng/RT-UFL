@@ -1,0 +1,64 @@
+_readRegister(index)
+{
+  __writeMemory32(index,0xE000EDF4,"Memory");
+  //__probeCmd("dap.w 0xE000EDF4", index, 0);
+  while(!(__readMemory32(0xE000EDF0,"Memory") & (1<<16)));
+  //while(!(__probeCmd("dap.r 0xE000EDF0", 0) & (1<<16)));
+  return __readMemory32(0xE000EDF8,"Memory");
+  //return __probeCmd("dap.r 0xE000EDF8", 0);
+}
+
+_writeRegister(value,index)
+{
+  __writeMemory32(value,0xE000EDF8,"Memory");
+  //__probeCmd("dap.w 0xE000EDF8", value, 0);
+  __writeMemory32(index|(1<<16),0xE000EDF4,"Memory");
+  //__probeCmd("dap.w 0xE000EDF4", index|(1<<16), 0);
+  while(!(__readMemory32(0xE000EDF0,"Memory") & (1<<16)));
+}
+
+execUserFlashInit()
+{
+  if((__driverType("ijet") || __driverType("cmsisdap")))
+  {
+    if((__readMemory32(0xE000EFB8,"Memory") & (1<<5)))
+    {/*If the device implements the Security extension
+       reset it to disable all the security settings*/
+      SystemReset();
+    }
+  }
+}
+
+execUserFlashReset()
+{
+__var _SP;
+__var _PC;
+
+  /*Check if Secure invasive debug is
+    implemented and allowed*/
+  if((__readMemory32(0xE000EFB8,"Memory") & (1<<5)))
+  {
+    if(!(__readMemory32(0xE000EFB8,"Memory") & (1<<4)))
+    {/*Flash loader can not be executed*/
+      __abortLaunch("Flash loader can't run in NS state");
+    }
+    else
+    {/*Make sure that the flash loader runs in secure state*/
+     // if( !(__readMemory32(0xE000EE08,"Memory") & (1<<16)))
+      {
+        /*Read steck pointer and Program Counter*/      
+        _SP = _readRegister(0x0D);
+        _PC = _readRegister(0x0F);
+        
+        //__setTZSecureMode(1);
+        __writeMemory32((1<<16),0xE000EE08,"Memory");
+        
+        /*Set SP and PC*/
+        _writeRegister(_SP,0x0D);
+        _writeRegister(_PC,0x0F);
+        /*Clear Limit register*/
+        _writeRegister(0x0,0x1C);
+      }
+    }
+  }
+}
