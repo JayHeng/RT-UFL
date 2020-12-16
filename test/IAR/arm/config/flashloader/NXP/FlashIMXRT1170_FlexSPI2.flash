@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_device>
+  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT1170_FlexSPI.out</exe>
+  <page>256</page>
+  <block>1 0x0F800000</block>
+  <flash_base>0x60000000</flash_base>
+  <macro>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT1170_FlexSPI.mac</macro>
+  <aggregate>1</aggregate>
+  <args_doc>To specify the connected memory use the
+flash loader with one of the following args:
+"--Qspi"      - QuadSPI NOR - Quad SDR Read (same if no arg is used)
+"--QspiDDR"   - QuadSPI NOR - Quad DDR Read
+"--Hyper1V8"  - HyperFLASH 1V8
+"--Hyper3V0"  - HyperFLASH 3V0
+"--MxicOpiDDR"-  MXIC OPI DDR (OPI DDR enabled by default)
+"--McrnOct"   -  Micron Octal DDR
+"--McrnOpi"   -  Micron OPI DDR
+"--McrnOpiDDR"- Micron OPI DDR (DDR read enabled by default):
+"--AdstOpi"   - Adesto OPI DDR
+"--Opt0 0x..."- set Option0 hex value
+"--Opt1 0x..."- set Option1 hex value
+For more info refer to IMXRT1170 ROM API specification</args_doc>
+</flash_device>
