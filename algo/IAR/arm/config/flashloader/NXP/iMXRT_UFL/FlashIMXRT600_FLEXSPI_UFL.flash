@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <flash_device>
-  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT_FLEXSPI_UFL.out</exe>
+  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\iMXRT_UFL\FlashIMXRT_FLEXSPI_UFL.out</exe>
   <page>256</page>
   <block>16384 0x1000</block>
   <flash_base>0x08000000</flash_base>
-  <macro>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT600_FLEXSPI_UFL.mac</macro>
+  <macro>$TOOLKIT_DIR$\config\flashloader\NXP\iMXRT_UFL\FlashIMXRT600_FLEXSPI_UFL.mac</macro>
   <aggregate>1</aggregate>
 </flash_device>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <flash_device>
-  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT_FLEXSPI_UFL.out</exe>
+  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\iMXRT_UFL\FlashIMXRT_FLEXSPI_UFL.out</exe>
   <page>256</page>
   <block>1 0x10000000</block>
   <flash_base>0x30000000</flash_base>
-  <macro>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT1170_FLEXSPI_UFL.mac</macro>
+  <macro>$TOOLKIT_DIR$\config\flashloader\NXP\iMXRT_UFL\FlashIMXRT1170_FLEXSPI_UFL.mac</macro>
   <aggregate>1</aggregate>
   <args_doc>To specify the connected memory use the
 flash loader with one of the following args:

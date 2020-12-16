@@ -2,7 +2,7 @@
 
 <flash_board>
   <pass>
-    <loader>$TOOLKIT_DIR$\config\flashloader\NXP\FlashIMXRT1060_FLEXSPI1_UFL.flash</loader>
+    <loader>$TOOLKIT_DIR$\config\flashloader\NXP\iMXRT_UFL\FlashIMXRT1060_FLEXSPI1_UFL.flash</loader>
     <range>CODE 0x60000000 0x6FFFFFFF</range>
   </pass>
 </flash_board>

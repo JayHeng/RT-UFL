@@ -711,7 +711,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>$CONFIG_NAME$.out</state>
+                    <state>FlashIMXRT_FLEXSPI_UFL.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
