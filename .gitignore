@@ -43,6 +43,11 @@ release
 */*/*/Release/
 */*/*/settings/
 
+*/*/settings/
+*/*/*/Exe/
+*/*/*/Obj/
+*/*/*/List/
+
 # IAR temp files
 EW*.tmp
 EW*.tmp.c
