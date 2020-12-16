@@ -1,33 +1,46 @@
-# RT-UFL (Universal FlashLoader)
+# RT-UFL (通用下载算法)
 
-　　RT-UFL is a universal flashloader, one .FLM file for all i.MXRT chips, it should be integrated into Segger driver (or Keil MDK), then you can download and debug MCUXpresso SDK XIP project by J-Link.
+[![GitHub release](https://img.shields.io/github/release/JayHeng/RT-UFL.svg)](https://github.com/JayHeng/RT-UFL/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/JayHeng/RT-UFL/v0.5.svg)](https://github.com/JayHeng/RT-UFL/compare/v0.5...master) ![GitHub All Releases](https://img.shields.io/github/downloads/JayHeng/RT-UFL/total.svg) [![GitHub license](https://img.shields.io/github/license/JayHeng/RT-UFL.svg)](https://github.com/JayHeng/RT-UFL/blob/master/LICENSE)
 
-　　The main features of RT-UniversalFlashloader：
+[English](./README-en.md) | 中文
 
-> * Can run on all i.MXRT chips.
-> * Can support any serial NOR Flash that can be used as i.MXRT boot device .
-> * Can erase and program Flash connected to ROM specified pinmux.
-> * Can auto-detect serial NOR Flash type (QuadSPI, Octal-SPI, Hyperbus).
-> * Can auto-detect SFDP version of Flash.
-> * Can support Flash without SFDP.
-> * Can auto-detect default QE bit status of QuadSPI Flash.
-> * Can output necessary information of Flash for boot header.
+## 一、简介
 
-　　The block diagram of RT-UniversalFlashloader：
+RT-UFL 是一个适用全平台i.MXRT的通用Flash下载算法项目，项目的最终目标是做到一个.FLM文件适用所有的i.MXRT开发板，且不论其连接的哪款Flash型号。
+
+RT-UFL 主要是为了解决如下七大痛点：
+
+```text
+1. 每一个i.MXRT型号都需要一个单独的下载算法文件.
+2. 同一个i.MXRT型号搭配不同属性的Flash也需要不同的算法文件.
+3. 同一个i.MXRT型号搭配相同特性的Flash但Flash出厂设置不同（有无SFDP、QE默认状态灯）也需要不同的算法文件.
+4. Flash连接到i.MXRT不同的FlexSPI引脚上也可能需要不同的算法文件.
+5. 如果下载算法公共设计部分有不可忽视的缺陷，需要整体更新全部i.MXRT型号对应的下载算法.
+6. 对于下载算法的发布，没有一个统一的版本管理.
+7. 在量产过程中，如果更换了Flash型号，则需要对应更换算法文件，对于工厂流程来说有点麻烦.
+```
+
+RT-UFL 从设计上分为三层：
+
+> * 最底层是Driver层：即Low-level驱动，对于i.MXRT来说，就是FlexSPI模块的驱动。
+> * 中间是Adapter层：这一层是最核心的，它实现了全i.MXRT平台、全Flash型号的自适应支持。
+> * 最顶层是API层：这属于下载算法模板，其实由集成开发环境(Keil、JLink)决定了，不可更改。
 
 ![](doc/RT-UniversalFlashloader_Arch.PNG)
 
-　　RT-UniversalFlashloader contains three layers:
+## 二、特性
 
-> * [API Layer]: API is defined by Tool (Segger, Keil MDK).
-> * [Adapter Layer]: The key layer to support different i.MXRT chips and NOR Flash chips.
-> * [Driver Layer]: The low-level FlexSPI NOR driver.
+为了使 RT-UFL 成为一个超级下载算法，它至少要包含如下八个特性：
 
-　　To develop RT-UniversalFlashloader, we should be aware of below notes:
+```text
+1. 可以跑在所有i.MXRT型号下.
+2. 可以支持能用作i.MXRT可启动设备的所有类型Flash.
+3. 可以擦写连在i.MXRT可启动FleXSPI引脚上的Flash.
+4. 可以自动识别连接的Flash类型(QuadSPI, Octal-SPI, Hyperbus).
+5. 可以自动检测Flash中有无SFDP及其版本.
+6. 可以支持不含SFDP表的Flash.
+7. 可以自动识别Flash的默认QE状态并开启QE.
+8. 可以输出一些有效的Flash信息以便后续启动.
+```
 
-> * Always use Cortex-M0 instruction set to build final .FLM file.
-> * There is no device ID in i.MXRT, we can take use of ROM content to find part number.
-> * Most i.MXRT chips contain ROM API, we can use ROM API as low-level NOR driver.
-> * Flash auto-probe feature is added in i.MXRT1060 BootROM, we can refer to this feature to develop key flash_auto_probe() function.
-> * soft reset command should be issued to reset Flash after every failed attempt in flash_auto_probe()
 
