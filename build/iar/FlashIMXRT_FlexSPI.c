@@ -66,7 +66,6 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
 {
     uint32_t result = (RESULT_OK);
 
-  
 #if USE_ARGC_ARGV
     serial_nor_config_option_t option;
 
@@ -144,7 +143,7 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
         SET_PAGESIZE_OVERRIDE(flashConfig.pageSize);
         result |= (OVERRIDE_LAYOUT) | (OVERRIDE_PAGESIZE);
 
-        if (FLAG_ERASE_ONLY & flags)
+        if ((FLAG_ERASE_ONLY & flags) != 0)
         {
             if(flexspi_nor_flash_erase_all(instance, &flashConfig) !=  kStatus_Success)
             {
@@ -176,19 +175,17 @@ uint32_t FlashWrite(void *block_start,
     uint32_t result = (RESULT_OK);
     uint32_t instance = g_uflTargetDesc.flexspiInstance;
     uint32_t baseAddr = g_uflTargetDesc.flashBaseAddr;
-    uint32_t loadaddr = (uint32_t)block_start-baseAddr+offset_into_block;
-    uint32_t size = flashConfig.pageSize;
+    uint32_t addr = (uint32_t)block_start-baseAddr+offset_into_block;
 
-    while(count)
+    for (uint32_t size = 0; size < count; size += flashConfig.pageSize,
+                                          buffer += flashConfig.pageSize,
+                                          addr += flashConfig.pageSize)
     {
-        if (flexspi_nor_flash_page_program(instance, &flashConfig, loadaddr, (uint32_t *)buffer) != kStatus_Success)
+        if (flexspi_nor_flash_page_program(instance, &flashConfig, addr, (uint32_t *)buffer) != kStatus_Success)
         {
             result = (RESULT_ERROR);
             break;
         }
-        count -= size;
-        loadaddr += size;
-        buffer += size;
     }
   
     return result;
@@ -216,6 +213,19 @@ uint32_t FlashErase(void *block_start,
     }
 
     return result;
+}
+
+/*************************************************************************
+ * Function Name: FlashSignoff
+ * Parameters:  none
+ *
+ * Return: 0
+ *
+ * Description: Restore the performance mode.
+ *************************************************************************/
+uint32_t FlashSignoff(void)
+{
+    return (RESULT_OK);
 }
 
 /** private functions **/

@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>FlashIMXRT1060_FlexSPI</name>
+        <name>FlashIMXRT_FlexSPI</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
