@@ -25,7 +25,13 @@ static void ufl_set_target_property(void);
  * Variables
  ******************************************************************************/
 
+#if defined(UFL_USE_CONST_VAR)
+const
+#endif
 ufl_target_desc_t g_uflTargetDesc = {.imxrtChipId = kChipId_Invalid};
+#if defined(UFL_USE_CONST_VAR)
+const
+#endif
 bool g_isFirstTimeInit = true;
 
 /*******************************************************************************

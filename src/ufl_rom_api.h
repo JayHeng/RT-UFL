@@ -95,6 +95,9 @@ typedef struct _target_desc
     bool isFlashPageProgram;
 } ufl_target_desc_t;
 
+#if defined(UFL_USE_CONST_VAR)
+const
+#endif
 extern ufl_target_desc_t g_uflTargetDesc;
 
 /*******************************************************************************
