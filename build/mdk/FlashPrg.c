@@ -25,6 +25,9 @@
 #include "FlashOS.h"        // FlashOS Structures
 #include "ufl_rom_api.h"
 
+#if defined(UFL_USE_CONST_VAR)
+const
+#endif
 flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 /*
