@@ -111,7 +111,7 @@ int EraseChip (void) {
 
     uint32_t instance = g_uflTargetDesc.flexspiInstance;
     /*Erase all*/
-    status_t status =  flexspi_nor_flash_erase_all(instance, &flashConfig);
+    status_t status =  flexspi_nor_flash_erase_all(instance, (void *)&flashConfig);
     if (status != kStatus_Success)
     {
         return (1);
@@ -134,7 +134,7 @@ int EraseSector (unsigned long adr) {
     uint32_t instance = g_uflTargetDesc.flexspiInstance;
     uint32_t baseAddr = g_uflTargetDesc.flashBaseAddr;
     /*Erase Sector*/
-    status_t status =  flexspi_nor_flash_erase(instance, &flashConfig, adr - baseAddr, flashConfig.sectorSize);
+    status_t status =  flexspi_nor_flash_erase(instance, (void *)&flashConfig, adr - baseAddr, flashConfig.sectorSize);
     if (status != kStatus_Success)
     {
         return (1);
@@ -166,7 +166,7 @@ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
                                            buf+=flashConfig.pageSize,
                                            adr+=flashConfig.pageSize)
         {
-            status =  flexspi_nor_flash_page_program(instance, &flashConfig, adr - baseAddr, (uint32_t *)buf);
+            status =  flexspi_nor_flash_page_program(instance, (void *)&flashConfig, adr - baseAddr, (uint32_t *)buf);
             if (status != kStatus_Success)
             {
                 return (1);
@@ -175,7 +175,7 @@ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
     }
     else
     {
-        status =  flexspi_nor_flash_page_program(instance, &flashConfig, adr - baseAddr, (uint32_t *)buf);
+        status =  flexspi_nor_flash_page_program(instance, (void *)&flashConfig, adr - baseAddr, (uint32_t *)buf);
         if (status != kStatus_Success)
         {
             return (1);

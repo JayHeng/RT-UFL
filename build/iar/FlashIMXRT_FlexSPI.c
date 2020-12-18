@@ -145,7 +145,7 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
 
         if ((FLAG_ERASE_ONLY & flags) != 0)
         {
-            if(flexspi_nor_flash_erase_all(instance, &flashConfig) !=  kStatus_Success)
+            if(flexspi_nor_flash_erase_all(instance, (void *)&flashConfig) !=  kStatus_Success)
             {
                 result = (RESULT_ERROR);
             }
@@ -181,7 +181,7 @@ uint32_t FlashWrite(void *block_start,
                                           buffer += flashConfig.pageSize,
                                           addr += flashConfig.pageSize)
     {
-        if (flexspi_nor_flash_page_program(instance, &flashConfig, addr, (uint32_t *)buffer) != kStatus_Success)
+        if (flexspi_nor_flash_page_program(instance, (void *)&flashConfig, addr, (uint32_t *)buffer) != kStatus_Success)
         {
             result = (RESULT_ERROR);
             break;
@@ -207,7 +207,7 @@ uint32_t FlashErase(void *block_start,
     uint32_t addr = (uint32_t)block_start-baseAddr;
     uint32_t result = (RESULT_OK);
 
-    if (flexspi_nor_flash_erase(instance, &flashConfig, addr , block_size) != kStatus_Success)
+    if (flexspi_nor_flash_erase(instance, (void *)&flashConfig, addr , block_size) != kStatus_Success)
     {
         result = (RESULT_ERROR);
     }

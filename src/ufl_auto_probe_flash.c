@@ -101,12 +101,13 @@ status_t ufl_auto_probe(void)
 {
     status_t status = kStatus_Success;
     uint32_t instance = g_uflTargetDesc.flexspiInstance;
+    ufl_target_desc_t *uflTargetDesc = (ufl_target_desc_t *)&g_uflTargetDesc;
 
     // If we have found proper option before, we just reuse it.
     if (g_uflTargetDesc.configOption.option0.B.tag == kSerialNorCfgOption_Tag)
     {
         memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
-        status = flexspi_nor_auto_config(instance, &flashConfig, &g_uflTargetDesc.configOption);
+        status = flexspi_nor_auto_config(instance, (void *)&flashConfig, (void *)&g_uflTargetDesc.configOption);
     }
     else
     {
@@ -133,16 +134,16 @@ status_t ufl_auto_probe(void)
                 option.option0.U = s_flashConfigOpt[idx].option0.U;
                 option.option1.U = s_flashConfigOpt[idx].option1.U;
             }
-            status = flexspi_nor_get_config(instance, &flashConfig, (void *)&option);
+            status = flexspi_nor_get_config(instance, (void *)&flashConfig, (void *)&option);
             if (status == kStatus_Success)
             {
-                status = flexspi_nor_flash_init(instance, &flashConfig);
+                status = flexspi_nor_flash_init(instance, (void *)&flashConfig);
                 if (status == kStatus_Success)
                 {
-                    status = flexspi_nor_flash_erase(instance, &flashConfig, 0x0, flashConfig.sectorSize);
+                    status = flexspi_nor_flash_erase(instance, (void *)&flashConfig, 0x0, flashConfig.sectorSize);
                     if (status == kStatus_Success)
                     {
-                        status = flexspi_nor_flash_page_program(instance, &flashConfig, 0x0, (uint32_t *)&flashConfig);
+                        status = flexspi_nor_flash_page_program(instance, (void *)&flashConfig, 0x0, (uint32_t *)&flashConfig);
                         if (status == kStatus_Success)
                         {
                             // Only when higher freq of current option wasn't failed ever, then 
@@ -160,8 +161,8 @@ status_t ufl_auto_probe(void)
                             //   current freq as final option.
                             else
                             {
-                                g_uflTargetDesc.configOption.option0.U = option.option0.U;
-                                g_uflTargetDesc.configOption.option1.U = option.option1.U;
+                                uflTargetDesc->configOption.option0.U = option.option0.U;
+                                uflTargetDesc->configOption.option1.U = option.option1.U;
                                 break;
                             }
                         }
