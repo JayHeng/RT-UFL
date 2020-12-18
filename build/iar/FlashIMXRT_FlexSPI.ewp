@@ -224,6 +224,7 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
+                    <state>UFL_USE_CONST_VAR</state>
                     <state>CPU_MIMXRT1176DVMAA_cm7</state>
                 </option>
                 <option>
@@ -285,7 +286,7 @@
                 <option>
                     <name>CCAllowList</name>
                     <version>1</version>
-                    <state>11111010</state>
+                    <state>11111110</state>
                 </option>
                 <option>
                     <name>CCDebugInfo</name>
@@ -787,7 +788,7 @@
                 </option>
                 <option>
                     <name>IlinkSuppressDiags</name>
-                    <state>Lp050</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkTreatAsRem</name>

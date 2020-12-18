@@ -41,6 +41,9 @@
 static uint32_t strToUint(const char *str);
 /** public data **/
 #pragma data_alignment=4
+#if defined(UFL_USE_CONST_VAR)
+const
+#endif
 flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 /** private data **/
 
