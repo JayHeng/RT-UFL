@@ -15,7 +15,7 @@
  *  Variables
  **********************************************************************************************************************/
 
-flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
+const flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 /***********************************************************************************************************************
  *  Prototypes
@@ -32,7 +32,7 @@ int main()
 
     if (!status)
     {
-        status = flexspi_nor_flash_erase(instance, &flashConfig, 0x1000, flashConfig.sectorSize);
+        status = flexspi_nor_flash_erase(instance, (void *)&flashConfig, 0x1000, flashConfig.sectorSize);
         if (!status)
         {
             while (1);
