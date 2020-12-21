@@ -71,11 +71,9 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
 
     serial_nor_config_option_t option;
     option.option0.U = 0x0;
+    option.option1.U = 0x0;
 
 #if USE_ARGC_ARGV
-    option.option0.U = 0xC0000005;
-    option.option1.U = 0x00000000;
-
   for(int i = 0; i < argc; /*i++*/)
   {
     if((strcmp("--Opt0", argv[i]) == 0) && ((i+1) < argc))
@@ -94,6 +92,7 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
     {
       if(strcmp("--Qspi", argv[i]) == 0 )
       {//default option setting
+        option.option0.U = 0xC0000005;
       }
       else if(strcmp("--QspiDDR", argv[i]) == 0 )
       {
