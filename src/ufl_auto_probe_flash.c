@@ -12,12 +12,7 @@
  * Definitions
  ******************************************************************************/
 
-enum
-{
-    kSerialNorCfgOption_Tag = 0x0c,
-
-    kSerialNorCfgOption_MaxFreq = 0x5,
-};
+#define DEFAULT_FLASH_BLOCK_SIZE (64*1024U)
 
 /*******************************************************************************
  * Prototypes
@@ -141,10 +136,12 @@ status_t ufl_auto_probe(void)
             if (status == kStatus_Success)
             {
                 status = flexspi_nor_flash_init(instance, (void *)&flashConfig);
-                if (status == kStatus_Success)
+                if ((status == kStatus_Success) &&
+                    (flashConfig.sectorSize != 0))
                 {
                     status = flexspi_nor_flash_erase(instance, (void *)&flashConfig, 0x0, flashConfig.sectorSize);
-                    if (status == kStatus_Success)
+                    if ((status == kStatus_Success) &&
+                        (flashConfig.pageSize != 0))
                     {
                         status = flexspi_nor_flash_page_program(instance, (void *)&flashConfig, 0x0, (uint32_t *)&flashConfig);
                         if (status == kStatus_Success)
@@ -185,6 +182,13 @@ status_t ufl_auto_probe(void)
             }
             flexspi_error_handler(base);
         }
+    }
+
+    // Set default block size if it is 0
+    if (flashConfig.blockSize == 0)
+    {
+        flexspi_nor_config_t *flashCfg = (flexspi_nor_config_t *)&flashConfig;
+        flashCfg->blockSize = DEFAULT_FLASH_BLOCK_SIZE;
     }
 
     return status;
