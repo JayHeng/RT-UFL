@@ -186,7 +186,19 @@ status_t ufl_full_setup(void)
     //   do auto probe anymore. so we just need to init g_uflTargetDesc once.
     if (*isFirstTimeInit)
     {
+        serial_nor_config_option_t option;
+        option.option0.U = g_uflTargetDesc.configOption.option0.U;
+        option.option1.U = g_uflTargetDesc.configOption.option1.U;
+
         memset((void *)&g_uflTargetDesc, 0U, sizeof(ufl_target_desc_t));
+
+        if (option.option0.B.tag == kSerialNorCfgOption_Tag)
+        {
+            ufl_target_desc_t *uflTargetDesc = (ufl_target_desc_t *)&g_uflTargetDesc;
+            uflTargetDesc->configOption.option0.U = option.option0.U;
+            uflTargetDesc->configOption.option1.U = option.option1.U;
+        }
+
         *isFirstTimeInit = false;
     }
 
