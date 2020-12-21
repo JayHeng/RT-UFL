@@ -18,7 +18,7 @@ execUserFlashInit()  // Called by debugger before loading flash loader in RAM.
 __var tmp;
 __var cpu;
   
-  cpu = __probeCmd("emu BoardDID");
+  //cpu = __probeCmd("emu BoardDID");
 
   /*Make sure both cores are stopped*/
 
@@ -26,7 +26,7 @@ __var cpu;
   
 //  if(tmp & 0x2)
   {
-    _haltM7Core();
+    //_haltM7Core();
   }
 
   if(tmp & 0x1)
@@ -34,11 +34,11 @@ __var cpu;
     _haltM4Core();
   }
   
-  if("CM4" == cpu)
+  //if("CM4" == cpu)
   {
     _disableM4Cache(); 
   }
-  else
+  //else
   {
     _disableM7Cache();
   }
