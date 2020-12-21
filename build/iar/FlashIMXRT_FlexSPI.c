@@ -149,9 +149,26 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
     {
         if (g_uflTargetDesc.iarCfg.enablePageSizeOverride)
         {
+            uint32_t flashSize = 0;
+            if (flashConfig.sflashA1Size)
+            {
+                flashSize = flashConfig.sflashA1Size;
+            }
+            if (flashConfig.sflashA2Size)
+            {
+                flashSize = flashConfig.sflashA2Size;
+            }
+            if (flashConfig.sflashB1Size)
+            {
+                flashSize = flashConfig.sflashB1Size;
+            }
+            if (flashConfig.sflashB2Size)
+            {
+                flashSize = flashConfig.sflashB2Size;
+            }
             sprintf(LAYOUT_OVERRIDE_BUFFER,"%d 0x%X, %d 0x%X\0",\
                     flashConfig.blockSize/flashConfig.sectorSize,flashConfig.sectorSize,\
-                    flashConfig.sflashA1Size/flashConfig.blockSize - 1, flashConfig.blockSize);
+                    flashSize/flashConfig.blockSize - 1, flashConfig.blockSize);
             SET_PAGESIZE_OVERRIDE(flashConfig.pageSize);
             result |= (OVERRIDE_LAYOUT) | (OVERRIDE_PAGESIZE);
         }
