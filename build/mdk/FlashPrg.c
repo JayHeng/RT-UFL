@@ -82,8 +82,11 @@ int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
     //  kept in first time initialization, we need to clear option here in case
     //  uninitialized option0 is happened to be 0xcxxx_xxxx 
     ufl_target_desc_t *uflTargetDesc = (ufl_target_desc_t *)&g_uflTargetDesc;
-    uflTargetDesc->configOption.option0.U = 0x0;
-    uflTargetDesc->configOption.option1.U = 0x0;
+    if (uflTargetDesc->imxrtChipId == kChipId_Invalid)
+    {
+        uflTargetDesc->configOption.option0.U = 0x0;
+        uflTargetDesc->configOption.option1.U = 0x0;
+    }
 
     status_t status = ufl_full_setup();
     if (status != kStatus_Success)
