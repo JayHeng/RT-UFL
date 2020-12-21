@@ -69,10 +69,11 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
 {
     uint32_t result = (RESULT_OK);
 
-#if USE_ARGC_ARGV
     serial_nor_config_option_t option;
+    option.option0.U = 0x0;
 
-    option.option0.U = 0xC0000008;
+#if USE_ARGC_ARGV
+    option.option0.U = 0xC0000005;
     option.option1.U = 0x00000000;
 
   for(int i = 0; i < argc; /*i++*/)
@@ -132,6 +133,12 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
   }
 #endif
 
+    if (option.option0.U != 0)
+    {
+        ufl_target_desc_t *uflTargetDesc = (ufl_target_desc_t *)&g_uflTargetDesc;
+        uflTargetDesc->configOption.option0.U = option.option0.U;
+        uflTargetDesc->configOption.option1.U = option.option1.U;
+    }
     status_t status = ufl_full_setup();
     uint32_t instance = g_uflTargetDesc.flexspiInstance;
     if (status != kStatus_Success)
