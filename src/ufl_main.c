@@ -53,6 +53,8 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->flashDriver.read             = g_bootloaderTree_imxrt5xx->flexspiNorDriver->read;
             uflTargetDesc->flashDriver.set_clock_source = g_bootloaderTree_imxrt5xx->flexspiNorDriver->set_clock_source;
             uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt5xx->flexspiNorDriver->get_config;
+            // It doesn't matter that page size is overrided or not.
+            uflTargetDesc->iarCfg.enablePageSizeOverride = true;
             break;
 
         case kChipId_RT6xx:
@@ -64,6 +66,8 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->flashDriver.read             = g_bootloaderTree_imxrt6xx->flexspiNorDriver->read;
             uflTargetDesc->flashDriver.set_clock_source = g_bootloaderTree_imxrt6xx->flexspiNorDriver->set_clock_source;
             uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt6xx->flexspiNorDriver->get_config;
+            // page size hasn't to be overrided, or downloading will be hung.
+            uflTargetDesc->iarCfg.enablePageSizeOverride = false;
             break;
 
         case kChipId_RT106x:
@@ -75,6 +79,8 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->flashDriver.read             = g_bootloaderTree_imxrt106x->flexspiNorDriver->read;
             uflTargetDesc->flashDriver.set_clock_source = NULL;
             uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt106x->flexspiNorDriver->get_config;
+            // page size has to be overrided, or downloading will be hung.
+            uflTargetDesc->iarCfg.enablePageSizeOverride = true;
             break;
 
         case kChipId_RT117x:
@@ -86,6 +92,8 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->flashDriver.read             = g_bootloaderTree_imxrt117x->flexspiNorDriver->read;
             uflTargetDesc->flashDriver.set_clock_source = NULL;
             uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt117x->flexspiNorDriver->get_config;
+            // It doesn't matter that page size is overrided or not.
+            uflTargetDesc->iarCfg.enablePageSizeOverride = true;
             break;
 
         case kChipId_Invalid:

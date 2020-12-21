@@ -140,11 +140,14 @@ uint32_t FlashInit(void *base_of_flash, uint32_t image_size,
     }
     else
     {
-        //sprintf(LAYOUT_OVERRIDE_BUFFER,"%d 0x%X, %d 0x%X\0",\
-        //        flashConfig.blockSize/flashConfig.sectorSize,flashConfig.sectorSize,\
-        //        flashConfig.sflashA1Size/flashConfig.blockSize - 1, flashConfig.blockSize);
-        //SET_PAGESIZE_OVERRIDE(flashConfig.pageSize);
-        //result |= (OVERRIDE_LAYOUT) | (OVERRIDE_PAGESIZE);
+        if (g_uflTargetDesc.iarCfg.enablePageSizeOverride)
+        {
+            sprintf(LAYOUT_OVERRIDE_BUFFER,"%d 0x%X, %d 0x%X\0",\
+                    flashConfig.blockSize/flashConfig.sectorSize,flashConfig.sectorSize,\
+                    flashConfig.sflashA1Size/flashConfig.blockSize - 1, flashConfig.blockSize);
+            SET_PAGESIZE_OVERRIDE(flashConfig.pageSize);
+            result |= (OVERRIDE_LAYOUT) | (OVERRIDE_PAGESIZE);
+        }
 
         if ((FLAG_ERASE_ONLY & flags) != 0)
         {

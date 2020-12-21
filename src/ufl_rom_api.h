@@ -84,6 +84,11 @@ typedef struct _flexspi_nor_flash_driver
     status_t (*get_config)(uint32_t instance, void *config, void *option);
 } flexspi_nor_flash_driver_t;
 
+typedef struct _tool_cfg_iar
+{
+    bool enablePageSizeOverride;
+} ufl_tool_cfg_iar;
+
 typedef struct _target_desc
 {
     uint32_t imxrtChipId;
@@ -93,6 +98,7 @@ typedef struct _target_desc
     serial_nor_config_option_t configOption;
     flexspi_nor_flash_driver_t flashDriver;
     bool isFlashPageProgram;
+    ufl_tool_cfg_iar iarCfg;
 } ufl_target_desc_t;
 
 #if defined(UFL_USE_CONST_VAR)
