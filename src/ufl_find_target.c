@@ -41,6 +41,7 @@ typedef struct _rom_fingerprint
  ******************************************************************************/
 
 static core_type_t ufl_get_core_type(void);
+static rt_chip_id_t ufl_check_imxrt_sip(rt_chip_id_t chipId);
 
 /*******************************************************************************
  * Variables
@@ -78,6 +79,22 @@ static core_type_t ufl_get_core_type(void)
     }
 
     return coreType;
+}
+
+static rt_chip_id_t ufl_check_imxrt_sip(rt_chip_id_t chipId)
+{
+    if (chipId == kChipId_RT106x)
+    {
+        uint32_t sipEnBitMask = 0x100000U;
+        uint32_t ocotpCfg3 = *(uint32_t *)0x401f4440;
+        if (ocotpCfg3 & sipEnBitMask)
+        {
+            chipId = kChipId_RT1064_SIP;
+        }
+
+    }
+
+    return chipId;
 }
 
 rt_chip_id_t ufl_get_imxrt_chip_id(void)
@@ -118,6 +135,8 @@ rt_chip_id_t ufl_get_imxrt_chip_id(void)
             }
         }
     } while (0);
+
+    chipId = ufl_check_imxrt_sip(chipId);
 
     return chipId;
 }

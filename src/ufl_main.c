@@ -71,6 +71,7 @@ static void ufl_fill_flash_api(void)
             break;
 
         case kChipId_RT106x:
+        case kChipId_RT1064_SIP:
             uflTargetDesc->flashDriver.init             = g_bootloaderTree_imxrt106x->flexspiNorDriver->init;
             uflTargetDesc->flashDriver.page_program     = g_bootloaderTree_imxrt106x->flexspiNorDriver->program;
             uflTargetDesc->isFlashPageProgram           = false;
@@ -157,6 +158,14 @@ static void ufl_set_target_property(void)
             uflTargetDesc->flashBaseAddr   = MIMXRT106X_1st_FLEXSPI_AMBA_BASE;
             //uflTargetDesc->configOption.option0.U = 0xc0000006;
             //uflTargetDesc->configOption.option1.U = 0x0;
+            break;
+
+        case kChipId_RT1064_SIP:
+            uflTargetDesc->flexspiInstance = MIMXRT106X_2nd_FLEXSPI_INSTANCE;
+            uflTargetDesc->flexspiBaseAddr = MIMXRT106X_2nd_FLEXSPI_BASE;
+            uflTargetDesc->flashBaseAddr   = MIMXRT106X_2nd_FLEXSPI_AMBA_BASE;
+            uflTargetDesc->configOption.option0.U = 0xc0000006;
+            uflTargetDesc->configOption.option1.U = 0x0;
             break;
 
         case kChipId_RT117x:
