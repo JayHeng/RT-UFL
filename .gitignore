@@ -41,6 +41,7 @@ release
 */*/*/Debug/
 */*/*/Release/
 */*/*/settings/
+*/*/*/.settings/
 
 */*/settings/
 */*/*/Exe/
