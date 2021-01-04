@@ -18,15 +18,13 @@
 // retain, install, activate or otherwise use the software.
 //*****************************************************************************
 
-#include <flexspi_QSPI_flash.h>
-#include <stdint.h>
-// For memcmp used in Verify()
-#include <string.h>
-
-#include "fsl_common.h"
+#include "ufl_rom_api.h"
 #include "lpcx_flash_driver.h"
 
-
+#if defined(UFL_USE_CONST_VAR)
+const
+#endif
+flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 Mailbox_Init_DynInfo_t Mailbox_Init_DynInfo;
 
@@ -42,42 +40,22 @@ uint32_t Init (void)
 {
     status_t status;
 
-    // this from SystemInit, that is skipped in NDEBUG
-#ifdef NDEBUG
-
-    if (WDOG1->WCR & WDOG_WCR_WDE_MASK)
+    ufl_target_desc_t *uflTargetDesc = (ufl_target_desc_t *)&g_uflTargetDesc;
+    if (uflTargetDesc->imxrtChipId == kChipId_Invalid)
     {
-        WDOG1->WCR &= ~WDOG_WCR_WDE_MASK;
-    }
-    if (WDOG2->WCR & WDOG_WCR_WDE_MASK)
-    {
-        WDOG2->WCR &= ~WDOG_WCR_WDE_MASK;
-    }
-    RTWDOG->CNT = 0xD928C520U; /* 0xD928C520U is the update key */
-    RTWDOG->TOVAL = 0xFFFF;
-    RTWDOG->CS = (uint32_t) ((RTWDOG->CS) & ~RTWDOG_CS_EN_MASK) | RTWDOG_CS_UPDATE_MASK;
-
-    /* Disable Systick which might be enabled by bootrom */
-    if (SysTick->CTRL & SysTick_CTRL_ENABLE_Msk)
-    {
-        SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
+        uflTargetDesc->configOption.option0.U = 0x0;
+        uflTargetDesc->configOption.option1.U = 0x0;
     }
 
-    /* Enable instruction and data caches
-     * there are problems with power on reset if
-     * this is not done */
-
-     SCB_EnableICache();
-//       SCB_EnableDCache();
-
-#endif
-
-	status = QSPI_init();
-	if (status) {
-		return (-1);
-	}
-
-	return 0; // Finished without Errors
+    status = ufl_full_setup();
+    if (status != kStatus_Success)
+    {
+        return (-1);
+    }
+    else
+    {
+        return (0);
+    }
 }
 
 // ************************************
@@ -89,9 +67,9 @@ uint32_t Init (void)
 uint32_t UnInit(void) {
 
     /* Do software reset to reset AHB buffer. */
-    FLEXSPI_SoftwareReset(EXAMPLE_FLEXSPI);
+    //FLEXSPI_SoftwareReset(EXAMPLE_FLEXSPI);
 
-	return 0;                               // Finished without Errors
+    return 0;                               // Finished without Errors
 }
 
 // ************************************
@@ -101,18 +79,17 @@ uint32_t UnInit(void) {
  *    Return Value:   0 - OK,  1 - Failed */
 uint32_t EraseChip(void) {
 
-    uint32_t sector = 0;
-    status_t status = 0;
-
-    for (sector = 0; sector < SECTOR_NUMBER; sector++) {
-
-        status = flexspi_nor_flash_erase_sector(EXAMPLE_FLEXSPI, sector * SECTOR_SIZE);
-
-    	if (status) {
-    		return (status);
-    	}
+    uint32_t instance = g_uflTargetDesc.flexspiInstance;
+    /*Erase all*/
+    status_t status =  flexspi_nor_flash_erase_all(instance, (void *)&flashConfig);
+    if (status != kStatus_Success)
+    {
+        return (status);
     }
-	return (status);
+    else
+    {
+        return (0);
+    }
 }
 
 #endif
@@ -128,22 +105,29 @@ extern uint32_t checkblank(uint32_t adr, uint32_t words, uint32_t blankval);
  */
 uint32_t EraseSectors(uint32_t adr, uint32_t numsecs) {
 
-    uint32_t sector = 0;
-    status_t status = 0;
+    status_t status = kStatus_Success;
+    uint32_t instance = g_uflTargetDesc.flexspiInstance;
+    uint32_t baseAddr = g_uflTargetDesc.flashBaseAddr;
 
-    if (adr < FlexSPI_AMBA_BASE) {			// bail if < flash, can't really happen
-    	return(-1);
+    // bail if < flash, can't really happen
+    if (adr < baseAddr)
+    {
+        return (-1);
     }
-    adr = adr - FlexSPI_AMBA_BASE;			// set address to base of flash
 
-    for (sector = 0; sector < numsecs; sector++) {
+     // set address to base of flash
+    adr = adr - baseAddr;
 
-    	status = flexspi_nor_flash_erase_sector(EXAMPLE_FLEXSPI, adr + (sector * SECTOR_SIZE));
+    for (uint32_t sector = 0; sector < numsecs; sector++)
+    {
+        status = flexspi_nor_flash_erase(instance, (void *)&flashConfig, adr + (sector * flashConfig.sectorSize), flashConfig.sectorSize);
 
-    	if (status) {
-    		return (status);
-    	}
+        if (status != kStatus_Success)
+        {
+            return (status);
+        }
     }
+
     return (status);
 }
 
@@ -165,28 +149,39 @@ uint32_t EraseSectors(uint32_t adr, uint32_t numsecs) {
 
 uint32_t ProgramPage(uint32_t adr, uint32_t sz, uint8_t *buf) {
 
-    status_t status = 0;
-    uint32_t page = 0;
+    status_t status = kStatus_Success;
+    uint32_t instance = g_uflTargetDesc.flexspiInstance;
+    uint32_t baseAddr = g_uflTargetDesc.flashBaseAddr;
 
-    if (adr < FlexSPI_AMBA_BASE) {			// bail if < flash, can't really happen
-    	return(-1);
+    // bail if < flash, can't really happen
+    if (adr < baseAddr)
+    {
+        return (-1);
     }
-    adr = adr - FlexSPI_AMBA_BASE;			// set address to base of flash
 
-    while (sz) {
-
-    	status = flexspi_nor_flash_page_program(EXAMPLE_FLEXSPI, adr, (void *) (buf + (page * FLASH_PAGE_SIZE)));
-
-    	if (status) {
-    		return (status);
-    	}
-
-    	sz = sz - FLASH_PAGE_SIZE;		// Decrease remaining size by page
-    	adr = adr + FLASH_PAGE_SIZE;	// Update adr base by page
-    	page ++;						// Next page
-
+    if (g_uflTargetDesc.isFlashPageProgram)
+    {
+        for(uint32_t size = 0; size < sz; size+=flashConfig.pageSize,
+                                           buf+=flashConfig.pageSize,
+                                           adr+=flashConfig.pageSize)
+        {
+            status =  flexspi_nor_flash_page_program(instance, (void *)&flashConfig, adr - baseAddr, (uint32_t *)buf);
+            if (status != kStatus_Success)
+            {
+                return (status);
+            }
+        }
     }
-    return (status);
+    else
+    {
+        status =  flexspi_nor_flash_page_program(instance, (void *)&flashConfig, adr - baseAddr, (uint32_t *)buf);
+        if (status != kStatus_Success)
+        {
+            return (status);
+        }
+    }
+
+    return (0);
 }
 
 // ************************************
@@ -203,7 +198,7 @@ uint32_t Verify(uint32_t adr, uint32_t sz, uint8_t *buf) {
 	uint32_t status = 0;
 
 	/* Reset to memory mode so we can access the SPIFI via a bus read */
-	FLEXSPI_SoftwareReset(EXAMPLE_FLEXSPI);
+	//FLEXSPI_SoftwareReset(EXAMPLE_FLEXSPI);
 
 	if (adr == FlashDevice.DevAdr)	{	// ignore CRP word - NOT NEEDED HERE
 		status = memcmp((void *) adr, buf, sz > 28 ? 28 : sz);

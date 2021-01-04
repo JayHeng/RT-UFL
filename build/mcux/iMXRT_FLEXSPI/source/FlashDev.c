@@ -17,24 +17,22 @@
 // retain, install, activate or otherwise use the software.
 //*****************************************************************************
 
-#include <flexspi_QSPI_flash.h>
 #include "lpcx_flash_driver.h"
-#include "fsl_common.h"
 
 FLASHDEV_SECTION
 FlashDeviceV_t FlashDevice  =  {
-   FLASH_DRV_VERS,				// Driver Version, do not modify!
-   "MIMXRT1050-EVK_IS25WP064A "__DATE__" "__TIME__,
-   EXTSPI,     			// Device Type
-   FlexSPI_AMBA_BASE, 	// Device Start Address
-   DEVICE_SIZE,   			// Device Size
-   PSEUDO_PAGE_SIZE,    // Programming Page Size
-   0,          			// Reserved, must be 0
-   0xFF,       			// Initial Content of Erased Memory
-   3000,       			// Program Page Timeout
-   6000,       			// Erase Sector Timeout
+   FLASH_DRV_VERS,      // Driver Version, do not modify!
+   "MIMXRT_FLEXSPI "__DATE__" "__TIME__,
+   EXTSPI,              // Device Type
+   0x00000000,          // Device Start Address
+   0x40000000,          // Device Size
+   256,                 // Programming Page Size
+   0,                   // Reserved, must be 0
+   0xFF,                // Initial Content of Erased Memory
+   3000,                // Program Page Timeout
+   15000,               // Erase Sector Timeout
    // Specify Size and Address of Sectors
-   {{SECTOR_SIZE, 0},   // Sector sizes
+   {{0x1000, 0},        // Sector sizes
    {SECTOR_END}}
 };
 

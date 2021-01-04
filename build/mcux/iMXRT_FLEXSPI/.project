@@ -20,8 +20,19 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.cdt.core.cnature</nature>
-		<nature>com.nxp.mcuxpresso.core.datamodels.sdkNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Include</name>
+			<type>2</type>
+			<location>D:/git_repo_jay/RT-UFL/CMSIS/Core/Include</location>
+		</link>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<location>D:/git_repo_jay/RT-UFL/src</location>
+		</link>
+	</linkedResources>
 </projectDescription>
