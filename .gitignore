@@ -48,6 +48,8 @@ release
 */*/*/Obj/
 */*/*/List/
 
+*/*/*/builds/
+
 # IAR temp files
 EW*.tmp
 EW*.tmp.c
