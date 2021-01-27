@@ -70,28 +70,16 @@ static const serial_nor_config_option_t s_flashConfigOpt[] = {
  * Code
  ******************************************************************************/
 
-static void flexspi_sw_reset(FLEXSPI_Type *base)
+//!@brief Get FlexSPI instance
+FLEXSPI_Type *flexspi_get_module_base(uint32_t instance)
 {
-    //base->MCR0 |= FLEXSPI_MCR0_SWRESET_MASK;
-    base->MCR0 |= 0x1U;
-    while (base->MCR0 & 0x1U)
-    {
-    }
+    return (FLEXSPI_Type *)g_uflTargetDesc.flexspiBaseAddr;
 }
 
-// Wait until FlexSPI controller becomes idle
-static void flexspi_wait_idle(FLEXSPI_Type *base)
+static void flexspi_error_handler(uint32_t instance)
 {
-    //while (!(base->STS0 & FLEXSPI_STS0_ARBIDLE_MASK))
-    while (!(base->STS0 & 0x2U))
-    {
-    }
-}
-
-static void flexspi_error_handler(FLEXSPI_Type *base)
-{
-    flexspi_sw_reset(base);
-    flexspi_wait_idle(base);
+    flexspi_sw_reset(instance);
+    flexspi_wait_idle(instance);
 }
 
 status_t ufl_auto_probe(void)
@@ -153,7 +141,7 @@ status_t ufl_auto_probe(void)
                             {
                                 isLowerFreqPassed = true;
                                 option.option0.B.max_freq++;
-                                flexspi_error_handler(base);
+                                flexspi_error_handler(instance);
                                 continue;
                             }
                             // If we get to max freq or we failed to use higher freq, then we use 
@@ -179,7 +167,7 @@ status_t ufl_auto_probe(void)
                 // Switch to new option
                 idx++;
             }
-            flexspi_error_handler(base);
+            flexspi_error_handler(instance);
         }
     }
 

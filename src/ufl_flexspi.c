@@ -36,7 +36,7 @@ enum
 /*******************************************************************************
  * Local variables
  ******************************************************************************/
-static FLEXSPI_Type *const g_flexSpiInstances[] = FLEXSPI_BASE_PTRS;
+
 
 /*******************************************************************************
  * Prototypes
@@ -53,8 +53,6 @@ static void flexspi_clear_ip_txfifo(FLEXSPI_Type *base);
 static void flexspi_clear_ip_rxfifo(FLEXSPI_Type *base);
 //!@brief Wait Until FlexSPI IP is idle
 static void flexspi_wait_until_ip_idle(FLEXSPI_Type *base);
-//!@brief Get FlexSPI instance
-static FLEXSPI_Type *flexspi_get_module_base(uint32_t instance);
 //!@brief Clear FlexSPI error status
 static void flexspi_clear_error_status(FLEXSPI_Type *base);
 //!@brief Get interval ticks based on provided interval in terms of nano-seconds, frequency and unit
@@ -71,6 +69,9 @@ static status_t flexspi_device_workmode_config_all_chips(uint32_t instance, flex
 static status_t flexspi_device_cmd_config(uint32_t instance, flexspi_mem_config_t *config, uint32_t baseAddr);
 static status_t flexspi_device_cmd_config_all_chips(uint32_t instance, flexspi_mem_config_t *config);
 
+//!@brief Get FlexSPI instance
+FLEXSPI_Type *flexspi_get_module_base(uint32_t instance);
+
 /*******************************************************************************
  * Codes
  ******************************************************************************/
@@ -80,6 +81,21 @@ static void flexspi_swreset(FLEXSPI_Type *base)
     while (base->MCR0 & FLEXSPI_MCR0_SWRESET_MASK)
     {
     }
+}
+
+void flexspi_sw_reset(uint32_t instance)
+{
+    do
+    {
+        FLEXSPI_Type *base = flexspi_get_module_base(instance);
+        if (base == NULL)
+        {
+            break;
+        }
+
+        flexspi_swreset(base);
+
+    } while (0);
 }
 
 static void flexspi_unlock_lut(FLEXSPI_Type *base)
@@ -416,16 +432,6 @@ static void flexspi_wait_until_ip_idle(FLEXSPI_Type *base)
     while ((base->STS0 & FLEXSPI_STS0_ARBIDLE_MASK) != FLEXSPI_STS0_ARBIDLE_MASK)
     {
     }
-}
-
-static FLEXSPI_Type *flexspi_get_module_base(uint32_t instance)
-{
-    FLEXSPI_Type *baseAddr = NULL;
-    if (instance < sizeof(g_flexSpiInstances) / sizeof(g_flexSpiInstances[0]))
-    {
-        baseAddr = g_flexSpiInstances[instance];
-    }
-    return baseAddr;
 }
 
 void flexspi_clear_error_status(FLEXSPI_Type *base)

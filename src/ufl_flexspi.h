@@ -333,6 +333,9 @@ extern "C"
     //!@brief Get FlexSPI Clock frequency
     status_t flexspi_get_clock(uint32_t instance, flexspi_clock_type_t type, uint32_t *freq);
 
+    //!@brief Reset internal logical of FlexSPI
+    void flexspi_sw_reset(uint32_t instance);
+
     //!@brief Wait until FlexSPI controller becomes idle
     void flexspi_wait_idle(uint32_t instance);
 
