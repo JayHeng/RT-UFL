@@ -7,10 +7,10 @@
  *
  */
 
-#ifndef __FSL_FLEXSPI_H__
-#define __FSL_FLEXSPI_H__
+#ifndef __UFL_FLEXSPI_H__
+#define __UFL_FLEXSPI_H__
 
-#include "bl_common.h"
+#include "ufl_common.h"
 
 /**********************************************************************************************************************
  * Definitions
@@ -279,6 +279,16 @@ typedef enum
     kFlexSpiClock_IpgClock,        //!< IPG clock
 } flexspi_clock_type_t;
 
+//!@brief FLEXSPI ROOT CLOCK soruce related definitions
+enum
+{
+    kFlexSpiClockSrc_MainClk = 0,
+    kFlexSpiClockSrc_MainPllClk,
+    kFlexSpiClockSrc_Aux0PllClk,
+    kFlexSpiClockSrc_FFRO_Clk, // kFlexSpiClockSrc_FRO192M_Clk
+    kFlexSpiClockSrc_Aux1PllClk,
+};
+
 //!@brief Generate bit mask
 #define FLEXSPI_BITMASK(bit_offset) (1u << (bit_offset))
 
@@ -380,6 +390,6 @@ extern "C"
 
 #ifdef __cplusplus
 }
-#endif
+#endif /*_cplusplus*/
 
-#endif
+#endif /* __UFL_FLEXSPI_H__ */

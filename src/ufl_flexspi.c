@@ -9,8 +9,7 @@
 #include <assert.h>
 #include <stdbool.h>
 
-#include "bl_flexspi.h"
-#include "bl_common.h"
+#include "ufl_flexspi.h"
 
 /*******************************************************************************
  * Definitions

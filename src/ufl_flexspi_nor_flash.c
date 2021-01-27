@@ -10,8 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "bl_flexspi.h"
-#include "flexspi_nor_flash.h"
+#include "ufl_flexspi_nor_flash.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Definitions
