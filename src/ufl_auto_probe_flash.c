@@ -92,7 +92,7 @@ status_t ufl_auto_probe(void)
     if (g_uflTargetDesc.configOption.option0.B.tag == kSerialNorCfgOption_Tag)
     {
         memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
-        status = flexspi_nor_auto_config(instance, (void *)&flashConfig, (void *)&g_uflTargetDesc.configOption);
+        status = flexspi_nor_auto_config(instance, (flexspi_nor_config_t *)&flashConfig, (serial_nor_config_option_t *)&g_uflTargetDesc.configOption);
     }
     else
     {
@@ -119,18 +119,18 @@ status_t ufl_auto_probe(void)
                 option.option0.U = s_flashConfigOpt[idx].option0.U;
                 option.option1.U = s_flashConfigOpt[idx].option1.U;
             }
-            status = flexspi_nor_get_config(instance, (void *)&flashConfig, (void *)&option);
+            status = flexspi_nor_get_config(instance, (flexspi_nor_config_t *)&flashConfig, &option);
             if (status == kStatus_Success)
             {
-                status = flexspi_nor_flash_init(instance, (void *)&flashConfig);
+                status = flexspi_nor_flash_init(instance, (flexspi_nor_config_t *)&flashConfig);
                 if ((status == kStatus_Success) &&
                     (flashConfig.sectorSize != 0))
                 {
-                    status = flexspi_nor_flash_erase(instance, (void *)&flashConfig, 0x0, flashConfig.sectorSize);
+                    status = flexspi_nor_flash_erase(instance, (flexspi_nor_config_t *)&flashConfig, 0x0, flashConfig.sectorSize);
                     if ((status == kStatus_Success) &&
                         (flashConfig.pageSize != 0))
                     {
-                        status = flexspi_nor_flash_page_program(instance, (void *)&flashConfig, 0x0, (uint32_t *)&flashConfig);
+                        status = flexspi_nor_flash_page_program(instance, (flexspi_nor_config_t *)&flashConfig, 0x0, (uint32_t *)&flashConfig);
                         if (status == kStatus_Success)
                         {
                             // Only when higher freq of current option wasn't failed ever, then 

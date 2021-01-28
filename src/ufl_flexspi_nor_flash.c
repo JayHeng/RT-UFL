@@ -435,7 +435,7 @@ static status_t prepare_0_4_4_mode_enable_sequence(uint32_t instance,
 // Code
 ////////////////////////////////////////////////////////////////////////////////
 // See flexspi_nor_flash.h for more details
-status_t flexspi_nor_flash_init(uint32_t instance, flexspi_nor_config_t *config)
+status_t flexspi_nor_drv_flash_init(uint32_t instance, flexspi_nor_config_t *config)
 {
     status_t status = kStatus_InvalidArgument;
 
@@ -672,7 +672,7 @@ void flexspi_change_serial_clock(uint32_t instance, flexspi_nor_config_t *config
 }
 
 // See flexspi_nor_flash.h for more details
-status_t flexspi_nor_flash_page_program(uint32_t instance,
+status_t flexspi_nor_drv_flash_page_program(uint32_t instance,
                                         flexspi_nor_config_t *config,
                                         uint32_t dstAddr,
                                         const uint32_t *src)
@@ -746,7 +746,7 @@ status_t flexspi_nor_flash_page_program(uint32_t instance,
 }
 
 // See flexspi_nor_flash.h for more details
-status_t flexspi_nor_flash_erase_all(uint32_t instance, flexspi_nor_config_t *config)
+status_t flexspi_nor_drv_flash_erase_all(uint32_t instance, flexspi_nor_config_t *config)
 {
     uint32_t *flashSizeStart = NULL;
     uint32_t currentFlashSize = 0;
@@ -839,7 +839,7 @@ status_t flexspi_nor_flash_erase_all(uint32_t instance, flexspi_nor_config_t *co
 }
 
 // See flexspi_nor_flash.h for more details.
-status_t flexspi_nor_flash_erase_sector(uint32_t instance, flexspi_nor_config_t *config, uint32_t address)
+status_t flexspi_nor_drv_flash_erase_sector(uint32_t instance, flexspi_nor_config_t *config, uint32_t address)
 {
     status_t status;
     flexspi_xfer_t flashXfer;
@@ -905,7 +905,7 @@ status_t flexspi_nor_flash_erase_sector(uint32_t instance, flexspi_nor_config_t 
     return status;
 }
 
-status_t flexspi_nor_flash_erase_block(uint32_t instance, flexspi_nor_config_t *config, uint32_t address)
+status_t flexspi_nor_drv_flash_erase_block(uint32_t instance, flexspi_nor_config_t *config, uint32_t address)
 {
     status_t status;
     flexspi_xfer_t flashXfer;
@@ -1631,7 +1631,7 @@ status_t parse_sfdp(uint32_t instance,
                 config->memConfig.lookupTable[1] = FLEXSPI_LUT_SEQ(READ_SDR, FLEXSPI_1PAD, 0x04, STOP, FLEXSPI_1PAD, 1);
             }
 
-            status = flexspi_nor_flash_init(instance, config);
+            status = flexspi_nor_drv_flash_init(instance, config);
             if (status != kStatus_Success)
             {
                 break;
@@ -2016,7 +2016,7 @@ status_t flexspi_nor_generate_config_block_using_sfdp(uint32_t instance,
         config->memConfig.lookupTable[0] = FLEXSPI_LUT_SEQ(CMD_SDR, FLEXSPI_1PAD, 0x03, RADDR_SDR, FLEXSPI_1PAD, 24);
         config->memConfig.lookupTable[1] = FLEXSPI_LUT_SEQ(READ_SDR, FLEXSPI_1PAD, 0x04, STOP, FLEXSPI_1PAD, 1);
 
-        status = flexspi_nor_flash_init(instance, config);
+        status = flexspi_nor_drv_flash_init(instance, config);
         if (status != kStatus_Success)
         {
             break;
@@ -2171,7 +2171,7 @@ status_t flexspi_nor_generate_config_block_hyperflash(uint32_t instance, flexspi
 
         uint32_t lut_seq[4];
 
-        status = flexspi_nor_flash_init(instance, config);
+        status = flexspi_nor_drv_flash_init(instance, config);
         if (status != kStatus_Success)
         {
             break;
@@ -2445,11 +2445,11 @@ status_t flexspi_nor_generate_config_block_mxic_octalflash(uint32_t instance,
         if (query_pads == FLEXSPI_1PAD)
         {
             flash_run_context_t run_ctx;
-            status = flexspi_nor_read_persistent(&run_ctx.U);
-            flexspi_nor_write_persistent(0);
+            status = flexspi_nor_drv_read_persistent(&run_ctx.U);
+            flexspi_nor_drv_write_persistent(0);
             if (status == kStatus_Success)
             {
-                status = flexspi_nor_restore_spi_protocol(instance, config, &run_ctx);
+                status = flexspi_nor_drv_restore_spi_protocol(instance, config, &run_ctx);
                 if (status != kStatus_Success)
                 {
                     break;
@@ -2486,7 +2486,7 @@ status_t flexspi_nor_generate_config_block_mxic_octalflash(uint32_t instance,
             config->memConfig.sflashPadType = kSerialFlash_1Pad;
         }
 
-        status = flexspi_nor_flash_init(instance, config);
+        status = flexspi_nor_drv_flash_init(instance, config);
         if (status != kStatus_Success)
         {
             break;
@@ -2605,7 +2605,7 @@ status_t flexspi_nor_generate_config_block_mxic_octalflash(uint32_t instance,
                         FLEXSPI_LUT_SEQ(CMD_SDR, FLEXSPI_1PAD, 0x00, WRITE_SDR, FLEXSPI_1PAD, 0x01);
                 }
 
-                flexspi_nor_write_persistent(run_ctx.U);
+                flexspi_nor_drv_write_persistent(run_ctx.U);
             }
         }
 
@@ -2743,11 +2743,11 @@ status_t flexspi_nor_generate_config_block_micron_octalflash(uint32_t instance,
         if (option->option0.B.query_pads == FLEXSPI_1PAD)
         {
             flash_run_context_t run_ctx;
-            status = flexspi_nor_read_persistent(&run_ctx.U);
-            flexspi_nor_write_persistent(0);
+            status = flexspi_nor_drv_read_persistent(&run_ctx.U);
+            flexspi_nor_drv_write_persistent(0);
             if (status == kStatus_Success)
             {
-                status = flexspi_nor_restore_spi_protocol(instance, config, &run_ctx);
+                status = flexspi_nor_drv_restore_spi_protocol(instance, config, &run_ctx);
                 if (status != kStatus_Success)
                 {
                     break;
@@ -2765,7 +2765,7 @@ status_t flexspi_nor_generate_config_block_micron_octalflash(uint32_t instance,
         }
         config->memConfig.sflashPadType = kSerialFlash_8Pads;
 
-        status = flexspi_nor_flash_init(instance, config);
+        status = flexspi_nor_drv_flash_init(instance, config);
         if (status != kStatus_Success)
         {
             break;
@@ -2935,7 +2935,7 @@ status_t flexspi_nor_generate_config_block_micron_octalflash(uint32_t instance,
                 run_ctx.B.por_mode = kFlashInstMode_ExtendedSpi;
                 run_ctx.B.restore_sequence = kRestoreSequence_Send_66_99;
                 run_ctx.B.current_mode = kFlashInstMode_OPI_DDR;
-                flexspi_nor_write_persistent(run_ctx.U);
+                flexspi_nor_drv_write_persistent(run_ctx.U);
 
                 // Enable OPI mode
                 config->memConfig.deviceModeCfgEnable = true;
@@ -3011,12 +3011,12 @@ status_t flexspi_nor_generate_config_block_adesto_octalflash(uint32_t instance,
         if (query_pads == FLEXSPI_1PAD)
         {
             flash_run_context_t run_ctx;
-            status = flexspi_nor_read_persistent(&run_ctx.U);
+            status = flexspi_nor_drv_read_persistent(&run_ctx.U);
             // Clear persistent status
-            flexspi_nor_write_persistent(kFlashInstMode_ExtendedSpi);
+            flexspi_nor_drv_write_persistent(kFlashInstMode_ExtendedSpi);
             if (status == kStatus_Success)
             {
-                status = flexspi_nor_restore_spi_protocol(instance, config, &run_ctx);
+                status = flexspi_nor_drv_restore_spi_protocol(instance, config, &run_ctx);
                 if (status != kStatus_Success)
                 {
                     break;
@@ -3072,7 +3072,7 @@ status_t flexspi_nor_generate_config_block_adesto_octalflash(uint32_t instance,
             config->memConfig.controllerMiscOption |= (1u << kFlexSpiMiscOffset_DdrModeEnable);
         }
 
-        status = flexspi_nor_flash_init(instance, config);
+        status = flexspi_nor_drv_flash_init(instance, config);
         if (status != kStatus_Success)
         {
             break;
@@ -3256,7 +3256,7 @@ status_t flexspi_nor_generate_config_block_adesto_octalflash(uint32_t instance,
             }
         }
         run_ctx.B.restore_sequence = kRestoreSequence_Send_06_FF;
-        flexspi_nor_write_persistent(run_ctx.U);
+        flexspi_nor_drv_write_persistent(run_ctx.U);
 
         status = kStatus_Success;
 
@@ -3266,7 +3266,7 @@ status_t flexspi_nor_generate_config_block_adesto_octalflash(uint32_t instance,
 }
 
 // See flexspi_nor_flash.h for more details.
-status_t flexspi_nor_get_config(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option)
+status_t flexspi_nor_drv_get_config(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option)
 {
     status_t status = kStatus_InvalidArgument;
 
@@ -3378,7 +3378,7 @@ status_t flexspi_nor_get_config(uint32_t instance, flexspi_nor_config_t *config,
 }
 
 // See flexspi_nor_flash.h for more details.
-status_t flexspi_nor_flash_erase(uint32_t instance, flexspi_nor_config_t *config, uint32_t start, uint32_t length)
+status_t flexspi_nor_drv_flash_erase(uint32_t instance, flexspi_nor_config_t *config, uint32_t start, uint32_t length)
 {
     uint32_t aligned_start;
     uint32_t aligned_end;
@@ -3400,7 +3400,7 @@ status_t flexspi_nor_flash_erase(uint32_t instance, flexspi_nor_config_t *config
         {
             while (aligned_start < aligned_end)
             {
-                status = flexspi_nor_flash_erase_sector(instance, config, aligned_start);
+                status = flexspi_nor_drv_flash_erase_sector(instance, config, aligned_start);
                 if (status != kStatus_Success)
                 {
                     return status;
@@ -3416,7 +3416,7 @@ status_t flexspi_nor_flash_erase(uint32_t instance, flexspi_nor_config_t *config
                 uint32_t remaining_size = (aligned_end - aligned_start);
                 if (is_addr_block_aligned && (remaining_size >= config->blockSize))
                 {
-                    status = flexspi_nor_flash_erase_block(instance, config, aligned_start);
+                    status = flexspi_nor_drv_flash_erase_block(instance, config, aligned_start);
                     if (status != kStatus_Success)
                     {
                         return status;
@@ -3425,7 +3425,7 @@ status_t flexspi_nor_flash_erase(uint32_t instance, flexspi_nor_config_t *config
                 }
                 else
                 {
-                    status = flexspi_nor_flash_erase_sector(instance, config, aligned_start);
+                    status = flexspi_nor_drv_flash_erase_sector(instance, config, aligned_start);
                     if (status != kStatus_Success)
                     {
                         return status;
@@ -3440,7 +3440,7 @@ status_t flexspi_nor_flash_erase(uint32_t instance, flexspi_nor_config_t *config
 }
 
 // See flexspi_nor_flash.h for more details.
-status_t flexspi_nor_flash_read(
+status_t flexspi_nor_drv_flash_read(
     uint32_t instance, flexspi_nor_config_t *config, uint32_t *dst, uint32_t start, uint32_t bytes)
 {
     status_t status = kStatus_InvalidArgument;
@@ -3483,7 +3483,7 @@ status_t flexspi_nor_flash_read(
     return status;
 }
 
-status_t flexspi_nor_restore_spi_protocol(uint32_t instance, flexspi_nor_config_t *config, flash_run_context_t *run_ctx)
+status_t flexspi_nor_drv_restore_spi_protocol(uint32_t instance, flexspi_nor_config_t *config, flash_run_context_t *run_ctx)
 {
     status_t status = kStatus_InvalidArgument;
     flexspi_xfer_t xfer;
@@ -3559,7 +3559,7 @@ status_t flexspi_nor_restore_spi_protocol(uint32_t instance, flexspi_nor_config_
         config->ipcmdSerialClkFreq = kFlexSpiSerialClk_30MHz;
         config->memConfig.commandInterval = 10;
 
-        status = flexspi_nor_flash_init(instance, config);
+        status = flexspi_nor_drv_flash_init(instance, config);
         if (status != kStatus_Success)
         {
             break;
