@@ -7,8 +7,7 @@
  *
  */
 
-#include "ufl_flexspi.h"
-#include "ufl_flexspi_nor_bsp_imxrt105x.h"
+#include "ufl_rom_api.h"
 
 /*******************************************************************************
  * Definitions
@@ -16,24 +15,24 @@
 
 void flexspi_iomux_config(uint32_t instance, flexspi_mem_config_t *config)
 {
-    flexspi_iomux_config_rt1050(instance, config);
+    g_uflTargetDesc.flexspiBsp.flexspi_iomux_config(instance, config);
 }
 
 void flexspi_update_padsetting(flexspi_mem_config_t *config, uint32_t driveStrength)
 {
-    flexspi_update_padsetting_rt1050(config, driveStrength);
+    g_uflTargetDesc.flexspiBsp.flexspi_update_padsetting(config, driveStrength);
 }
 
 void flexspi_clock_config(uint32_t instance, uint32_t freq, uint32_t sampleClkMode)
 {   
-    flexspi_clock_config_rt1050(instance, freq, sampleClkMode);   
+    g_uflTargetDesc.flexspiBsp.flexspi_clock_config(instance, freq, sampleClkMode);   
 }
 
 status_t flexspi_set_failsafe_setting(flexspi_mem_config_t *config)
 {
     status_t status = kStatus_InvalidArgument;
     
-    status = flexspi_set_failsafe_setting_rt1050(config);
+    status = g_uflTargetDesc.flexspiBsp.flexspi_set_failsafe_setting(config);
     
     return status;
 }
@@ -42,14 +41,14 @@ status_t flexspi_get_max_supported_freq(uint32_t instance, uint32_t *freq, uint3
 {
     status_t status = kStatus_InvalidArgument;
 
-    status = flexspi_get_max_supported_freq_rt1050(instance, freq, clkMode);
+    status = g_uflTargetDesc.flexspiBsp.flexspi_get_max_supported_freq(instance, freq, clkMode);
 
     return status;
 }
 
 void flexspi_sw_delay_us(uint64_t us)
 {
-    uint32_t ticks_per_us = CLOCK_GetCPUFreq_RT1050() / 1000000;
+    uint32_t ticks_per_us = g_uflTargetDesc.flexspiBsp.CLOCK_GetCPUFreq() / 1000000;
     while(us--)
     {
         volatile uint32_t ticks = ticks_per_us / 4;
@@ -64,31 +63,31 @@ status_t flexspi_get_clock(uint32_t instance, flexspi_clock_type_t type, uint32_
 {
     status_t status = kStatus_Success;
     
-    status = flexspi_get_clock_rt1050(instance, type, freq);
+    status = g_uflTargetDesc.flexspiBsp.flexspi_get_clock(instance, type, freq);
 
     return status;
 }
 
 void flexspi_clock_gate_enable(uint32_t instance)
 {
-    flexspi_clock_gate_enable_rt1050(instance);
+    g_uflTargetDesc.flexspiBsp.flexspi_clock_gate_enable(instance);
 }
 
 void flexspi_clock_gate_disable(uint32_t instance)
 {
-    flexspi_clock_gate_disable_rt1050(instance);
+    g_uflTargetDesc.flexspiBsp.flexspi_clock_gate_disable(instance);
 }
 
-status_t flexspi_nor_write_persistent(const uint32_t data)
+status_t flexspi_nor_drv_write_persistent(const uint32_t data)
 {   
-    flexspi_nor_write_persistent_rt1050(data);
+    g_uflTargetDesc.flexspiBsp.flexspi_nor_write_persistent(data);
     
     return kStatus_Success;
 }
 
-status_t flexspi_nor_read_persistent(uint32_t *data)
+status_t flexspi_nor_drv_read_persistent(uint32_t *data)
 {
-    flexspi_nor_read_persistent_rt1050(data);
+    g_uflTargetDesc.flexspiBsp.flexspi_nor_read_persistent(data);
 
     return kStatus_Success;
 }

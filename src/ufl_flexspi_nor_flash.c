@@ -9,7 +9,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-#include "cmsis_compiler.h"
 
 #include "ufl_flexspi_nor_flash.h"
 

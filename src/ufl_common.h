@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
+#include "cmsis_compiler.h"
 #if defined(CPU_MIMXRT1176DVMAA_cm7)
 #include "fsl_common.h"
 #endif

@@ -29,6 +29,22 @@ typedef struct _flexspi_nor_flash_driver
     status_t (*get_config)(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option);
 } flexspi_nor_flash_driver_t;
 
+//!@brief FLEXSPI BSP driver API Interface
+typedef struct _flexspi_bsp_driver
+{
+    void (*flexspi_iomux_config)(uint32_t instance, flexspi_mem_config_t *config);
+    void (*flexspi_update_padsetting)(flexspi_mem_config_t *config, uint32_t driveStrength);
+    void (*flexspi_clock_config)(uint32_t instance, uint32_t freq, uint32_t sampleClkMode);
+    status_t (*flexspi_set_failsafe_setting)(flexspi_mem_config_t *config);
+    status_t (*flexspi_get_max_supported_freq)(uint32_t instance, uint32_t *freq, uint32_t clkMode);
+    uint32_t (*CLOCK_GetCPUFreq)(void);
+    status_t (*flexspi_get_clock)(uint32_t instance, flexspi_clock_type_t type, uint32_t *freq);
+    void (*flexspi_clock_gate_enable)(uint32_t instance);
+    void (*flexspi_clock_gate_disable)(uint32_t instance);
+    status_t (*flexspi_nor_write_persistent)(const uint32_t data);
+    status_t (*flexspi_nor_read_persistent)(uint32_t *data);
+} flexspi_bsp_driver_t;
+
 typedef struct _tool_cfg_iar
 {
     bool enablePageSizeOverride;
@@ -42,6 +58,7 @@ typedef struct _target_desc
     uint32_t flashBaseAddr;
     serial_nor_config_option_t configOption;
     flexspi_nor_flash_driver_t flashDriver;
+    flexspi_bsp_driver_t flexspiBsp;
     bool isFlashPageProgram;
     ufl_tool_cfg_iar iarCfg;
 } ufl_target_desc_t;
