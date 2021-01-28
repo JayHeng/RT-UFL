@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include "cmsis_compiler.h"
 
 #include "ufl_flexspi_nor_flash.h"
 
@@ -3569,9 +3570,13 @@ status_t flexspi_nor_drv_restore_spi_protocol(uint32_t instance, flexspi_nor_con
         status = flexspi_command_xfer(instance, &xfer);
 
         // Delay several ms until device is restored to SPI protocol
-        for (volatile uint32_t wait_cnt = SystemCoreClock / 1000; wait_cnt; wait_cnt--)
         {
-            __NOP();
+            uint32_t SystemCoreClock = 0;
+            flexspi_get_clock(instance, kFlexSpiClock_CoreClock, &SystemCoreClock);
+            register uint32_t delaycnt = SystemCoreClock / 1000;
+            while(delaycnt--)
+            {
+            }
         }
 
     } while (0);
