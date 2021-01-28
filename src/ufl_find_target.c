@@ -32,9 +32,12 @@ typedef struct _rom_fingerprint
     uint32_t content[3];
 } rom_fingerprint_t;
 
-#define ROM_FP_OFFSET1 (0x18000)
-#define ROM_FP_OFFSET2 (0x1a000)
-#define ROM_FP_OFFSET3 (0x1c000)
+#define ROM_FP_BASE_CM33 (0x10000)
+#define ROM_FP_BASE_CM7  (0x0)
+
+#define ROM_FP_OFFSET1 (0x8000)
+#define ROM_FP_OFFSET2 (0xa000)
+#define ROM_FP_OFFSET3 (0xc000)
 
 /*******************************************************************************
  * Prototypes
@@ -49,10 +52,17 @@ static rt_chip_id_t ufl_check_imxrt_sip(rt_chip_id_t chipId);
 
 // Keep ROM contents of three positions
 static const rom_fingerprint_t s_romFingerprint[] = {
+    // RT5xx ROM Size 192KB
     {kChipId_RT5xx,  {0x00000000, 0x669ff643, 0xa8017026} },        // From ROM 2.0rc4
+    // RT6xx ROM Size 256KB
     {kChipId_RT6xx,  {0x09657b04, 0xf2406510, 0x240046a2} },        // From ROM 2.0rc5.1
-    {kChipId_RT106x, {0x4608aa04, 0x2a01b132, 0x000000b4} },        // From ROM 1.0rc3
-    {kChipId_RT117x, {0xf24a0110, 0x9909a810, 0xf44f6030} },        // From ROM 2.0rc4.1
+
+    // RT105x ROM Size 96KB
+    {kChipId_RT105x, {0x9e016037, 0x2101eb10, 0xf04fd502} },        // From ROM 1.1rc3
+    // RT106x ROM Size 128KB
+    {kChipId_RT106x, {0xb0893000, 0x80dbf000, 0xf2c44100} },        // From ROM 1.0rc3
+    // RT117x ROM Size 256KB
+    {kChipId_RT117x, {0x00000f14, 0x00000000, 0x00000000} },        // From ROM 2.0rc4.1
 };
 
 /*******************************************************************************
@@ -101,18 +111,20 @@ rt_chip_id_t ufl_get_imxrt_chip_id(void)
 {
     rt_chip_id_t chipId = kChipId_Invalid;
     core_type_t coreType;
-    uint32_t rtRomBase = 0;
+    uint32_t rtRomFpBase = 0;
 
     // Get cortex-m core type by SCB->CPUID.
     coreType = ufl_get_core_type();
     // For i.MXRTxxx and i.MXRT1xxx, ROM base addresses are different
     if (kCoreType_CM33 == coreType)
     {
-        rtRomBase = RT_ROM_BASE_CM33;
+        rtRomFpBase = RT_ROM_BASE_CM33;
+        rtRomFpBase += ROM_FP_BASE_CM33;
     }
     else if (kCoreType_CM7 == coreType)
     {
-        rtRomBase = RT_ROM_BASE_CM7;
+        rtRomFpBase = RT_ROM_BASE_CM7;
+        rtRomFpBase += ROM_FP_BASE_CM7;
     }
     else
     {}
@@ -120,9 +132,9 @@ rt_chip_id_t ufl_get_imxrt_chip_id(void)
     do
     {
         uint32_t content[3];
-        content[0] = *(uint32_t *)(rtRomBase + ROM_FP_OFFSET1);
-        content[1] = *(uint32_t *)(rtRomBase + ROM_FP_OFFSET2);
-        content[2] = *(uint32_t *)(rtRomBase + ROM_FP_OFFSET3);
+        content[0] = *(uint32_t *)(rtRomFpBase + ROM_FP_OFFSET1);
+        content[1] = *(uint32_t *)(rtRomFpBase + ROM_FP_OFFSET2);
+        content[2] = *(uint32_t *)(rtRomFpBase + ROM_FP_OFFSET3);
 
         // Find dedicated i.MXRT part number according to ROM contents
         uint32_t idx = sizeof(s_romFingerprint) / sizeof(rom_fingerprint_t);
