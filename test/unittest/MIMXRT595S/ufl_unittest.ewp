@@ -2144,7 +2144,28 @@
         <name>$PROJ_DIR$\..\..\..\src\ufl_find_target.h</name>
     </file>
     <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_bsp.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_bsp_imxrt105x.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_bsp_imxrt105x_mdk.lib</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash.c</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt105x.h</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt106x.h</name>
@@ -2160,6 +2181,9 @@
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt105x.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt106x.c</name>
