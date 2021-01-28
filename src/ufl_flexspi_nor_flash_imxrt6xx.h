@@ -137,14 +137,14 @@ typedef struct _serial_nor_config_option_imxrt6xx
 typedef struct _flexspi_nor_flash_driver_imxrt6xx
 {
     uint32_t version;
-    status_t (*init)(uint32_t instance, void *config);
-    status_t (*page_program)(uint32_t instance, void *config, uint32_t dstAddr, const uint32_t *src);
-    status_t (*erase_all)(uint32_t instance, void *config);
-    status_t (*erase)(uint32_t instance, void *config, uint32_t start, uint32_t length);
-    status_t (*erase_sector)(uint32_t instance, void *config, uint32_t address);
-    status_t (*erase_block)(uint32_t instance, void *config, uint32_t address);
-    status_t (*get_config)(uint32_t instance, void *config, void *option);
-    status_t (*read)(uint32_t instance, void *config, uint32_t *dst, uint32_t start, uint32_t bytes);
+    status_t (*init)(uint32_t instance, flexspi_nor_config_t *config);
+    status_t (*page_program)(uint32_t instance, flexspi_nor_config_t *config, uint32_t dstAddr, const uint32_t *src);
+    status_t (*erase_all)(uint32_t instance, flexspi_nor_config_t *config);
+    status_t (*erase)(uint32_t instance, flexspi_nor_config_t *config, uint32_t start, uint32_t length);
+    status_t (*erase_sector)(uint32_t instance, flexspi_nor_config_t *config, uint32_t address);
+    status_t (*erase_block)(uint32_t instance, flexspi_nor_config_t *config, uint32_t address);
+    status_t (*get_config)(uint32_t instance, flexspi_nor_config_t *config, serial_nor_config_option_t *option);
+    status_t (*read)(uint32_t instance, flexspi_nor_config_t *config, uint32_t *dst, uint32_t start, uint32_t bytes);
     status_t (*xfer)(uint32_t instance, flexspi_xfer_t *xfer);
     status_t (*update_lut)(uint32_t instance, uint32_t seqIndex, const uint32_t *lutBase, uint32_t numberOfSeq);
     status_t (*set_clock_source)(uint32_t clockSrc);
