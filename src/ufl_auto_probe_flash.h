@@ -9,14 +9,13 @@
 #define _UFL_AUTO_PROBE_FLASH_H_
 
 #include "ufl_common.h"
+#include "ufl_flexspi_nor_flash.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
 
 enum
 {
-    kSerialNorCfgOption_Tag = 0x0c,
-
     kSerialNorCfgOption_MaxFreq = 0x5,
 };
 

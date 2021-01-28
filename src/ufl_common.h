@@ -19,11 +19,25 @@
  * Definitions
  ******************************************************************************/
 
+#define ALIGN_DOWN(x, a) ((x) & -(a))
+#define ALIGN_UP(x, a) (-(-(x) & -(a)))
+
+#define FREQ_1MHz (1UL * 1000 * 1000)
+
 /*! @brief Generic status return codes. */
 #if !defined(CPU_MIMXRT1176DVMAA_cm7)
+/*! @brief Construct a status code value from a group and code number. */
+#define MAKE_STATUS(group, code) ((((group)*100) + (code)))
+
 enum
 {
-    kStatus_Success = 0U,
+    kStatus_Success = MAKE_STATUS(0, 0),
+    kStatus_InvalidArgument = MAKE_STATUS(0, 4),
+};
+
+enum
+{
+    kStatusGroup_FLEXSPI = 70,
 };
 
 typedef uint32_t status_t;

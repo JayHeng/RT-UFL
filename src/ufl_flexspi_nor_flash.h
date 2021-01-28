@@ -42,6 +42,12 @@
 #define NOR_CMD_LUT_SEQ_IDX_EXIT_NOCMD \
     15 //!< 15 Exit 0-4-4/0-8-8 mode sequence id in lookupTable stored in config blobk
 
+//! @brief Bootloader status group numbers.
+enum
+{
+    kStatusGroup_FLEXSPINOR = 201,
+};
+
 /* FlexSPI NOR status */
 enum _flexspi_nor_status
 {

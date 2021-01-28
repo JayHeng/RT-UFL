@@ -96,7 +96,6 @@ status_t ufl_auto_probe(void)
     }
     else
     {
-        FLEXSPI_Type *base = (FLEXSPI_Type *)g_uflTargetDesc.flexspiBaseAddr;
         serial_nor_config_option_t option;
         uint32_t retryCnt = sizeof(s_flashConfigOpt) / sizeof(serial_nor_config_option_t);
         bool isLowerFreqPassed = false;

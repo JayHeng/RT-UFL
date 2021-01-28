@@ -289,6 +289,19 @@ enum
     kFlexSpiClockSrc_Aux1PllClk,
 };
 
+enum
+{
+    kFlexSpiSerialClk_30MHz = 1,
+    kFlexSpiSerialClk_50MHz = 2,
+    kFlexSpiSerialClk_60MHz = 3,
+    kFlexSpiSerialClk_75MHz = 4,
+    kFlexSpiSerialClk_80MHz = 5,
+    kFlexSpiSerialClk_100MHz = 6,
+    kFlexSpiSerialClk_133MHz = 7,
+    kFlexSpiSerialClk_166MHz = 8,
+    kFlexSpiSerialClk_200MHz = 9,
+};
+
 //!@brief Generate bit mask
 #define FLEXSPI_BITMASK(bit_offset) (1u << (bit_offset))
 
