@@ -47,6 +47,8 @@ release
 */*/*/*/Release/
 */*/*/*/settings/
 
+*/*/*/*/output/
+
 */*/settings/
 */*/*/Exe/
 */*/*/Obj/
