@@ -352,8 +352,9 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$/</state>
-                    <state>$PROJ_DIR$/../../../src</state>
-                    <state>$PROJ_DIR$/../../../src/devices</state>
+                    <state>$PROJ_DIR$/../</state>
+                    <state>$PROJ_DIR$/../../../../src</state>
+                    <state>$PROJ_DIR$/../../../../src/devices</state>
                     <state>$TOOLKIT_DIR$\CMSIS\Core\Include</state>
                 </option>
                 <option>
@@ -2120,102 +2121,99 @@
         </settings>
     </configuration>
     <file>
-        <name>$PROJ_DIR$\main.c</name>
+        <name>$PROJ_DIR$\..\main.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\startup_MIMXRT1052.s</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\system_MIMXRT1052.c</name>
+        <name>$PROJ_DIR$\..\system_MIMXRT1052.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_auto_probe_flash.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_auto_probe_flash.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_auto_probe_flash.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_auto_probe_flash.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_common.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_common.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_find_target.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_find_target.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_find_target.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_find_target.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_bsp.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_bsp.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_bsp_imxrt105x.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_bsp_imxrt105x.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_bsp_imxrt105x_mdk.lib</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_flash.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_flash.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_flash_imxrt105x.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt105x.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_flash_imxrt106x.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt106x.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_flash_imxrt117x.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt117x.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_flash_imxrt5xx.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt5xx.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_flash_imxrt6xx.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_flexspi_nor_flash_imxrt6xx.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_hardware_init.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_hardware_init_imxrt105x.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt105x.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_hardware_init_imxrt106x.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt106x.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_hardware_init_imxrt117x.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt117x.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_hardware_init_imxrt5xx.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt5xx.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_hardware_init_imxrt6xx.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_hardware_init_imxrt6xx.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_main.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_main.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_rom_api.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_rom_api.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_rom_api_imxrt106x.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt106x.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_rom_api_imxrt117x.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt117x.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_rom_api_imxrt5xx.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt5xx.h</name>
-    </file>
-    <file>
-        <name>$PROJ_DIR$\..\..\..\src\ufl_rom_api_imxrt6xx.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_rom_api_imxrt6xx.h</name>
     </file>
 </project>

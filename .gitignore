@@ -43,6 +43,10 @@ release
 */*/*/settings/
 */*/*/.settings/
 
+*/*/*/*/Debug/
+*/*/*/*/Release/
+*/*/*/*/settings/
+
 */*/settings/
 */*/*/Exe/
 */*/*/Obj/
