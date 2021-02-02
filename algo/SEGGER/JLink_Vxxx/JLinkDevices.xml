@@ -42,7 +42,7 @@
     <ChipInfo      Vendor="NXP"
                    Name="MIMXRT1050_UFL"
                    WorkRAMAddr="0x00000000"
-                   WorkRAMSize="0x00080000"
+                   WorkRAMSize="0x00020000"
                    Core="JLINK_CORE_CORTEX_M7"
                    Aliases="MIMXRT1052DVL6B" />
     <FlashBankInfo Name="HyperFlash" 
@@ -59,7 +59,7 @@
     <ChipInfo      Vendor="NXP"
                    Name="MIMXRT1060_UFL"
                    WorkRAMAddr="0x00000000"
-                   WorkRAMSize="0x00080000"
+                   WorkRAMSize="0x00020000"
                    Core="JLINK_CORE_CORTEX_M7"
                    Aliases="MIMXRT1062DVL6A" />
     <FlashBankInfo Name="QSPI Flash" 
@@ -76,7 +76,7 @@
     <ChipInfo      Vendor="NXP"
                    Name="MIMXRT1064_UFL"
                    WorkRAMAddr="0x00000000"
-                   WorkRAMSize="0x00080000"
+                   WorkRAMSize="0x00020000"
                    Core="JLINK_CORE_CORTEX_M7"
                    Aliases="MIMXRT1064DVL6A" />
     <FlashBankInfo Name="QSPI Flash" 
@@ -93,7 +93,7 @@
     <ChipInfo      Vendor="NXP"
                    Name="MIMXRT1170_UFL"
                    WorkRAMAddr="0x00000000"
-                   WorkRAMSize="0x00080000"
+                   WorkRAMSize="0x00040000"
                    Core="JLINK_CORE_CORTEX_M7"
                    Aliases="MIMXRT1176DVMAA" />
     <FlashBankInfo Name="QSPI Flash" 

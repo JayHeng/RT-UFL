@@ -1,7 +1,7 @@
 ; Linker Control File (scatter-loading)
 ;
 
-PRG 0xc000 PI               ; Programming Functions
+PRG 0x1000 PI               ; Programming Functions
 {
   PrgCode +0           ; Code
   {

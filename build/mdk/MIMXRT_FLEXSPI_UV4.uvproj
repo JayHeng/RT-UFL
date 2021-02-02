@@ -412,7 +412,7 @@
             <ScatterFile>.\Target.lin</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>--diag_suppress L6305 --entry 0xc001</Misc>
+            <Misc>--diag_suppress L6305 --entry 0x1001</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
