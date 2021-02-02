@@ -36,6 +36,23 @@
   </Device>
 
   <!--                 -->
+  <!-- NXP (iMXRT105x) -->
+  <!--                 -->
+  <Device>
+    <ChipInfo      Vendor="NXP"
+                   Name="MIMXRT1050_UFL"
+                   WorkRAMAddr="0x00000000"
+                   WorkRAMSize="0x00080000"
+                   Core="JLINK_CORE_CORTEX_M7"
+                   Aliases="MIMXRT1052DVL6B" />
+    <FlashBankInfo Name="HyperFlash" 
+                   BaseAddr="0x60000000"
+                   MaxSize="0x08000000"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL.FLM"
+                   LoaderType="FLASH_ALGO_TYPE_OPEN" />
+  </Device>
+
+  <!--                 -->
   <!-- NXP (iMXRT106x) -->
   <!--                 -->
   <Device>

@@ -186,8 +186,8 @@ static void ufl_set_target_property(void)
             uflTargetDesc->flexspiInstance = MIMXRT105X_1st_FLEXSPI_INSTANCE;
             uflTargetDesc->flexspiBaseAddr = MIMXRT105X_1st_FLEXSPI_BASE;
             uflTargetDesc->flashBaseAddr   = MIMXRT105X_1st_FLEXSPI_AMBA_BASE;
-            //uflTargetDesc->configOption.option0.U = 0xc0233007;
-            //uflTargetDesc->configOption.option1.U = 0x0;
+            uflTargetDesc->configOption.option0.U = 0xc0233007;
+            uflTargetDesc->configOption.option1.U = 0x0;
             break;
 
         case kChipId_RT106x:
