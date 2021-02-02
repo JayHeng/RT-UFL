@@ -46,8 +46,12 @@ release
 */*/*/*/Debug/
 */*/*/*/Release/
 */*/*/*/settings/
+*/*/*/*/FlashIMXRT_FlexSPI/
 
 */*/*/*/output/
+*/*/*/*/*.scvd
+*/*/*/*/*.txt
+*/*/*/*/*.ini
 
 */*/settings/
 */*/*/Exe/
