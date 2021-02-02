@@ -88,7 +88,7 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->flexspiBsp.flexspi_clock_config         = flexspi_clock_config_rt1050;
             uflTargetDesc->flexspiBsp.flexspi_set_failsafe_setting = flexspi_set_failsafe_setting_rt1050;
             uflTargetDesc->flexspiBsp.CLOCK_GetCPUFreq             = CLOCK_GetCPUFreq_RT1050;
-            uflTargetDesc->flexspiBsp.flexspi_get_clock            = flexspi_get_clock_rt1050;
+            uflTargetDesc->flexspiBsp.flexspi_get_max_supported_freq = flexspi_get_max_supported_freq_rt1050;
             uflTargetDesc->flexspiBsp.flexspi_clock_gate_enable    = flexspi_clock_gate_enable_rt1050;
             uflTargetDesc->flexspiBsp.flexspi_clock_gate_disable   = flexspi_clock_gate_disable_rt1050;
             uflTargetDesc->flexspiBsp.flexspi_nor_write_persistent = flexspi_nor_write_persistent_rt1050;
