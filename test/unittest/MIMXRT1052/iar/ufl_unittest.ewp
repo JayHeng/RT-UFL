@@ -2157,6 +2157,9 @@
         <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_bsp_imxrt105x.h</name>
     </file>
     <file>
+        <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_bsp_imxrt105x_iar.a</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\..\..\..\..\src\ufl_flexspi_nor_flash.c</name>
     </file>
     <file>
