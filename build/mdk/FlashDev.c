@@ -45,6 +45,7 @@ struct FlashDevice const FlashDevice  =  {
 */
 
 // MIMXRT1050-EVK
+/*
 struct FlashDevice const FlashDevice = {
    FLASH_DRV_VERS,             // Driver Version, do not modify!
    "MIMXRT_FLEXSPI",           // Device Name
@@ -61,8 +62,9 @@ struct FlashDevice const FlashDevice = {
    0x40000, 0x00000000,        // Sector Size  256kB (256 Sectors)
    SECTOR_END
 };
+*/
 
-// MIMXRT1060-EVK
+// MIMXRT1020-EVK, MIMXRT1060-EVK
 /*
 struct FlashDevice const FlashDevice = {
    FLASH_DRV_VERS,             // Driver Version, do not modify!
@@ -102,7 +104,6 @@ struct FlashDevice const FlashDevice = {
 };
 */
 
-/*
 struct FlashDevice const FlashDevice = {
    FLASH_DRV_VERS,             // Driver Version, do not modify!
    "MIMXRT_FLEXSPI",           // Device Name
@@ -119,4 +120,3 @@ struct FlashDevice const FlashDevice = {
    0x1000, 0x00000000,         // Sector Size  4kB (256 Sectors)
    SECTOR_END
 };
-*/
