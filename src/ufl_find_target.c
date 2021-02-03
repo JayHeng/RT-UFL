@@ -95,7 +95,16 @@ static core_type_t ufl_get_core_type(void)
 
 static rt_chip_id_t ufl_check_imxrt_sip(rt_chip_id_t chipId)
 {
-    if (chipId == kChipId_RT106x)
+    if (chipId == kChipId_RT102x)
+    {
+        uint32_t sipBitMask = 0x100000U;
+        uint32_t ocotpCfg3 = *(uint32_t *)0x401f4440;
+        if (ocotpCfg3 & sipBitMask)
+        {
+            chipId = kChipId_RT1024_SIP;
+        }
+    }
+    else if (chipId == kChipId_RT106x)
     {
         uint32_t sipEnBitMask = 0x100000U;
         uint32_t ocotpCfg3 = *(uint32_t *)0x401f4440;
@@ -103,7 +112,6 @@ static rt_chip_id_t ufl_check_imxrt_sip(rt_chip_id_t chipId)
         {
             chipId = kChipId_RT1064_SIP;
         }
-
     }
 
     return chipId;
