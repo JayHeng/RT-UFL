@@ -57,6 +57,8 @@ static const rom_fingerprint_t s_romFingerprint[] = {
     // RT6xx ROM Size 256KB
     {kChipId_RT6xx,  {0x09657b04, 0xf2406510, 0x240046a2} },        // From ROM 2.0rc5.1
 
+    // RT102x ROM Size 96KB
+    {kChipId_RT102x, {0x4038f83d, 0xe9dd9a03, 0x7831688a} },        // From ROM 1.0rc4
     // RT105x ROM Size 96KB
     {kChipId_RT105x, {0x9e016037, 0x2101eb10, 0xf04fd502} },        // From ROM 1.1rc3
     // RT106x ROM Size 128KB
