@@ -177,6 +177,7 @@ static void ufl_init_hardware(void)
             break;
 
         case kChipId_RT106x:
+        case kChipId_RT1064_SIP:
             ufl_init_hardware_imxrt106x();
             break;
 
