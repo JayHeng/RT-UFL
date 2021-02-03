@@ -225,7 +225,7 @@
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
-      <CpuCode>8</CpuCode>
+      <CpuCode>7</CpuCode>
       <DebugOpt>
         <uSim>0</uSim>
         <uTrg>1</uTrg>
@@ -268,7 +268,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>UL2CM3</Key>
-          <Name>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC8000 -FN1 -FF0MIMXRT1021_QuadSPI_4KB_SEC -FS060000000 -FL0800000 -FP0($$Device:MIMXRT1021DAG5A$arm\MIMXRT1021_QuadSPI_4KB_SEC.FLM))</Name>
+          <Name>UL2CM3(-S0 -C0 -P0 ) -FC1000 -FD20000000</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
       <Breakpoint/>
