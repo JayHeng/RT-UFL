@@ -483,6 +483,16 @@
               <FilePath>..\..\src\ufl_flexspi_nor_bsp.c</FilePath>
             </File>
             <File>
+              <FileName>ufl_flexspi_nor_bsp_imxrt101x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_flexspi_nor_bsp_imxrt101x.h</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_flexspi_nor_bsp_imxrt101x_mdk.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\src\ufl_flexspi_nor_bsp_imxrt101x_mdk.lib</FilePath>
+            </File>
+            <File>
               <FileName>ufl_flexspi_nor_bsp_imxrt102x.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_flexspi_nor_bsp_imxrt102x.h</FilePath>
@@ -523,6 +533,11 @@
               <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt6xx.h</FilePath>
             </File>
             <File>
+              <FileName>ufl_flexspi_nor_flash_imxrt101x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt101x.h</FilePath>
+            </File>
+            <File>
               <FileName>ufl_flexspi_nor_flash_imxrt102x.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\src\ufl_flexspi_nor_flash_imxrt102x.h</FilePath>
@@ -556,6 +571,11 @@
               <FileName>ufl_hardware_init_imxrt6xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\src\ufl_hardware_init_imxrt6xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>ufl_hardware_init_imxrt101x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\src\ufl_hardware_init_imxrt101x.c</FilePath>
             </File>
             <File>
               <FileName>ufl_hardware_init_imxrt102x.c</FileName>

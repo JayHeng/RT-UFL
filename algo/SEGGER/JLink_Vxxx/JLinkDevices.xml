@@ -36,6 +36,23 @@
   </Device>
 
   <!--                 -->
+  <!-- NXP (iMXRT101x) -->
+  <!--                 -->
+  <Device>
+    <ChipInfo      Vendor="NXP"
+                   Name="MIMXRT1010_UFL"
+                   WorkRAMAddr="0x00000000"
+                   WorkRAMSize="0x00008000"
+                   Core="JLINK_CORE_CORTEX_M7"
+                   Aliases="MIMXRT1011DAE5A" />
+    <FlashBankInfo Name="QSPI Flash" 
+                   BaseAddr="0x60000000"
+                   MaxSize="0x08000000"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL.FLM"
+                   LoaderType="FLASH_ALGO_TYPE_OPEN" />
+  </Device>
+
+  <!--                 -->
   <!-- NXP (iMXRT102x) -->
   <!--                 -->
   <Device>
