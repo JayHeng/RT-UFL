@@ -98,6 +98,7 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->flexspiBsp.flexspi_nor_read_persistent  = flexspi_nor_read_persistent_rt1010;
             break;
 
+        case kChipId_RT1015:
         case kChipId_RT102x:
         case kChipId_RT1024_SIP:
             uflTargetDesc->flashDriver.init             = flexspi_nor_drv_flash_init;
@@ -199,6 +200,7 @@ static void ufl_init_hardware(void)
             ufl_init_hardware_imxrt101x();
             break;
 
+        case kChipId_RT1015:
         case kChipId_RT102x:
         case kChipId_RT1024_SIP:
             ufl_init_hardware_imxrt102x();
@@ -253,6 +255,7 @@ static void ufl_set_target_property(void)
             //uflTargetDesc->configOption.option1.U = 0x0;
             break;
 
+        case kChipId_RT1015:
         case kChipId_RT102x:
             uflTargetDesc->flexspiInstance = MIMXRT102X_1st_FLEXSPI_INSTANCE;
             uflTargetDesc->flexspiBaseAddr = MIMXRT102X_1st_FLEXSPI_BASE;
