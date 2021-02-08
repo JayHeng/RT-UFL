@@ -55,12 +55,13 @@ typedef enum _rt_chip_id
     kChipId_Invalid    = 0xFFU,
     kChipId_RT5xx      = 1U,
     kChipId_RT6xx      = 2U,
-    kChipId_RT102x     = 3U,
-    kChipId_RT1024_SIP = 4U,
-    kChipId_RT105x     = 5U,
-    kChipId_RT106x     = 6U,
-    kChipId_RT1064_SIP = 7U,
-    kChipId_RT117x     = 8U,
+    kChipId_RT101x     = 3U,
+    kChipId_RT102x     = 4U,
+    kChipId_RT1024_SIP = 5U,
+    kChipId_RT105x     = 6U,
+    kChipId_RT106x     = 7U,
+    kChipId_RT1064_SIP = 8U,
+    kChipId_RT117x     = 9U,
 } rt_chip_id_t;
 
 #define RT_ROM_BASE_CM33 (0x03000000u)

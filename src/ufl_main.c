@@ -9,6 +9,7 @@
 #include "ufl_rom_api.h"
 #include "ufl_hardware_init.h"
 #include "ufl_auto_probe_flash.h"
+#include "ufl_flexspi_nor_bsp_imxrt101x.h"
 #include "ufl_flexspi_nor_bsp_imxrt102x.h"
 #include "ufl_flexspi_nor_bsp_imxrt105x.h"
 /*******************************************************************************
@@ -70,6 +71,31 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt6xx->flexspiNorDriver->get_config;
             // page size hasn't to be overrided, or downloading will be hung.
             uflTargetDesc->iarCfg.enablePageSizeOverride = false;
+            break;
+
+        case kChipId_RT101x:
+            uflTargetDesc->flashDriver.init             = flexspi_nor_drv_flash_init;
+            uflTargetDesc->flashDriver.page_program     = flexspi_nor_drv_flash_page_program;
+            uflTargetDesc->isFlashPageProgram           = true;
+            uflTargetDesc->flashDriver.erase_all        = flexspi_nor_drv_flash_erase_all;
+            uflTargetDesc->flashDriver.erase            = flexspi_nor_drv_flash_erase;
+            uflTargetDesc->flashDriver.read             = flexspi_nor_drv_flash_read;
+            uflTargetDesc->flashDriver.set_clock_source = NULL;
+            uflTargetDesc->flashDriver.get_config       = flexspi_nor_drv_get_config;
+            // page size has to be overrided, or downloading will be hung.
+            uflTargetDesc->iarCfg.enablePageSizeOverride = true;
+
+            uflTargetDesc->flexspiBsp.flexspi_iomux_config         = flexspi_iomux_config_rt1010;
+            uflTargetDesc->flexspiBsp.flexspi_update_padsetting    = flexspi_update_padsetting_rt1010;
+            uflTargetDesc->flexspiBsp.flexspi_clock_config         = flexspi_clock_config_rt1010;
+            uflTargetDesc->flexspiBsp.flexspi_set_failsafe_setting = flexspi_set_failsafe_setting_rt1010;
+            uflTargetDesc->flexspiBsp.CLOCK_GetCPUFreq             = CLOCK_GetCPUFreq_RT1010;
+            uflTargetDesc->flexspiBsp.flexspi_get_max_supported_freq = flexspi_get_max_supported_freq_rt1010;
+            uflTargetDesc->flexspiBsp.flexspi_clock_gate_enable    = flexspi_clock_gate_enable_rt1010;
+            uflTargetDesc->flexspiBsp.flexspi_clock_gate_disable   = flexspi_clock_gate_disable_rt1010;
+            uflTargetDesc->flexspiBsp.flexspi_nor_write_persistent = flexspi_nor_write_persistent_rt1010;
+            uflTargetDesc->flexspiBsp.flexspi_get_clock            = flexspi_get_clock_rt1010;
+            uflTargetDesc->flexspiBsp.flexspi_nor_read_persistent  = flexspi_nor_read_persistent_rt1010;
             break;
 
         case kChipId_RT102x:
@@ -169,6 +195,10 @@ static void ufl_init_hardware(void)
             ufl_init_hardware_imxrt6xx();
             break;
 
+        case kChipId_RT101x:
+            ufl_init_hardware_imxrt101x();
+            break;
+
         case kChipId_RT102x:
         case kChipId_RT1024_SIP:
             ufl_init_hardware_imxrt102x();
@@ -213,6 +243,14 @@ static void ufl_set_target_property(void)
             uflTargetDesc->flashBaseAddr   = MIMXRT6XX_1st_FLEXSPI_AMBA_BASE;
             //uflTargetDesc->configOption.option0.U = 0xc1503051;
             //uflTargetDesc->configOption.option1.U = 0x20000014;
+            break;
+
+        case kChipId_RT101x:
+            uflTargetDesc->flexspiInstance = MIMXRT101X_1st_FLEXSPI_INSTANCE;
+            uflTargetDesc->flexspiBaseAddr = MIMXRT101X_1st_FLEXSPI_BASE;
+            uflTargetDesc->flashBaseAddr   = MIMXRT101X_1st_FLEXSPI_AMBA_BASE;
+            //uflTargetDesc->configOption.option0.U = 0xc0000006;
+            //uflTargetDesc->configOption.option1.U = 0x0;
             break;
 
         case kChipId_RT102x:
