@@ -6,6 +6,7 @@
  */
 
 #include "ufl_hardware_init.h"
+#include "core_scb.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -61,9 +62,11 @@ void ufl_init_hardware_imxrt101x(void)
     }
 
     /* Disable Systick which might be enabled by bootrom */
-    if (SysTick->CTRL & SysTick_CTRL_ENABLE_Msk)
+    //if (SysTick->CTRL & SysTick_CTRL_ENABLE_Msk)
+    if (MEM_ReadU32(0xE000E010UL) & 1UL)
     {
-        SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
+        //SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
+        MEM_WriteU32(0xE000E010UL, (uint32_t)(MEM_ReadU32(0xE000E010UL) & (~1UL)));
     }
 
     if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR))

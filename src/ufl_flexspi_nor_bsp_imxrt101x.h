@@ -10,8 +10,7 @@
 #ifndef __UFL_FLEXSPI_NOR_BSP_IMXRT101X_H__
 #define __UFL_FLEXSPI_NOR_BSP_IMXRT101X_H__
 
-#include "bl_flexspi.h"
-#include "bl_common.h"
+#include "ufl_flexspi.h"
 
 void flexspi_iomux_config_rt1010(uint32_t instance, flexspi_mem_config_t *config);
 
