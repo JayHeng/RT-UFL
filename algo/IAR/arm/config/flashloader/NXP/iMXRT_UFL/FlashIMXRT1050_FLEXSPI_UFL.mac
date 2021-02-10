@@ -1,0 +1,108 @@
+_ram_init()
+{
+  __message "FLASH MAC:____Configure ITCM, DTCM and OCRAM____\n";
+  /*Configure ITCM/DTCM/OCRAM memories*/
+  __writeMemory32(0x00AA0000,0x400AC038,"Memory");
+  __writeMemory32(0x00200003,0x400AC040,"Memory");
+  __writeMemory32(0x00000000,0x400AC044,"Memory");
+  __writeMemory32(0x00000001,0xE000EF90,"Memory");
+  __writeMemory32(0x00000001,0xE000EF94,"Memory");
+} 
+
+_setup()
+{
+__var tmp;
+
+  __message "FLASH MAC:____Prepare hardware for Flashloader____\n";
+
+  /** Set ARM and Periph clocks **/
+  /*Enable PLL1 but keep it bypassed*/
+  __writeMemory32(0x00012042,0x400D8000,"Memory");
+  /*Set Clock selectors and PODFs*/
+  __writeMemory32(0x00000001,0x400FC010,"Memory");
+  tmp = __readMemory32(0x400FC018,"Memory");
+  __writeMemory32(tmp | (3<<18),0x400FC018,"Memory");
+  tmp = __readMemory32(0x400FC014,"Memory") & ~((1<<25)|(7<<10)|(3<<8));
+  __writeMemory32(tmp | (2<<8),0x400FC014,"Memory");
+   
+  /*PLL1 clear bypass*/
+  __writeMemory32(0x00002042,0x400D8000,"Memory");
+
+  /*Enable PLL3 (USBPLL1)*/
+  __writeMemory32(0x00003000,0x400D8010,"Memory");  
+	
+  /** Set PLL3 PDF0 to ~262MHz **/
+  tmp = __readMemory32(0x400D80F0,"Memory") & ~(0xFF<<0);
+  __writeMemory32(tmp | (1<<7),0x400D80F0,"Memory");
+  __writeMemory32(tmp | (0x21<<0),0x400D80F0,"Memory");
+  
+  /** Select FlexSPI Clock from PLL3 PFD0 (262MHz)
+      with divider set to 2. SCLK to FlexSPI will be 131MHz **/
+  tmp = __readMemory32(0x400FC01C,"Memory");  //read CCM_CSCMR1
+  tmp &= ~((0x3<<29) | (0x7<<23)); //
+  tmp |= ((0x3<<29) | (0x1<<23));  //FlexSPI_clk_podf = 1(divide by 2); FlexSPI_clk_sel = 3;
+  __writeMemory32(tmp,0x400FC01C,"Memory");     //write back CCM_CSCMR1
+  
+  /** Enable FlexSPI Clock in CCM **/
+  tmp = __readMemory32(0x400FC080,"Memory");  //read CCM_CCGR6
+  tmp |= (3<<10);                             //Set CG5 bits
+  __writeMemory32(tmp,0x400FC080,"Memory");   //write back CCM_CCGR6
+  
+  /** Set these bits for chip revision A1.
+	  The bits are reserved in A0 but are set by default.
+	  So this should not change anything for A0 **/
+  tmp = __readMemory32(0x400FC068,"Memory");  //read CCM_CCGR0
+  tmp |= (3<<6);                              //Set CG3 bits
+  __writeMemory32(tmp,0x400FC068,"Memory");   //write back CCM_CCGR0
+  
+  /** IOMUX config **/
+  /* Pin Mux */
+  __writeMemory32(0x6,0x401F81BC,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B0_00  FLEXSPI_A_SS1_B 
+  __writeMemory32(0x6,0x401F81C0,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B0_01  FLEXSPI_B_SS1_B 
+  __writeMemory32(0x4,0x401F81CC,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B0_04  FLEXSPI_B_SS0_B 
+  __writeMemory32(0x4,0x401F81D0,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B0_05  FLEXSPI_B_DQS   
+  __writeMemory32(0x1,0x401F81D4,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_00  FLEXSPI_B_DATA3 
+  __writeMemory32(0x1,0x401F81D8,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_01  FLEXSPI_B_DATA2 
+  __writeMemory32(0x1,0x401F81DC,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_02  FLEXSPI_B_DATA1 
+  __writeMemory32(0x1,0x401F81E0,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_03  FLEXSPI_B_DATA0 
+  __writeMemory32(0x1,0x401F81E4,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_04  FLEXSPI_B_SCLK  
+  __writeMemory32(0x1,0x401F81E8,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_05  FLEXSPI_A_DQS   
+  __writeMemory32(0x1,0x401F81EC,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_06  FLEXSPI_A_SS0_B 
+  __writeMemory32(0x1,0x401F81F0,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_07  FLEXSPI_A_SCLK  
+  __writeMemory32(0x1,0x401F81F4,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_08  FLEXSPI_A_DATA0 
+  __writeMemory32(0x1,0x401F81F8,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_09  FLEXSPI_A_DATA1 
+  __writeMemory32(0x1,0x401F81FC,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_10  FLEXSPI_A_DATA2 
+  __writeMemory32(0x1,0x401F8200,"Memory");  //SW_MUX_CTL_PAD_GPIO_SD_B1_11  FLEXSPI_A_DATA3 
+  /* Pin Config */
+  __writeMemory32(0x10F1,0x401F83C4,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B0_00  FLEXSPI_A_SS1_B 
+  __writeMemory32(0x10F1,0x401F83C4,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B0_01  FLEXSPI_B_SS1_B 
+  __writeMemory32(0x10F1,0x401F83C4,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B0_04  FLEXSPI_B_SS0_B 
+  __writeMemory32(0x130F1,0x401F83C4,"Memory"); //SW_PAD_CTL_PAD_GPIO_SD_B0_05  FLEXSPI_B_DQS   
+  __writeMemory32(0x10F1,0x401F83C4,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_00  FLEXSPI_B_DATA3 
+  __writeMemory32(0x10F1,0x401F83C8,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_01  FLEXSPI_B_DATA2 
+  __writeMemory32(0x10F1,0x401F83CC,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_02  FLEXSPI_B_DATA1 
+  __writeMemory32(0x10F1,0x401F83D0,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_03  FLEXSPI_B_DATA0 
+  __writeMemory32(0x10F1,0x401F83D4,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_04  FLEXSPI_B_SCLK  
+  __writeMemory32(0x130F1,0x401F83D8,"Memory"); //SW_PAD_CTL_PAD_GPIO_SD_B1_05  FLEXSPI_A_DQS   
+  __writeMemory32(0x10F1,0x401F83DC,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_06  FLEXSPI_A_SS0_B 
+  __writeMemory32(0x10F1,0x401F83E0,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_07  FLEXSPI_A_SCLK  
+  __writeMemory32(0x10F1,0x401F83E4,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_08  FLEXSPI_A_DATA0 
+  __writeMemory32(0x10F1,0x401F83E8,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_09  FLEXSPI_A_DATA1 
+  __writeMemory32(0x10F1,0x401F83EC,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_10  FLEXSPI_A_DATA2 
+  __writeMemory32(0x10F1,0x401F83F0,"Memory");  //SW_PAD_CTL_PAD_GPIO_SD_B1_11  FLEXSPI_A_DATA3 
+  
+//  __writeMemory32(0x60000010,0xE000ED9C,"Memory");	//
+//  __writeMemory32(0x03010035,0xE000EDA0,"Memory");	//
+//  __writeMemory32(0x00000005,0xE000ED94,"Memory");	//
+  
+}
+
+execUserFlashInit()  // Called by debugger before loading flash loader in RAM.
+{
+  _ram_init();
+}
+
+execUserFlashReset()
+{
+  _setup();
+}

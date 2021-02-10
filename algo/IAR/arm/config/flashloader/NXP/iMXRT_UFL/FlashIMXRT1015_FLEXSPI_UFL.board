@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_board>
+  <pass>
+    <loader>$TOOLKIT_DIR$\config\flashloader\NXP\iMXRT_UFL\FlashIMXRT1015_FLEXSPI_UFL.flash</loader>
+    <range>CODE 0x60000000 0x7f7fffff</range>
+  </pass>
+</flash_board>
+
+

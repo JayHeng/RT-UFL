@@ -41,8 +41,8 @@
   <Device>
     <ChipInfo      Vendor="NXP"
                    Name="MIMXRT1010_UFL"
-                   WorkRAMAddr="0x00000000"
-                   WorkRAMSize="0x00008000"
+                   WorkRAMAddr="0x20000000"
+                   WorkRAMSize="0x00010000"
                    Core="JLINK_CORE_CORTEX_M7"
                    Aliases="MIMXRT1011DAE5A" />
     <FlashBankInfo Name="QSPI Flash" 
