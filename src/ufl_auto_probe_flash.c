@@ -52,7 +52,7 @@ static const serial_nor_config_option_t s_flashConfigOpt[] = {
     {.option0.U = 0xc1503051, .option1.U = 0x20000014},
 
     // For Normal HyperBus, eg. S26KS512S, IS26KS512S
-    {.option0.U = 0xc0233001, .option1.U = 0x00000000},
+    {.option0.U = (0xc0233000 + kSerialNorCfgOption_MaxFreq), .option1.U = 0x00000000},
 
     // For Normal Octal, eg. MX25UM51245G
     {.option0.U = 0xc0403031, .option1.U = 0x00000000},
