@@ -1107,7 +1107,46 @@
             <name>$PROJ_DIR$\..\..\src\ufl_find_target.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_bsp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_bsp_imxrt101x.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_bsp_imxrt101x_iar.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_bsp_imxrt102x.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_bsp_imxrt102x_iar.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_bsp_imxrt105x.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_bsp_imxrt105x_iar.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_flash.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_flash.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_flash_imxrt101x.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_flash_imxrt102x.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_flash_imxrt105x.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\src\ufl_flexspi_nor_flash_imxrt106x.h</name>
@@ -1123,6 +1162,15 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\src\ufl_hardware_init.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_hardware_init_imxrt101x.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_hardware_init_imxrt102x.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\src\ufl_hardware_init_imxrt105x.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\src\ufl_hardware_init_imxrt106x.c</name>
