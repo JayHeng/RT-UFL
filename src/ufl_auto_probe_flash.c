@@ -13,6 +13,8 @@
 
 #define DEFAULT_FLASH_BLOCK_SIZE (64*1024U)
 
+#define FLASH_CONFIG_OPT_1BIT_SDR (0x5a5aa5a5)
+
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/
@@ -61,9 +63,62 @@ static const serial_nor_config_option_t s_flashConfigOpt[] = {
     {.option0.U = 0xc0603001, .option1.U = 0x00000000},
     // For Normal Octal, eg. ATXP032
     {.option0.U = 0xc0803001, .option1.U = 0x00000000},
-    //{.option0.U = 0xc0000006, .option1.U = 0x00000000},  // MIMXRT1060/1170-EVK
-    //{.option0.U = 0xc0403004, .option1.U = 0x00000000},  // MIMXRT595-EVK
-    //{.option0.U = 0xc1503051, .option1.U = 0x20000014},  // MIMXRT685-EVK
+
+    // For Normal 1-bit SDR
+    {.option0.U = FLASH_CONFIG_OPT_1BIT_SDR, .option1.U = 0x00000000},
+};
+
+static const flexspi_nor_config_t s_flashConfigPortX = {
+    .memConfig = {
+        .tag                  = FLEXSPI_CFG_BLK_TAG,
+        .version              = FLEXSPI_CFG_BLK_VERSION,
+        .readSampleClkSrc     = kFlexSPIReadSampleClk_LoopbackInternally,
+        .csHoldTime           = 3,
+        .csSetupTime          = 3,
+        .columnAddressWidth   = 0,
+        .deviceModeCfgEnable  = 0,
+        .deviceModeType       = 0,
+        .waitTimeCfgCommands  = 0,
+        .deviceModeSeq        = {.seqNum = 0,
+                                 .seqId  = 0,},
+        .deviceModeArg        = 0,
+        .configCmdEnable      = 0,
+        .configModeType       = {0},
+        .configCmdSeqs        = {0},
+        .configCmdArgs        = {0},
+        .controllerMiscOption = (0),
+        .deviceType           = kFlexSpiDeviceType_SerialNOR,
+        .sflashPadType        = kSerialFlash_1Pad,
+        .serialClkFreq        = kFlexSpiSerialClk_30MHz,
+        .lutCustomSeqEnable   = 0,
+        .sflashA1Size         = 0x00200000,
+        .sflashA2Size         = 0,
+        .sflashB1Size         = 0,
+        .sflashB2Size         = 0,
+        .csPadSettingOverride = 0,
+        .sclkPadSettingOverride = 0,
+        .dataPadSettingOverride = 0,
+        .dqsPadSettingOverride  = 0,
+        .timeoutInMs            = 0,
+        .commandInterval        = 0,
+        .busyOffset             = 0,
+        .busyBitPolarity        = 0,
+        .lookupTable            = {
+            [0]  = 0x08180403,
+            [1]  = 0x00002404,
+            [4]  = 0x24040405,
+            [12] = 0x00000604,
+            [20] = 0x081804D8,
+            [36] = 0x08180402,
+            [37] = 0x00002080,
+            [44] = 0x00000460,
+        },
+    },
+    .pageSize           = 0x200,
+    .sectorSize         = 0x1000,
+    .ipcmdSerialClkFreq = 1,
+    .isUniformBlockSize = 0,
+    .blockSize          = 0x10000,
 };
 
 /*******************************************************************************
@@ -105,13 +160,28 @@ status_t ufl_auto_probe(void)
         for (uint32_t idx = 0; idx < retryCnt;)
         {
             register uint32_t delaycnt;
-            memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
-
             // Wait until the FLEXSPI is idle
             delaycnt = 10000u;
             while(delaycnt--)
             {
             }
+            
+            // Check to see whether to use 1bit SDR
+            if (s_flashConfigOpt[idx].option0.U == FLASH_CONFIG_OPT_1BIT_SDR)
+            {
+                // Currenttly only support Port A
+                flexspi_nor_config_t *configPort = (flexspi_nor_config_t *)&s_flashConfigPortX;
+                configPort->memConfig.sflashA1Size = 0x00200000;
+                configPort->memConfig.sflashB1Size = 0x0;
+                status = flexspi_nor_flash_init(instance, configPort);
+                if (status == kStatus_Success)
+                {
+                    break;
+                }
+                continue;
+            }
+
+            memset((void *)&flashConfig, 0U, sizeof(flexspi_nor_config_t));
             // Only when last option wasn't passed ever, then we will try new option.
             if (!isLowerFreqPassed)
             {
