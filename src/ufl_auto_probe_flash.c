@@ -47,10 +47,17 @@ kFlexspiNorOpt0_Winbond_W25Q128JV     = 0xc0000207
 
 static const serial_nor_config_option_t s_flashConfigOpt[] = {
     // For Normal Quad, eg. IS25LP064A, GD25LB256E
+      // 1st Pinmux, PortA
     {.option0.U = 0xc0000001, .option1.U = 0x00000000},
+      // 1st Pinmux, PortB
+    {.option0.U = 0xc1000001, .option1.U = 0x20000000},
+      // 2nd Pinmux, PortA
+    {.option0.U = 0xc1000001, .option1.U = 0x00010000},
 
     // For Normal Octal, eg. MX25UM51345G
+      // 1st Pinmux, PortA
     {.option0.U = 0xc0403001, .option1.U = 0x00000000},
+      // 1st Pinmux, PortB, No DQS
     {.option0.U = 0xc1503051, .option1.U = 0x20000014},
 
     // For Normal HyperBus, eg. S26KS512S, IS26KS512S
