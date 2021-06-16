@@ -41,6 +41,18 @@ struct FlashSectors  {
 
 #define SECTOR_END 0xFFFFFFFF, 0xFFFFFFFF
 
+#define FLASH_DRV_SIZE_OPT (1)
+#if (FLASH_DRV_SIZE_OPT == 0)
+#define FLASH_DRV_PAGE_SIZE      (0x100)
+#define FLASH_DRV_SECTOR_SIZE    (0x1000)
+#elif (FLASH_DRV_SIZE_OPT == 1)
+#define FLASH_DRV_PAGE_SIZE      (0x200)
+#define FLASH_DRV_SECTOR_SIZE    (0x1000)
+#elif (FLASH_DRV_SIZE_OPT == 2)
+#define FLASH_DRV_PAGE_SIZE      (0x200)
+#define FLASH_DRV_SECTOR_SIZE    (0x10000)
+#endif
+
 struct FlashDevice  {
    unsigned short     Vers;    // Version Number and Architecture
    char       DevName[128];    // Device Name and Description

@@ -28,7 +28,7 @@
 #if defined(UFL_USE_CONST_VAR)
 const
 #endif
-flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
+flexspi_nor_config_t flashConfig = {.pageSize = FLASH_DRV_PAGE_SIZE};
 
 /*
 extern struct FlashDevice const FlashDevice;
@@ -147,7 +147,7 @@ int EraseSector (unsigned long adr) {
     uint32_t instance = g_uflTargetDesc.flexspiInstance;
     uint32_t baseAddr = g_uflTargetDesc.flashBaseAddr;
     /*Erase Sector*/
-    status_t status =  flexspi_nor_flash_erase(instance, (void *)&flashConfig, adr - baseAddr, flashConfig.sectorSize);
+    status_t status =  flexspi_nor_flash_erase(instance, (void *)&flashConfig, adr - baseAddr, FLASH_DRV_SECTOR_SIZE);
     if (status != kStatus_Success)
     {
         return (1);
@@ -175,9 +175,9 @@ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
 
     if (g_uflTargetDesc.isFlashPageProgram)
     {
-        for(uint32_t size = 0; size < sz; size+=flashConfig.pageSize,
-                                           buf+=flashConfig.pageSize,
-                                           adr+=flashConfig.pageSize)
+        for(uint32_t size = 0; size < sz; size+=FLASH_DRV_PAGE_SIZE,
+                                           buf+=FLASH_DRV_PAGE_SIZE,
+                                           adr+=FLASH_DRV_PAGE_SIZE)
         {
             status =  flexspi_nor_flash_page_program(instance, (void *)&flashConfig, adr - baseAddr, (uint32_t *)buf);
             if (status != kStatus_Success)
