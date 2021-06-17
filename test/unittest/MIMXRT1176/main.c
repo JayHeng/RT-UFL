@@ -27,6 +27,7 @@ const flexspi_nor_config_t flashConfig = {.pageSize = 0x400};
 
 int main()
 {
+    *(uint32_t *)FP_FLAG_ADDR = FP_FLAG_RT117X;
     status_t status = ufl_full_setup();
     uint32_t instance = g_uflTargetDesc.flexspiInstance;
 

@@ -24,10 +24,10 @@
 ** ###################################################################
 */
 
-define symbol m_interrupts_start       = 0x00000000;
-define symbol m_interrupts_end         = 0x000003FF;
+define symbol m_interrupts_start       = 0x00010000;
+define symbol m_interrupts_end         = 0x000103FF;
 
-define symbol m_text_start             = 0x00000400;
+define symbol m_text_start             = 0x00010400;
 define symbol m_text_end               = 0x0003FFFF;
 
 define symbol m_data_start             = 0x20000000;
