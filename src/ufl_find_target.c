@@ -32,8 +32,9 @@ typedef struct _rom_fingerprint
     uint32_t content[3];
 } rom_fingerprint_t;
 
-#define ROM_FP_BASE_CM33 (0x10000)
-#define ROM_FP_BASE_CM7  (0x0)
+#define ROM_FP_BASE_CM33    (0x10000)
+#define ROM_FP_BASE_CM7     (0x0)
+#define ROM_FP_BASE_RT117X  (0x10000)
 
 #define ROM_FP_OFFSET1 (0x8000)
 #define ROM_FP_OFFSET2 (0xa000)
@@ -66,7 +67,7 @@ static const rom_fingerprint_t s_romFingerprint[] = {
     // RT106x ROM Size 128KB
     {kChipId_RT106x, {0xb0893000, 0x80dbf000, 0xf2c44100} },        // From ROM 1.0rc3
     // RT117x ROM Size 256KB
-    {kChipId_RT117x, {0x00000f14, 0x00000000, 0x00000000} },        // From ROM 2.0rc4.1
+    {kChipId_RT117x, {0xf24a0110, 0x9909a810, 0xf44f6030} },        // From ROM 2.0rc4.1
 };
 
 /*******************************************************************************
@@ -135,8 +136,16 @@ rt_chip_id_t ufl_get_imxrt_chip_id(void)
     }
     else if (kCoreType_CM7 == coreType)
     {
+        uint32_t rt117xFlag = *(uint32_t *)FP_FLAG_ADDR;
         rtRomFpBase = RT_ROM_BASE_CM7;
-        rtRomFpBase += ROM_FP_BASE_CM7;
+        if (rt117xFlag == FP_FLAG_RT117X)
+        {
+            rtRomFpBase += ROM_FP_BASE_RT117X;
+        }
+        else
+        {
+            rtRomFpBase += ROM_FP_BASE_CM7;
+        }
     }
     else
     {}

@@ -68,6 +68,9 @@ typedef enum _rt_chip_id
 #define RT_ROM_BASE_CM33 (0x03000000u)
 #define RT_ROM_BASE_CM7  (0x00200000u)
 
+#define FP_FLAG_ADDR     (0x0000FFFCu)
+#define FP_FLAG_RT117X   (0x5AA60FF0u)
+
 /*******************************************************************************
  * API
  ******************************************************************************/
