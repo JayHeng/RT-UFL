@@ -366,6 +366,7 @@
                    WorkRAMAddr="0x00000000"
                    WorkRAMSize="0x00040000"
                    Core="JLINK_CORE_CORTEX_M7"
+                   JLinkScriptFile="Devices/NXP/iMXRT_UFL/iMXRT117x_CortexM7.JLinkScript"
                    Aliases="MIMXRT1176DVMAA" />
     <FlashBankInfo Name="QSPI Flash" 
                    BaseAddr="0x30000000"
@@ -380,6 +381,7 @@
                    WorkRAMAddr="0x00000000"
                    WorkRAMSize="0x00040000"
                    Core="JLINK_CORE_CORTEX_M7"
+                   JLinkScriptFile="Devices/NXP/iMXRT_UFL/iMXRT117x_CortexM7.JLinkScript"
                    Aliases="MIMXRT1176DVMAA" />
     <FlashBankInfo Name="QSPI Flash" 
                    BaseAddr="0x30000000"
@@ -394,6 +396,7 @@
                    WorkRAMAddr="0x00000000"
                    WorkRAMSize="0x00040000"
                    Core="JLINK_CORE_CORTEX_M7"
+                   JLinkScriptFile="Devices/NXP/iMXRT_UFL/iMXRT117x_CortexM7.JLinkScript"
                    Aliases="MIMXRT1176DVMAA" />
     <FlashBankInfo Name="QSPI Flash" 
                    BaseAddr="0x30000000"
