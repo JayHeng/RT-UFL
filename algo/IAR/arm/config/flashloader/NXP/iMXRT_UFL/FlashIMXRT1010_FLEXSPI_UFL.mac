@@ -2,9 +2,10 @@ _ram_init()
 {
   __message "FLASH MAC:____Configure ITCM, DTCM and OCRAM____\n";
   /*Configure ITCM/DTCM/OCRAM memories*/
-  __writeMemory32(0x00880000,0x400AC038,"Memory");
-  __writeMemory32(0x00200003,0x400AC040,"Memory");
-  __writeMemory32(0x00000000,0x400AC044,"Memory");
+  //__writeMemory32(0x00880000,0x400AC038,"Memory");
+  __writeMemory32(0x000000FA,0x400AC044,"Memory");
+  __writeMemory32(0x00200007,0x400AC040,"Memory");
+
   __writeMemory32(0x00000001,0xE000EF90,"Memory");
   __writeMemory32(0x00000001,0xE000EF94,"Memory");
 } 
