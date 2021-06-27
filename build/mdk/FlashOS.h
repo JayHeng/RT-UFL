@@ -41,7 +41,7 @@ struct FlashSectors  {
 
 #define SECTOR_END 0xFFFFFFFF, 0xFFFFFFFF
 
-#define FLASH_DRV_SIZE_OPT (1)
+#define FLASH_DRV_SIZE_OPT (0)
 #if (FLASH_DRV_SIZE_OPT == 0)
 #define FLASH_DRV_PAGE_SIZE      (0x100)
 #define FLASH_DRV_SECTOR_SIZE    (0x1000)

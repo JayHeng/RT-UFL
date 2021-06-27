@@ -13,7 +13,7 @@
     <FlashBankInfo Name="Octal Flash"
                    BaseAddr="0x08000000"
                    MaxSize="0x08000000"
-                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL.FLM"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_256B_4KB.FLM"
                    LoaderType="FLASH_ALGO_TYPE_OPEN" />
   </Device>
   <!------------------------>
@@ -28,7 +28,7 @@
     <FlashBankInfo Name="Octal Flash"
                    BaseAddr="0x08000000"
                    MaxSize="0x08000000"
-                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL.FLM"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_512B_4KB.FLM"
                    LoaderType="FLASH_ALGO_TYPE_OPEN" />
   </Device>
   <!------------------------>
@@ -43,7 +43,7 @@
     <FlashBankInfo Name="Octal Flash"
                    BaseAddr="0x08000000"
                    MaxSize="0x08000000"
-                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL.FLM"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_512B_64KB.FLM"
                    LoaderType="FLASH_ALGO_TYPE_OPEN" />
   </Device>
 
@@ -61,7 +61,7 @@
     <FlashBankInfo Name="Octal Flash"
                    BaseAddr="0x08000000"
                    MaxSize="0x08000000"
-                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL.FLM"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_256B_4KB.FLM"
                    LoaderType="FLASH_ALGO_TYPE_OPEN" />
   </Device>
   <!------------------------>
@@ -76,7 +76,7 @@
     <FlashBankInfo Name="Octal Flash"
                    BaseAddr="0x08000000"
                    MaxSize="0x08000000"
-                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL.FLM"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_512B_4KB.FLM"
                    LoaderType="FLASH_ALGO_TYPE_OPEN" />
   </Device>
   <!------------------------>
@@ -91,7 +91,7 @@
     <FlashBankInfo Name="Octal Flash"
                    BaseAddr="0x08000000"
                    MaxSize="0x08000000"
-                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL.FLM"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_512B_64KB.FLM"
                    LoaderType="FLASH_ALGO_TYPE_OPEN" />
   </Device>
 
