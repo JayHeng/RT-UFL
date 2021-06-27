@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_board>
+  <pass>
+    <loader>$TOOLKIT_DIR$\config\flashloader\NXP\iMXRT_UFL\FlashIMXRT1160_FLEXSPI1_UFL.flash</loader>
+    <range>CODE 0x30000000 0x3FFFFFFF</range>
+  </pass>
+  <pass>
+    <loader>$TOOLKIT_DIR$\config\flashloader\NXP\iMXRT_UFL\FlashIMXRT1160_FLEXSPI2_UFL.flash</loader>
+    <range>CODE 0x60000000 0x6F7FFFFF</range>
+  </pass>
+</flash_board>
+
+
