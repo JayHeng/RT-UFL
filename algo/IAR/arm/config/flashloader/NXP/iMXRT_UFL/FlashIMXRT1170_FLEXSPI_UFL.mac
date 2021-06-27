@@ -42,4 +42,6 @@ __var cpu;
   {
     _disableM7Cache();
   }
+
+  __writeMemory32(0x5AA60FF0,0xFFFC,"Memory");
 }
