@@ -1,19 +1,19 @@
 # RT-UFL (通用下载算法)
 
-[![GitHub release](https://img.shields.io/github/release/JayHeng/RT-UFL.svg)](https://github.com/JayHeng/RT-UFL/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/JayHeng/RT-UFL/v0.5.svg)](https://github.com/JayHeng/RT-UFL/compare/v0.5...master) ![GitHub All Releases](https://img.shields.io/github/downloads/JayHeng/RT-UFL/total.svg) [![GitHub license](https://img.shields.io/github/license/JayHeng/RT-UFL.svg)](https://github.com/JayHeng/RT-UFL/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/JayHeng/RT-UFL.svg)](https://github.com/JayHeng/RT-UFL/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/JayHeng/RT-UFL/v1.0.svg)](https://github.com/JayHeng/RT-UFL/compare/v1.0...master) ![GitHub All Releases](https://img.shields.io/github/downloads/JayHeng/RT-UFL/total.svg) [![GitHub license](https://img.shields.io/github/license/JayHeng/RT-UFL.svg)](https://github.com/JayHeng/RT-UFL/blob/master/LICENSE)
 
 [English](./README-en.md) | 中文
 
 ## 一、简介
 
-RT-UFL 是一个适用全平台i.MXRT的通用Flash下载算法项目，项目的最终目标是做到一个.FLM文件适用所有的i.MXRT开发板，且不论其连接的哪款Flash型号。
+RT-UFL 是一个适用全平台 i.MXRT 的通用 Flash 下载算法项目，项目的最终目标是做到一个 .FLM 文件适用所有的i.MXRT开发板，且不论其连接的哪款 Flash 型号。
 
 RT-UFL 主要是为了解决如下七大痛点：
 
 ```text
 1. 每一个i.MXRT型号都需要一个单独的下载算法文件.
 2. 同一个i.MXRT型号搭配不同属性的Flash也需要不同的算法文件.
-3. 同一个i.MXRT型号搭配相同特性的Flash但Flash出厂设置不同（有无SFDP、QE默认状态灯）也需要不同的算法文件.
+3. 同一个i.MXRT型号搭配相同特性的Flash但Flash出厂设置不同（有无SFDP、QE默认状态位）也需要不同的算法文件.
 4. Flash连接到i.MXRT不同的FlexSPI引脚上也可能需要不同的算法文件.
 5. 如果下载算法公共设计部分有不可忽视的缺陷，需要整体更新全部i.MXRT型号对应的下载算法.
 6. 对于下载算法的发布，没有一个统一的版本管理.
