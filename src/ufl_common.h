@@ -63,13 +63,18 @@ typedef enum _rt_chip_id
     kChipId_RT106x     = 8U,
     kChipId_RT1064_SIP = 9U,
     kChipId_RT117x     = 10U,
+    kChipId_RT118x     = 11U,
 } rt_chip_id_t;
 
-#define RT_ROM_BASE_CM33 (0x03000000u)
-#define RT_ROM_BASE_CM7  (0x00200000u)
+#define RT_ROM_BASE_CM33    (0x03000000u)
+#define RT_ROM_BASE_CM7     (0x00200000u)
+#define RT_ROM_BASE_RT118X  (0x10000000u)
 
-#define FP_FLAG_ADDR     (0x0000FFFCu)
-#define FP_FLAG_RT117X   (0x5AA60FF0u)
+#define FP_FLAG_ADDR_RT117X    (0x0000FFFCu)
+#define FP_FLAG_VALUE_RT117X   (0x5AA60FF0u)
+
+#define FP_FLAG_ADDR_RT118X    (0x1FFFFFFCu)
+#define FP_FLAG_VALUE_RT118X   (0x5AA60FF1u)
 
 /*******************************************************************************
  * API

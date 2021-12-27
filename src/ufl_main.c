@@ -177,6 +177,19 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->iarCfg.enablePageSizeOverride = true;
             break;
 
+        case kChipId_RT118x:
+            uflTargetDesc->flashDriver.init             = g_bootloaderTree_imxrt118x->flexspiNorDriver->init;
+            uflTargetDesc->flashDriver.page_program     = g_bootloaderTree_imxrt118x->flexspiNorDriver->page_program;
+            uflTargetDesc->isFlashPageProgram           = true;
+            uflTargetDesc->flashDriver.erase_all        = g_bootloaderTree_imxrt118x->flexspiNorDriver->erase_all;
+            uflTargetDesc->flashDriver.erase            = g_bootloaderTree_imxrt118x->flexspiNorDriver->erase;
+            uflTargetDesc->flashDriver.read             = g_bootloaderTree_imxrt118x->flexspiNorDriver->read;
+            uflTargetDesc->flashDriver.set_clock_source = NULL;
+            uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt118x->flexspiNorDriver->get_config;
+            // It doesn't matter that page size is overrided or not.
+            uflTargetDesc->iarCfg.enablePageSizeOverride = true;
+            break;
+
         case kChipId_Invalid:
         default:
             break;
@@ -217,6 +230,10 @@ static void ufl_init_hardware(void)
 
         case kChipId_RT117x:
             ufl_init_hardware_imxrt117x();
+            break;
+
+        case kChipId_RT118x:
+            ufl_init_hardware_imxrt118x();
             break;
 
         case kChipId_Invalid:
@@ -301,6 +318,14 @@ static void ufl_set_target_property(void)
             uflTargetDesc->flexspiBaseAddr = MIMXRT117X_1st_FLEXSPI_BASE;
             uflTargetDesc->flashBaseAddr   = MIMXRT117X_1st_FLEXSPI_AMBA_BASE;
             //uflTargetDesc->configOption.option0.U = 0xc0000006;
+            //uflTargetDesc->configOption.option1.U = 0x0;
+            break;
+
+        case kChipId_RT118x:
+            uflTargetDesc->flexspiInstance = MIMXRT118X_2nd_FLEXSPI_INSTANCE;
+            uflTargetDesc->flexspiBaseAddr = MIMXRT118X_2nd_FLEXSPI_BASE;
+            uflTargetDesc->flashBaseAddr   = MIMXRT118X_2nd_FLEXSPI_AMBA_BASE;
+            //uflTargetDesc->configOption.option0.U = 0xc0000004;
             //uflTargetDesc->configOption.option1.U = 0x0;
             break;
 

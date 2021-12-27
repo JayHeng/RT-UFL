@@ -16,6 +16,7 @@
 #include "ufl_flexspi_nor_flash_imxrt105x.h"
 #include "ufl_rom_api_imxrt106x.h"
 #include "ufl_rom_api_imxrt117x.h"
+#include "ufl_rom_api_imxrt118x.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/

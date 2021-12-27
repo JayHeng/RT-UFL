@@ -68,6 +68,8 @@ static const rom_fingerprint_t s_romFingerprint[] = {
     {kChipId_RT106x, {0xb0893000, 0x80dbf000, 0xf2c44100} },        // From ROM 1.0rc3
     // RT117x ROM Size 256KB
     {kChipId_RT117x, {0xf24a0110, 0x9909a810, 0xf44f6030} },        // From ROM 2.0rc4.1
+    // RT118x ROM Size 160KB
+    {kChipId_RT118x, {0xbf3c4577, 0x7f28d069, 0xf64f780a} },        // From ROM 1.0rc4.1
 };
 
 /*******************************************************************************
@@ -131,14 +133,22 @@ rt_chip_id_t ufl_get_imxrt_chip_id(void)
     // For i.MXRTxxx and i.MXRT1xxx, ROM base addresses are different
     if (kCoreType_CM33 == coreType)
     {
-        rtRomFpBase = RT_ROM_BASE_CM33;
-        rtRomFpBase += ROM_FP_BASE_CM33;
+        uint32_t rt118xFlag = *(uint32_t *)FP_FLAG_ADDR_RT118X;
+        if (rt118xFlag == FP_FLAG_VALUE_RT118X)
+        {
+            rtRomFpBase = RT_ROM_BASE_RT118X;
+        }
+        else
+        {
+            rtRomFpBase = RT_ROM_BASE_CM33;
+            rtRomFpBase += ROM_FP_BASE_CM33;
+        }
     }
     else if (kCoreType_CM7 == coreType)
     {
-        uint32_t rt117xFlag = *(uint32_t *)FP_FLAG_ADDR;
+        uint32_t rt117xFlag = *(uint32_t *)FP_FLAG_ADDR_RT117X;
         rtRomFpBase = RT_ROM_BASE_CM7;
-        if (rt117xFlag == FP_FLAG_RT117X)
+        if (rt117xFlag == FP_FLAG_VALUE_RT117X)
         {
             rtRomFpBase += ROM_FP_BASE_RT117X;
         }
