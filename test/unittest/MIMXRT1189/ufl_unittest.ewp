@@ -717,7 +717,7 @@
                 </option>
                 <option>
                     <name>IlinkConfigDefines</name>
-                    <state></state>
+                    <state>__stack_size__=0x1000</state>
                 </option>
                 <option>
                     <name>IlinkMapFile</name>
