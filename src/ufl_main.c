@@ -225,9 +225,12 @@ static void ufl_init_hardware(void)
 
         case kChipId_RT106x:
         case kChipId_RT1064_SIP:
+        case kChipId_RT104x:
+        case kChipId_RT1060X:
             ufl_init_hardware_imxrt106x();
             break;
 
+        case kChipId_RT116x:
         case kChipId_RT117x:
             ufl_init_hardware_imxrt117x();
             break;
@@ -297,7 +300,9 @@ static void ufl_set_target_property(void)
             //uflTargetDesc->configOption.option1.U = 0x0;
             break;
 
+        case kChipId_RT104x:
         case kChipId_RT106x:
+        case kChipId_RT1060X:
             uflTargetDesc->flexspiInstance = MIMXRT106X_1st_FLEXSPI_INSTANCE;
             uflTargetDesc->flexspiBaseAddr = MIMXRT106X_1st_FLEXSPI_BASE;
             uflTargetDesc->flashBaseAddr   = MIMXRT106X_1st_FLEXSPI_AMBA_BASE;
@@ -313,6 +318,7 @@ static void ufl_set_target_property(void)
             uflTargetDesc->configOption.option1.U = 0x0;
             break;
 
+        case kChipId_RT116x:
         case kChipId_RT117x:
             uflTargetDesc->flexspiInstance = MIMXRT117X_1st_FLEXSPI_INSTANCE;
             uflTargetDesc->flexspiBaseAddr = MIMXRT117X_1st_FLEXSPI_BASE;

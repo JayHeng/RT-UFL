@@ -53,17 +53,28 @@ typedef uint32_t status_t;
 typedef enum _rt_chip_id
 {
     kChipId_Invalid    = 0xFFU,
-    kChipId_RT5xx      = 1U,
-    kChipId_RT6xx      = 2U,
-    kChipId_RT101x     = 3U,
-    kChipId_RT1015     = 4U,
-    kChipId_RT102x     = 5U,
-    kChipId_RT1024_SIP = 6U,
-    kChipId_RT105x     = 7U,
-    kChipId_RT106x     = 8U,
-    kChipId_RT1064_SIP = 9U,
-    kChipId_RT117x     = 10U,
-    kChipId_RT118x     = 11U,
+
+    kChipId_RT5xx      = 0x01U,
+
+    kChipId_RT6xx      = 0x11U,
+
+    kChipId_RT101x     = 0x31U,
+
+    kChipId_RT102x     = 0x41U,
+    kChipId_RT1015     = 0x42U,
+    kChipId_RT1024_SIP = 0x43U,
+
+    kChipId_RT105x     = 0x51U,
+
+    kChipId_RT106x     = 0x61U,
+    kChipId_RT1064_SIP = 0x62U,
+    kChipId_RT104x     = 0x63U,
+    kChipId_RT1060X    = 0x64U,
+
+    kChipId_RT117x     = 0x81U,
+    kChipId_RT116x     = 0x82U,
+
+    kChipId_RT118x     = 0x91U,
 } rt_chip_id_t;
 
 #define RT_ROM_BASE_CM33    (0x03000000u)

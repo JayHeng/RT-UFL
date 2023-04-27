@@ -251,6 +251,51 @@
   </Device>
 
   <!--                 -->
+  <!-- NXP (iMXRT104x) -->
+  <!--                 -->
+  <Device>
+    <ChipInfo      Vendor="NXP"
+                   Name="MIMXRT1040_UFL_L0"
+                   WorkRAMAddr="0x00000000"
+                   WorkRAMSize="0x00020000"
+                   Core="JLINK_CORE_CORTEX_M7"
+                   Aliases="MIMXRT1042xxx5B" />
+    <FlashBankInfo Name="QSPI Flash" 
+                   BaseAddr="0x60000000"
+                   MaxSize="0x08000000"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_256B_4KB.FLM"
+                   LoaderType="FLASH_ALGO_TYPE_OPEN" />
+  </Device>
+  <!------------------------>
+  <Device>
+    <ChipInfo      Vendor="NXP"
+                   Name="MIMXRT1040_UFL_L1"
+                   WorkRAMAddr="0x00000000"
+                   WorkRAMSize="0x00020000"
+                   Core="JLINK_CORE_CORTEX_M7"
+                   Aliases="MIMXRT1042xxx5B" />
+    <FlashBankInfo Name="QSPI Flash" 
+                   BaseAddr="0x60000000"
+                   MaxSize="0x08000000"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_512B_4KB.FLM"
+                   LoaderType="FLASH_ALGO_TYPE_OPEN" />
+  </Device>
+  <!------------------------>
+  <Device>
+    <ChipInfo      Vendor="NXP"
+                   Name="MIMXRT1040_UFL_L2"
+                   WorkRAMAddr="0x00000000"
+                   WorkRAMSize="0x00020000"
+                   Core="JLINK_CORE_CORTEX_M7"
+                   Aliases="MIMXRT1042xxx5B" />
+    <FlashBankInfo Name="QSPI Flash" 
+                   BaseAddr="0x60000000"
+                   MaxSize="0x08000000"
+                   Loader="Devices/NXP/iMXRT_UFL/MIMXRT_FLEXSPI_UFL_512B_64KB.FLM"
+                   LoaderType="FLASH_ALGO_TYPE_OPEN" />
+  </Device>
+
+  <!--                 -->
   <!-- NXP (iMXRT105x) -->
   <!--                 -->
   <Device>
@@ -463,7 +508,7 @@
                    WorkRAMSize="0x00020000"
                    Core="JLINK_CORE_CORTEX_M33"
                    JLinkScriptFile="Devices/NXP/iMXRT_UFL/iMXRT118x_CortexM33.JLinkScript"
-                   Aliases="MIMXRT1189xxx8A_M33" />
+                   Aliases="MIMXRT1189xxx8_M33; MIMXRT1181xxx2; MIMXRT1182xxx2; MIMXRT1187xxx8_M33" />
     <FlashBankInfo Name="QSPI Flash" 
                    BaseAddr="0x28000000"
                    MaxSize="0x08000000"
@@ -478,7 +523,7 @@
                    WorkRAMSize="0x00020000"
                    Core="JLINK_CORE_CORTEX_M33"
                    JLinkScriptFile="Devices/NXP/iMXRT_UFL/iMXRT118x_CortexM33.JLinkScript"
-                   Aliases="MIMXRT1189xxx8A_M33" />
+                   Aliases="MIMXRT1189xxx8_M33; MIMXRT1181xxx2; MIMXRT1182xxx2; MIMXRT1187xxx8_M33" />
     <FlashBankInfo Name="QSPI Flash" 
                    BaseAddr="0x28000000"
                    MaxSize="0x08000000"
@@ -493,7 +538,7 @@
                    WorkRAMSize="0x00020000"
                    Core="JLINK_CORE_CORTEX_M33"
                    JLinkScriptFile="Devices/NXP/iMXRT_UFL/iMXRT118x_CortexM33.JLinkScript"
-                   Aliases="MIMXRT1189xxx8A_M33" />
+                   Aliases="MIMXRT1189xxx8_M33; MIMXRT1181xxx2; MIMXRT1182xxx2; MIMXRT1187xxx8_M33" />
     <FlashBankInfo Name="QSPI Flash" 
                    BaseAddr="0x28000000"
                    MaxSize="0x08000000"
