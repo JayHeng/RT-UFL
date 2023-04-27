@@ -16,7 +16,7 @@
 
 enum
 {
-    kSerialNorCfgOption_MaxFreq = 0x4,
+    kSerialNorCfgOption_MaxFreq = 0x5,
 };
 
 
