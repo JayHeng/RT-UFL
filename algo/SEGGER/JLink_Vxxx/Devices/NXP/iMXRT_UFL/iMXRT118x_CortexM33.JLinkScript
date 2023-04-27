@@ -1,0 +1,102 @@
+/*********************************************************************
+*            (c) 1995 - 2021 SEGGER Microcontroller GmbH             *
+*                        The Embedded Experts                        *
+*                           www.segger.com                           *
+**********************************************************************
+
+-------------------------- END-OF-HEADER -----------------------------
+*/
+
+void InitTCM(void) {
+    JLINK_SYS_Report("***************************************************");
+    JLINK_SYS_Report("Init TCM");
+    JLINK_SYS_Report("***************************************************");
+    JLINK_MEM_Fill(0x1FFE0000, 0x20000, 0);
+    JLINK_MEM_Fill(0x20000000, 0x20000, 0);
+}
+
+void ClearNVIC(void) {
+    JLINK_SYS_Report("***************************************************");
+    JLINK_SYS_Report("Clear NVIC");
+    JLINK_SYS_Report("***************************************************");
+    JLINK_MEM_Fill(0xE000E180, 0x40, 0xFF);
+    JLINK_MEM_Fill(0xE000E280, 0x40, 0xFF);
+}
+
+void enableEraseFlash(void) {
+    JLINK_SYS_Report("***************************************************");
+    JLINK_SYS_Report("Enable Erase All Flash Banks");
+    JLINK_SYS_Report("***************************************************");
+    JLINK_ExecCommand("EnableEraseAllFlashBanks");
+}
+
+/*********************************************************************
+*
+*       ResetTarget
+*/
+void ResetTarget(void) {
+    //
+    // This device requires a special reset as default reset does not work for this device.
+    // TBD
+    //
+    JLINK_TARGET_Halt(); // Make sure that the CPU is halted when reset is called
+}
+
+/*********************************************************************
+*
+*       InitTarget
+*/
+void InitTarget(void) { 
+    int v;
+    JLINK_SYS_Report("***************************************************");
+    JLINK_SYS_Report("J-Link script: iMXRT1180 Cortex-M33 core J-Link script");
+    JLINK_SYS_Report("***************************************************");
+
+    // For SWD, no special setup is needed, just output the switching sequence
+    JLINK_CORESIGHT_Configure("");
+    CPU = CORTEX_M33;                                                              // Pre-select that we have a Cortex-M4 connected
+    JTAG_AllowTAPReset = 0;                                                       // J-Link is allowed to use a TAP reset for JTAG-chain auto-detection
+
+    //
+    // Manually configure which APs are present on the CoreSight device
+    //
+    //JTAG_SetDeviceId(0, 0x44770003);  // 4-bits IRLen
+    CORESIGHT_AddAP(0, CORESIGHT_AHB_AP);
+    CORESIGHT_AddAP(1, CORESIGHT_APB_AP);
+    CORESIGHT_AddAP(2, CORESIGHT_AHB_AP);
+    CORESIGHT_AddAP(3, CORESIGHT_AHB_AP);
+    CORESIGHT_AddAP(4, CORESIGHT_APB_AP);
+    CORESIGHT_AddAP(5, CORESIGHT_APB_AP);
+    CORESIGHT_AddAP(6, CORESIGHT_APB_AP);
+    CORESIGHT_IndexAHBAPToUse = 3;
+
+    //JTAG_SetDeviceId(0, 0x44770003);  // 4-bits IRLen
+    v = JLINK_CORESIGHT_ReadDP(JLINK_CORESIGHT_DP_REG_CTRL_STAT);
+    JLINK_SYS_Report1("DAP-CtrlStat: ", v);  
+    return 0;
+}
+
+void SetFlagInITCM()
+{
+    MEM_WriteU32(0x1FFFFFFC, 0x5AA60FF1);
+
+    JLINK_SYS_Report("J-Link script: 0x5AA60FF1 has been written to address 0x1FFFFFFC");
+}
+
+/* SetupTarget */
+void SetupTarget(void) {
+
+    InitTCM();
+    ClearNVIC();
+    enableEraseFlash();
+
+    SetFlagInITCM();
+
+    return 0;
+}
+
+/* AfterResetTarget */
+void AfterResetTarget(void) {
+
+    SetFlagInITCM();
+}
