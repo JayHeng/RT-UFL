@@ -322,9 +322,9 @@ static void ufl_set_target_property(void)
             break;
 
         case kChipId_RT118x:
-            uflTargetDesc->flexspiInstance = MIMXRT118X_2nd_FLEXSPI_INSTANCE;
-            uflTargetDesc->flexspiBaseAddr = MIMXRT118X_2nd_FLEXSPI_BASE;
-            uflTargetDesc->flashBaseAddr   = MIMXRT118X_2nd_FLEXSPI_AMBA_BASE;
+            uflTargetDesc->flexspiInstance = MIMXRT118X_1st_FLEXSPI_INSTANCE;
+            uflTargetDesc->flexspiBaseAddr = MIMXRT118X_1st_FLEXSPI_BASE;
+            uflTargetDesc->flashBaseAddr   = MIMXRT118X_1st_FLEXSPI_AMBA_BASE;
             //uflTargetDesc->configOption.option0.U = 0xc0000004;
             //uflTargetDesc->configOption.option1.U = 0x0;
             break;
