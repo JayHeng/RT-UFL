@@ -144,6 +144,29 @@ static void flexspi_error_handler(uint32_t instance)
     flexspi_wait_idle(instance);
 }
 
+uint32_t ufl_get_fdcb_offset(rt_chip_id_t chipId)
+{
+    switch (chipId)
+    {
+        case kChipId_RT5xx:
+        case kChipId_RT6xx:
+        case kChipId_RT101x:
+        case kChipId_RT117x:
+        case kChipId_RT118x:
+            return 0x400;
+
+        case kChipId_RT1015:
+        case kChipId_RT102x:
+        case kChipId_RT1024_SIP:
+        case kChipId_RT105x:
+        case kChipId_RT106x:
+        case kChipId_RT1064_SIP:
+        case kChipId_Invalid:
+        default:
+            return 0x0;
+    }
+}
+
 status_t ufl_auto_probe(void)
 {
     status_t status = kStatus_Success;
@@ -206,7 +229,8 @@ status_t ufl_auto_probe(void)
                     if ((status == kStatus_Success) &&
                         (flashConfig.pageSize != 0))
                     {
-                        status = flexspi_nor_flash_page_program(instance, (flexspi_nor_config_t *)&flashConfig, 0x0, (uint32_t *)&flashConfig);
+                        uint32_t opAddr = ufl_get_fdcb_offset((rt_chip_id_t)g_uflTargetDesc.imxrtChipId);
+                        status = flexspi_nor_flash_page_program(instance, (flexspi_nor_config_t *)&flashConfig, opAddr, (uint32_t *)&flashConfig);
                         if (status == kStatus_Success)
                         {
                             // Only when higher freq of current option wasn't failed ever, then 
