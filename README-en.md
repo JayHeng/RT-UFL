@@ -1,3 +1,14 @@
+``` mermaid
+gantt
+    title RT-UFL Release Plan
+    dateFormat  YYYY-MM-DD
+    section Formal Release
+    v0.5           :a1, 2020-09-22, 2020-12-13
+    v0.6           :a2, 2020-12-14, 2020-12-21
+    v1.0           :a3, 2020-12-22, 2021-06-27
+    v2.0           :a4, 2021-06-28, 2023-12-31
+```
+
 # RT-UFL (Universal FlashLoader)
 
 [![GitHub release](https://img.shields.io/github/release/JayHeng/RT-UFL.svg)](https://github.com/JayHeng/RT-UFL/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/JayHeng/RT-UFL/v1.0.svg)](https://github.com/JayHeng/RT-UFL/compare/v1.0...master) ![GitHub All Releases](https://img.shields.io/github/downloads/JayHeng/RT-UFL/total.svg) [![GitHub license](https://img.shields.io/github/license/JayHeng/RT-UFL.svg)](https://github.com/JayHeng/RT-UFL/blob/master/LICENSE)
