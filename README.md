@@ -37,7 +37,7 @@ RT-UFL 从设计上分为三层：
 > * 中间是Adapter层：这一层是最核心的，它实现了全i.MXRT平台、全Flash型号的自适应支持。
 > * 最顶层是API层：这属于下载算法模板，其实由集成开发环境(Keil、JLink)决定了，不可更改。
 
-![](doc/RT-UniversalFlashloader_Arch.PNG)
+![](https://raw.githubusercontent.com/JayHeng/RT-UFL/master/doc/RT-UniversalFlashloader_Arch.PNG)
 
 ## 二、特性
 

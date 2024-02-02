@@ -152,6 +152,8 @@ static void ufl_fill_flash_api(void)
 
         case kChipId_RT106x:
         case kChipId_RT1064_SIP:
+        case kChipId_RT104x:
+        case kChipId_RT1060X:
             uflTargetDesc->flashDriver.init             = g_bootloaderTree_imxrt106x->flexspiNorDriver->init;
             uflTargetDesc->flashDriver.page_program     = g_bootloaderTree_imxrt106x->flexspiNorDriver->program;
             uflTargetDesc->isFlashPageProgram           = false;
@@ -164,6 +166,7 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->iarCfg.enablePageSizeOverride = true;
             break;
 
+        case kChipId_RT116x:
         case kChipId_RT117x:
             uflTargetDesc->flashDriver.init             = g_bootloaderTree_imxrt117x->flexspiNorDriver->init;
             uflTargetDesc->flashDriver.page_program     = g_bootloaderTree_imxrt117x->flexspiNorDriver->page_program;
