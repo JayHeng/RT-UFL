@@ -54,22 +54,26 @@ static rt_chip_id_t ufl_check_imxrt_sip(rt_chip_id_t chipId);
 // Keep ROM contents of three positions
 static const rom_fingerprint_t s_romFingerprint[] = {
     // RT5xx ROM Size 192KB
-    {kChipId_RT5xx,  {0x00000000, 0x669ff643, 0xa8017026} },        // From ROM 2.0rc4
+    {kChipId_RT5xx,     {0x00000000, 0x669ff643, 0xa8017026} },        // From ROM 2.0rc4
     // RT6xx ROM Size 256KB
-    {kChipId_RT6xx,  {0x09657b04, 0xf2406510, 0x240046a2} },        // From ROM 2.0rc5.1
+    {kChipId_RT6xx,     {0x09657b04, 0xf2406510, 0x240046a2} },        // From ROM 2.0rc5.1
 
     // RT101x ROM Size 64KB
-    {kChipId_RT101x, {0x2805eb03, 0xf88d10c9, 0xf810f000} },        // From ROM 1.0rc3
+    {kChipId_RT101x,    {0x2805eb03, 0xf88d10c9, 0xf810f000} },        // From ROM 1.0rc3
     // RT102x ROM Size 96KB
-    {kChipId_RT102x, {0x4038f88d, 0xe9dd9a03, 0x7831688a} },        // From ROM 1.0rc4
-    // RT105x ROM Size 96KB
-    {kChipId_RT105x, {0x9e016037, 0x2101eb10, 0xf04fd502} },        // From ROM 1.1rc3
+    {kChipId_RT102x,    {0x4038f88d, 0xe9dd9a03, 0x7831688a} },        // From ROM 1.0rc4
+    // RT105x A1 ROM Size 96KB
+    {kChipId_RT105x,    {0x9e016037, 0x2101eb10, 0xf04fd502} },        // From ROM 1.1rc3
     // RT106x ROM Size 128KB
-    {kChipId_RT106x, {0xb0893000, 0x80dbf000, 0xf2c44100} },        // From ROM 1.0rc3
-    // RT117x ROM Size 256KB
-    {kChipId_RT117x, {0xf24a0110, 0x9909a810, 0xf44f6030} },        // From ROM 2.0rc4.1
+    {kChipId_RT106x,    {0xb0893000, 0x80dbf000, 0xf2c44100} },        // From ROM 1.0rc3
+    // RT117x A0 ROM Size 256KB
+    {kChipId_RT117x_A0, {0xe00714d0, 0xdc012904, 0x9100010e} },        // From ROM 1.0rc4
+    // RT117x B0 ROM Size 256KB
+    {kChipId_RT117x_B0, {0xf24a0110, 0x9909a810, 0xf44f6030} },        // From ROM 2.0rc4.1
+    // RT117x C0 ROM Size 256KB
+    {kChipId_RT117x_C0, {0xf6c87012, 0x430861e0, 0x6830b1cc} },        // From ROM 3.0rc1.4
     // RT118x ROM Size 160KB
-    {kChipId_RT118x, {0xbf3c4577, 0x7f28d069, 0xf64f780a} },        // From ROM 1.0rc4.1
+    {kChipId_RT118x,    {0xbf3c4577, 0x7f28d069, 0xf64f780a} },        // From ROM 1.0rc4.1
 };
 
 /*******************************************************************************

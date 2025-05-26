@@ -166,16 +166,32 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->iarCfg.enablePageSizeOverride = true;
             break;
 
-        case kChipId_RT116x:
-        case kChipId_RT117x:
-            uflTargetDesc->flashDriver.init             = g_bootloaderTree_imxrt117x->flexspiNorDriver->init;
-            uflTargetDesc->flashDriver.page_program     = g_bootloaderTree_imxrt117x->flexspiNorDriver->page_program;
+        case kChipId_RT116x_A0:
+        case kChipId_RT117x_A0:
+            uflTargetDesc->flashDriver.init             = g_bootloaderTree_imxrt117x_a0->flexspiNorDriver->init;
+            uflTargetDesc->flashDriver.page_program     = g_bootloaderTree_imxrt117x_a0->flexspiNorDriver->page_program;
             uflTargetDesc->isFlashPageProgram           = true;
-            uflTargetDesc->flashDriver.erase_all        = g_bootloaderTree_imxrt117x->flexspiNorDriver->erase_all;
-            uflTargetDesc->flashDriver.erase            = g_bootloaderTree_imxrt117x->flexspiNorDriver->erase;
-            uflTargetDesc->flashDriver.read             = g_bootloaderTree_imxrt117x->flexspiNorDriver->read;
+            uflTargetDesc->flashDriver.erase_all        = g_bootloaderTree_imxrt117x_a0->flexspiNorDriver->erase_all;
+            uflTargetDesc->flashDriver.erase            = g_bootloaderTree_imxrt117x_a0->flexspiNorDriver->erase;
+            uflTargetDesc->flashDriver.read             = g_bootloaderTree_imxrt117x_a0->flexspiNorDriver->read;
             uflTargetDesc->flashDriver.set_clock_source = NULL;
-            uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt117x->flexspiNorDriver->get_config;
+            uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt117x_a0->flexspiNorDriver->get_config;
+            // It doesn't matter that page size is overrided or not.
+            uflTargetDesc->iarCfg.enablePageSizeOverride = true;
+            break;
+
+        case kChipId_RT116x_B0:
+        case kChipId_RT116x_C0:
+        case kChipId_RT117x_B0:
+        case kChipId_RT117x_C0:
+            uflTargetDesc->flashDriver.init             = g_bootloaderTree_imxrt117x_b0c0->flexspiNorDriver->init;
+            uflTargetDesc->flashDriver.page_program     = g_bootloaderTree_imxrt117x_b0c0->flexspiNorDriver->page_program;
+            uflTargetDesc->isFlashPageProgram           = true;
+            uflTargetDesc->flashDriver.erase_all        = g_bootloaderTree_imxrt117x_b0c0->flexspiNorDriver->erase_all;
+            uflTargetDesc->flashDriver.erase            = g_bootloaderTree_imxrt117x_b0c0->flexspiNorDriver->erase;
+            uflTargetDesc->flashDriver.read             = g_bootloaderTree_imxrt117x_b0c0->flexspiNorDriver->read;
+            uflTargetDesc->flashDriver.set_clock_source = NULL;
+            uflTargetDesc->flashDriver.get_config       = g_bootloaderTree_imxrt117x_b0c0->flexspiNorDriver->get_config;
             // It doesn't matter that page size is overrided or not.
             uflTargetDesc->iarCfg.enablePageSizeOverride = true;
             break;
@@ -233,8 +249,12 @@ static void ufl_init_hardware(void)
             ufl_init_hardware_imxrt106x();
             break;
 
-        case kChipId_RT116x:
-        case kChipId_RT117x:
+        case kChipId_RT116x_A0:
+        case kChipId_RT116x_B0:
+        case kChipId_RT116x_C0:
+        case kChipId_RT117x_A0:
+        case kChipId_RT117x_B0:
+        case kChipId_RT117x_C0:
             ufl_init_hardware_imxrt117x();
             break;
 
@@ -321,8 +341,12 @@ static void ufl_set_target_property(void)
             uflTargetDesc->configOption.option1.U = 0x0;
             break;
 
-        case kChipId_RT116x:
-        case kChipId_RT117x:
+        case kChipId_RT116x_A0:
+        case kChipId_RT116x_B0:
+        case kChipId_RT116x_C0:
+        case kChipId_RT117x_A0:
+        case kChipId_RT117x_B0:
+        case kChipId_RT117x_C0:
             uflTargetDesc->flexspiInstance = MIMXRT117X_1st_FLEXSPI_INSTANCE;
             uflTargetDesc->flexspiBaseAddr = MIMXRT117X_1st_FLEXSPI_BASE;
             uflTargetDesc->flashBaseAddr   = MIMXRT117X_1st_FLEXSPI_AMBA_BASE;

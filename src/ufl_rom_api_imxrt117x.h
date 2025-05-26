@@ -13,7 +13,8 @@
  * Definitions
  ******************************************************************************/
 
-#define RT117X_ROM_API_TREE_ADDR (0x0021001cu)
+#define RT117X_A0_ROM_API_TREE_ADDR   (0x0020001cu)
+#define RT117X_B0C0_ROM_API_TREE_ADDR (0x0021001cu)
 
 typedef struct _bootloader_tree_imxrt117x
 {
@@ -31,7 +32,8 @@ typedef struct _bootloader_tree_imxrt117x
     const uint32_t reserved7;
 } bootloader_tree_imxrt117x_t;
 
-#define g_bootloaderTree_imxrt117x (*(bootloader_tree_imxrt117x_t **)(RT117X_ROM_API_TREE_ADDR))
+#define g_bootloaderTree_imxrt117x_a0   (*(bootloader_tree_imxrt117x_t **)(RT117X_A0_ROM_API_TREE_ADDR))
+#define g_bootloaderTree_imxrt117x_b0c0 (*(bootloader_tree_imxrt117x_t **)(RT117X_B0C0_ROM_API_TREE_ADDR))
 
 /*******************************************************************************
  * API

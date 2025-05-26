@@ -71,8 +71,12 @@ typedef enum _rt_chip_id
     kChipId_RT104x     = 0x63U,
     kChipId_RT1060X    = 0x64U,
 
-    kChipId_RT117x     = 0x81U,
-    kChipId_RT116x     = 0x82U,
+    kChipId_RT117x_A0  = 0x81U,
+    kChipId_RT117x_B0  = 0x82U,
+    kChipId_RT117x_C0  = 0x83U,
+    kChipId_RT116x_A0  = 0x84U,
+    kChipId_RT116x_B0  = 0x85U,
+    kChipId_RT116x_C0  = 0x86U,
 
     kChipId_RT118x     = 0x91U,
 } rt_chip_id_t;
