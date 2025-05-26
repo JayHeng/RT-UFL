@@ -182,9 +182,15 @@ uint32_t ufl_get_fdcb_offset(rt_chip_id_t chipId)
         case kChipId_RT5xx:
         case kChipId_RT6xx:
         case kChipId_RT101x:
-        case kChipId_RT116x:
-        case kChipId_RT117x:
-        case kChipId_RT118x:
+        case kChipId_RT116x_A0:
+        case kChipId_RT116x_B0:
+        case kChipId_RT116x_C0:
+        case kChipId_RT117x_A0:
+        case kChipId_RT117x_B0:
+        case kChipId_RT117x_C0:
+        case kChipId_RT118x_A0:
+        case kChipId_RT118x_B0:
+        case kChipId_RT118x_C0:
             return 0x400;
 
         case kChipId_RT1015:
