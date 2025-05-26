@@ -196,7 +196,9 @@ static void ufl_fill_flash_api(void)
             uflTargetDesc->iarCfg.enablePageSizeOverride = true;
             break;
 
-        case kChipId_RT118x:
+        case kChipId_RT118x_A0:
+        case kChipId_RT118x_B0:
+        case kChipId_RT118x_C0:
             uflTargetDesc->flashDriver.init             = g_bootloaderTree_imxrt118x->flexspiNorDriver->init;
             uflTargetDesc->flashDriver.page_program     = g_bootloaderTree_imxrt118x->flexspiNorDriver->page_program;
             uflTargetDesc->isFlashPageProgram           = true;
@@ -258,7 +260,9 @@ static void ufl_init_hardware(void)
             ufl_init_hardware_imxrt117x();
             break;
 
-        case kChipId_RT118x:
+        case kChipId_RT118x_A0:
+        case kChipId_RT118x_B0:
+        case kChipId_RT118x_C0:
             ufl_init_hardware_imxrt118x();
             break;
 
@@ -354,7 +358,9 @@ static void ufl_set_target_property(void)
             //uflTargetDesc->configOption.option1.U = 0x0;
             break;
 
-        case kChipId_RT118x:
+        case kChipId_RT118x_A0:
+        case kChipId_RT118x_B0:
+        case kChipId_RT118x_C0:
             uflTargetDesc->flexspiInstance = MIMXRT118X_1st_FLEXSPI_INSTANCE;
             uflTargetDesc->flexspiBaseAddr = MIMXRT118X_1st_FLEXSPI_BASE;
             uflTargetDesc->flashBaseAddr   = MIMXRT118X_1st_FLEXSPI_AMBA_BASE;

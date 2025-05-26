@@ -72,8 +72,12 @@ static const rom_fingerprint_t s_romFingerprint[] = {
     {kChipId_RT117x_B0, {0xf24a0110, 0x9909a810, 0xf44f6030} },        // From ROM 2.0rc4.1
     // RT117x C0 ROM Size 256KB
     {kChipId_RT117x_C0, {0xf6c87012, 0x430861e0, 0x6830b1cc} },        // From ROM 3.0rc1.4
-    // RT118x ROM Size 160KB
-    {kChipId_RT118x,    {0xbf3c4577, 0x7f28d069, 0xf64f780a} },        // From ROM 1.0rc4.1
+    // RT118x A0 ROM Size 160KB
+    {kChipId_RT118x_A0, {0xbf3c4577, 0x7f28d069, 0xf64f780a} },        // From ROM 1.0rc4.1
+    // RT118x B0 ROM Size 160KB
+    {kChipId_RT118x_B0, {0xf240221d, 0xd0642e00, 0x0090f8c6} },        // From ROM 2.0rc3
+    // RT118x C0 ROM Size 160KB
+    {kChipId_RT118x_C0, {0xe0063401, 0x0b04f04f, 0x00b0f8c6} },        // From ROM 3.0rc1.2
 };
 
 /*******************************************************************************

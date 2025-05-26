@@ -78,7 +78,9 @@ typedef enum _rt_chip_id
     kChipId_RT116x_B0  = 0x85U,
     kChipId_RT116x_C0  = 0x86U,
 
-    kChipId_RT118x     = 0x91U,
+    kChipId_RT118x_A0  = 0x91U,
+    kChipId_RT118x_B0  = 0x92U,
+    kChipId_RT118x_C0  = 0x93U,
 } rt_chip_id_t;
 
 #define RT_ROM_BASE_CM33    (0x03000000u)
