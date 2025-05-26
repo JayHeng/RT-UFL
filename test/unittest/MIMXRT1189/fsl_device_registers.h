@@ -1,8 +1,6 @@
 /*
  * Copyright 2014-2016 Freescale Semiconductor, Inc.
- * Copyright 2016-2019 NXP
- * All rights reserved.
- *
+ * Copyright 2016-2023 NXP
  * SPDX-License-Identifier: BSD-3-Clause
  *
  */
@@ -15,7 +13,7 @@
  *
  * The CPU macro should be declared in the project or makefile.
  */
-#if (defined(CPU_MIMXRT1189AVM8A_cm7) || defined(CPU_MIMXRT1189CVM8A_cm7) || defined(CPU_MIMXRT1189CVM8A_cm7))
+#if (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7))
 
 #define MIMXRT1189_cm7_SERIES
 
@@ -24,7 +22,7 @@
 /* CPU specific feature definitions */
 #include "MIMXRT1189_cm7_features.h"
 
-#elif (defined(CPU_MIMXRT1189AVM8A_cm33) || defined(CPU_MIMXRT1189CVM8A_cm33) || defined(CPU_MIMXRT1189CVM8A_cm33))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33))
 
 #define MIMXRT1189_cm33_SERIES
 
