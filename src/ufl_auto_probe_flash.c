@@ -47,27 +47,58 @@ kFlexspiNorOpt0_Winbond_W25Q128JV     = 0xc0000207
 
 static const serial_nor_config_option_t s_flashConfigOpt[] = {
     // For Normal Quad, eg. IS25LP064A, GD25LB256E
-      // 1st Pinmux, PortA
+      // 1st Pinmux, PortA, SDR
     {.option0.U = 0xc0000001, .option1.U = 0x00000000},
-      // 1st Pinmux, PortB
+      // 1st Pinmux, PortB, SDR
     {.option0.U = 0xc1000001, .option1.U = 0x20000000},
-      // 2nd Pinmux, PortA
+      // 2nd Pinmux, PortA, SDR	
     {.option0.U = 0xc1000001, .option1.U = 0x00010000},
+      // 2nd Pinmux, PortB, SDR
+    {.option0.U = 0xc1000001, .option1.U = 0x20010000},
 
     // For Normal Octal, eg. MX25UM51345G
-      // 1st Pinmux, PortA
+      // 1st Pinmux, PortA, DDR
     {.option0.U = 0xc0403001, .option1.U = 0x00000000},
-      // 1st Pinmux, PortB, No DQS
+      // 1st Pinmux, PortB, SDR, Data samp intr loopback
     {.option0.U = 0xc1503051, .option1.U = 0x20000014},
+      // 1st Pinmux, PortB, DDR
+    {.option0.U = 0xc1403001, .option1.U = 0x20000000},
+      // 2nd Pinmux, PortA, DDR	
+    {.option0.U = 0xc1403001, .option1.U = 0x00010000},
+      // 2nd Pinmux, PortB, DDR
+    {.option0.U = 0xc1403001, .option1.U = 0x20010000},
+
+    // For Normal Octal, eg. MX25UM51245G
+      // 1st Pinmux, PortA, DDR, Data Order Swapped
+    {.option0.U = 0xc0403031, .option1.U = 0x00000000},
+      // 1st Pinmux, PortB, DDR, Data Order Swapped
+    {.option0.U = 0xc1403031, .option1.U = 0x20000000},
+      // 2nd Pinmux, PortA, DDR	
+    {.option0.U = 0xc1403031, .option1.U = 0x00010000},
+      // 2nd Pinmux, PortB, DDR
+    {.option0.U = 0xc1403031, .option1.U = 0x20010000},
+
+    // For Normal Octal, eg. MT35X
+      // 1st Pinmux, PortA, DDR
+    {.option0.U = 0xc0603001, .option1.U = 0x00000000},
+      // 1st Pinmux, PortB, DDR
+    {.option0.U = 0xc1603001, .option1.U = 0x20000000},
+      // 2nd Pinmux, PortA, DDR	
+    {.option0.U = 0xc1603001, .option1.U = 0x00010000},
+      // 2nd Pinmux, PortB, DDR
+    {.option0.U = 0xc1603001, .option1.U = 0x20010000},
+      // 1st Pinmux, PortA, DDR, Query pads - 8
+    {.option0.U = 0xc0633001, .option1.U = 0x00000000},
+      // 1st Pinmux, PortB, DDR, Query pads - 8
+    {.option0.U = 0xc1633001, .option1.U = 0x20000000},
+      // 2nd Pinmux, PortA, DDR, Query pads - 8
+    {.option0.U = 0xc1633001, .option1.U = 0x00010000},
+      // 2nd Pinmux, PortB, DDR, Query pads - 8
+    {.option0.U = 0xc1633001, .option1.U = 0x20010000},
 
     // For Normal HyperBus, eg. S26KS512S, IS26KS512S
     {.option0.U = (0xc0233000 + kSerialNorCfgOption_MaxFreq), .option1.U = 0x00000000},
 
-    // For Normal Octal, eg. MX25UM51245G
-    {.option0.U = 0xc0403031, .option1.U = 0x00000000},
-
-    // For Normal Octal, eg. MT35X
-    {.option0.U = 0xc0603001, .option1.U = 0x00000000},
     // For Normal Octal, eg. ATXP032
     {.option0.U = 0xc0803001, .option1.U = 0x00000000},
 
