@@ -1,66 +1,146 @@
-/*********************************************************************
-*            (c) 1995 - 2021 SEGGER Microcontroller GmbH             *
-*                        The Embedded Experts                        *
-*                           www.segger.com                           *
-**********************************************************************
+__constant U32 _INDEX_AHB_AP_CORTEX_M33       = 3;
+__constant U32 _AHB_ACC_32BIT_AUTO_INC        = (1 << 29) | (1 << 25) | (1 << 24) | (1 << 4) | (2 << 0);
+__constant U32 _AHB_ACC_16BIT_AUTO_INC        = (1 << 29) | (1 << 25) | (1 << 24) | (1 << 4) | (1 << 0);  // HMASTER = DEBUG, Private access, no Auto-increment, Access size: half word;
+__constant U32 _ACCESS_AP                     = 1;
+__constant U32 _CM33_CPUID                    = 0xD210;
+__constant U32 _CM7_CPUID                     = 0x0C27;
 
--------------------------- END-OF-HEADER -----------------------------
-*/
+unsigned int cpuID;
 
-void InitTCM(void) {
-    JLINK_SYS_Report("***************************************************");
-    JLINK_SYS_Report("Init TCM");
-    JLINK_SYS_Report("***************************************************");
-    JLINK_MEM_Fill(0x1FFE0000, 0x20000, 0);
-    JLINK_MEM_Fill(0x20000000, 0x20000, 0);
+static int _WriteViaCM33AP16(U32 Addr, U16 Data) {
+    int r;
+
+    JLINK_CORESIGHT_WriteDP(JLINK_CORESIGHT_DP_REG_SELECT, (0 << 4) | (_INDEX_AHB_AP_CORTEX_M33 << 24));
+    JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_CTRL,   _AHB_ACC_16BIT_AUTO_INC);
+    Data = (Data & 0xFFFF) | ((Data & 0xFFFF) << 16);
+    r  = JLINK_CORESIGHT_WriteDAP(JLINK_CORESIGHT_AP_REG_ADDR, _ACCESS_AP, Addr);
+    r |= JLINK_CORESIGHT_WriteDAP(JLINK_CORESIGHT_AP_REG_DATA, _ACCESS_AP, Data);
+    return r;
 }
 
-void ClearNVIC(void) {
-    JLINK_SYS_Report("***************************************************");
-    JLINK_SYS_Report("Clear NVIC");
-    JLINK_SYS_Report("***************************************************");
-    JLINK_MEM_Fill(0xE000E180, 0x40, 0xFF);
-    JLINK_MEM_Fill(0xE000E280, 0x40, 0xFF);
+static U32 _ReadViaCM33AP16(U32 Addr) {
+    U32 r;
+
+    JLINK_CORESIGHT_WriteDP(JLINK_CORESIGHT_DP_REG_SELECT, (0 << 4) | (_INDEX_AHB_AP_CORTEX_M33 << 24));
+    JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_CTRL,   _AHB_ACC_16BIT_AUTO_INC);
+    JLINK_CORESIGHT_WriteDAP(JLINK_CORESIGHT_AP_REG_ADDR, _ACCESS_AP, Addr);
+    JLINK_CORESIGHT_ReadDAP(JLINK_CORESIGHT_AP_REG_DATA, _ACCESS_AP, &r);
+    return r;
 }
 
-void enableEraseFlash(void) {
-    JLINK_SYS_Report("***************************************************");
-    JLINK_SYS_Report("Enable Erase All Flash Banks");
-    JLINK_SYS_Report("***************************************************");
-    JLINK_ExecCommand("EnableEraseAllFlashBanks");
+static int _WriteViaCM33AP32(U32 Addr, U32 Data) {
+    int r;
+
+    JLINK_CORESIGHT_WriteDP(JLINK_CORESIGHT_DP_REG_SELECT, (0 << 4) | (_INDEX_AHB_AP_CORTEX_M33 << 24));
+    JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_CTRL,   _AHB_ACC_32BIT_AUTO_INC);
+    r  = JLINK_CORESIGHT_WriteDAP(JLINK_CORESIGHT_AP_REG_ADDR, _ACCESS_AP, Addr);
+    r |= JLINK_CORESIGHT_WriteDAP(JLINK_CORESIGHT_AP_REG_DATA, _ACCESS_AP, Data);
+    return r;
 }
 
-/*********************************************************************
-*
-*       ResetTarget
-*/
-void ResetTarget(void) {
-    //
-    // This device requires a special reset as default reset does not work for this device.
-    // TBD
-    //
-    JLINK_TARGET_Halt(); // Make sure that the CPU is halted when reset is called
+static U32 _ReadViaCM33AP32(U32 Addr) {
+    int r;
+
+    JLINK_CORESIGHT_WriteDP(JLINK_CORESIGHT_DP_REG_SELECT, (0 << 4) | (_INDEX_AHB_AP_CORTEX_M33 << 24));
+    JLINK_CORESIGHT_WriteAP(JLINK_CORESIGHT_AP_REG_CTRL,   _AHB_ACC_32BIT_AUTO_INC);
+    r  = JLINK_CORESIGHT_WriteDAP(JLINK_CORESIGHT_AP_REG_ADDR, _ACCESS_AP, Addr);
+    r |= JLINK_CORESIGHT_ReadDAP(JLINK_CORESIGHT_AP_REG_DATA, _ACCESS_AP, &r);
+    return r;
 }
 
-/*********************************************************************
-*
-*       InitTarget
-*/
-void InitTarget(void) { 
-    int v;
-    JLINK_SYS_Report("***************************************************");
-    JLINK_SYS_Report("J-Link script: iMXRT1180 Cortex-M33 core J-Link script");
-    JLINK_SYS_Report("***************************************************");
+void CM7_InitTCM(U32 targetAddr, U32 size) {
+    U32 reg;
+    
+    reg = _ReadViaCM33AP32(0x52010000);           // DMA4->TDC[0].CH_CSR
+    
+    if((reg & 0x80000000) != 0)
+    {
+        // DMA channel is active, wait it get finished
+        do
+        {
+            reg = _ReadViaCM33AP32(0x52010000);   // DMA4->TDC[0].CH_CSR
+        } while((reg & 0x40000000) == 0);
+    }
 
-    // For SWD, no special setup is needed, just output the switching sequence
+    _WriteViaCM33AP32(0x52010000, 0x40000000);    // DMA4->TDC[0].CH_CSR, clear DONE flag
+
+    _WriteViaCM33AP32(0x5201002C, 0x00000000);    // DMA4->TCD[0].SLAST_SGA
+    _WriteViaCM33AP32(0x52010038, 0x00000000);    // DMA4->TCD[0].DLAST_SGA
+
+    _WriteViaCM33AP32(0x52010000, 0x40000000);    // DMA4->TCD[0].CH_CSR
+
+    _WriteViaCM33AP32(0x52010020, 0x20484000);    // DMA4->TCD[0].SADDR
+    _WriteViaCM33AP32(0x52010030, targetAddr);    // DMA4->TCD[0].DADDR
+    _WriteViaCM33AP32(0x52010028, size);          // DMA4->TCD[0].NBYTES_MLOFFNO
+    _WriteViaCM33AP16(0x52010036, 0x1);           // DMA4->TCD[0].ELINKNO
+    _WriteViaCM33AP16(0x5201003E, 0x1);           // DMA4->TCD[0].BITER_ELINKNO
+    _WriteViaCM33AP16(0x52010026, 0x0303);        // DMA4->TCD[0].ATTR
+    _WriteViaCM33AP16(0x52010024, 0x0);           // DMA4->TCD[0].SOFF
+    _WriteViaCM33AP16(0x52010034, 0x8);           // DMA4->TCD[0].DOFF
+    _WriteViaCM33AP32(0x52010000, 0x7);           // DMA4->TDC[0].CH_CSR
+    _WriteViaCM33AP16(0x5201003C, 0x8);           // DMA4->TCD[0].CSR
+    _WriteViaCM33AP32(0x5201003C, 0x9);           // DMA4->TCD[0].CSR
+
+    do
+    {
+        reg = _ReadViaCM33AP32(0x52010000);       // DMA4->TDC[0].CH_CSR
+    } while((reg & 0x40000000) == 0);
+    _WriteViaCM33AP32(0x52010000, 0x40000000);    // DMA4->TDC[0].CH_CSR, clear DONE flag
+}
+
+void CM7_KickOff(void)
+{
+    U32 reg, resp1, resp2;
+    
+    reg = _ReadViaCM33AP32(0x544F0080);  // BLK_CTRL_S_AONMIX->M7_CFG
+    if((reg & 0x10) == 0)
+    {
+        JLINK_SYS_Report("CM7 is running already");
+    }
+    else
+    {
+        JLINK_SYS_Report("************* Begin Operations to Enable CM7 ***********************");
+
+        // Clock Preparation
+        JLINK_SYS_Report("******** Prepare Clock *********");
+        _WriteViaCM33AP32(0x54484350, 0x0);   // ROSC400M_CTRL1
+        _WriteViaCM33AP32(0x54450000, 0x100); // CLOCK_ROOT[0].CONTROL, CM7
+
+        // Release CM7
+        _WriteViaCM33AP32(0x54460010, 0x1);  // SRC_GENERAL_REG->SCR
+
+        // DMA initialization
+        JLINK_SYS_Report("******** DMA operation *********");
+        CM7_InitTCM(0x303C0000, 0x40000);
+        CM7_InitTCM(0x30400000, 0x40000);
+
+        // Making Landing Zone
+        JLINK_SYS_Report("******** Creating Landing Zone *********");
+        _WriteViaCM33AP32(0x303C0000, 0x20020000);
+        _WriteViaCM33AP32(0x303C0004, 0x00000009);
+        _WriteViaCM33AP32(0x303C0008, 0xE7FEE7FE);
+
+        // VTOR 0x00
+        _WriteViaCM33AP32(0x544F0080, 0x0010);  // BLK_CTRL_S_AONMIX->M7_CFG
+
+        // Trigger ELE
+        JLINK_SYS_Report("******** ELE Trigger *********");
+        _WriteViaCM33AP32(0x57540200, 0x17d20106);  // MU_RT_S3MUA->TR[0]
+        resp1 = _ReadViaCM33AP32(0x57540280);  // MU_RT_S3MUA->RR[0]
+        resp2 = _ReadViaCM33AP32(0x57540284);  // MU_RT_S3MUA->RR[1]
+        JLINK_SYS_Report1("ELE RESP1 : ", resp1);  
+        JLINK_SYS_Report1("ELE RESP2 : ", resp2);
+
+        // Deassert CM7 Wait
+        JLINK_SYS_Report("******** Kickoff CM7 *********");
+        _WriteViaCM33AP32(0x544F0080, 0x0);  // BLK_CTRL_S_AONMIX->M7_CFG
+    }
+}
+
+void DAP_Init(void)
+{
     JLINK_CORESIGHT_Configure("");
-    CPU = CORTEX_M33;                                                              // Pre-select that we have a Cortex-M4 connected
-    JTAG_AllowTAPReset = 0;                                                       // J-Link is allowed to use a TAP reset for JTAG-chain auto-detection
 
-    //
-    // Manually configure which APs are present on the CoreSight device
-    //
-    //JTAG_SetDeviceId(0, 0x44770003);  // 4-bits IRLen
     CORESIGHT_AddAP(0, CORESIGHT_AHB_AP);
     CORESIGHT_AddAP(1, CORESIGHT_APB_AP);
     CORESIGHT_AddAP(2, CORESIGHT_AHB_AP);
@@ -68,11 +148,86 @@ void InitTarget(void) {
     CORESIGHT_AddAP(4, CORESIGHT_APB_AP);
     CORESIGHT_AddAP(5, CORESIGHT_APB_AP);
     CORESIGHT_AddAP(6, CORESIGHT_APB_AP);
-    CORESIGHT_IndexAHBAPToUse = 3;
+    
+    JLINK_SYS_Report("***************************************************");
+    if(cpuID == _CM7_CPUID)
+    {
+        CPU = CORTEX_M7;
+        CORESIGHT_IndexAHBAPToUse = 2;
+        JLINK_SYS_Report("Current core is CM7");
+    }
+    else if(cpuID == _CM33_CPUID)
+    {
+        CPU = CORTEX_M33;
+        CORESIGHT_IndexAHBAPToUse = 3;
+        JLINK_SYS_Report("Current core is CM33");
+    }
+    else
+    {
+        JLINK_SYS_Report1("Wrong CPU ID: ", cpuID);
+    }
+    JLINK_SYS_Report("***************************************************");
+}
 
-    //JTAG_SetDeviceId(0, 0x44770003);  // 4-bits IRLen
-    v = JLINK_CORESIGHT_ReadDP(JLINK_CORESIGHT_DP_REG_CTRL_STAT);
-    JLINK_SYS_Report1("DAP-CtrlStat: ", v);  
+void CM33_Halt(void)
+{
+    U32 reg;
+    
+    reg = (_ReadViaCM33AP32(0x54460044) >> 24) & 0x3F;  //SRC->SBMR2
+    
+    if((reg == 8) || (reg == 9))  // Serial Download Mode, or Boot From Fuse 
+    {
+        JLINK_SYS_Report("Not flash execution mode, check if CM33 is halted...");
+
+        reg = _ReadViaCM33AP32(0xE000EDF0);  //DHCSR
+        
+        if(0 == (reg & 0x02))
+        {
+            JLINK_SYS_Report1("CM33 is not halted, trying to halt it. CM33 DHCSR: ", reg);
+
+            _WriteViaCM33AP32(0xE000EDF0, 0xA05F0001);   // DHCSR, Enable CM33 debug control
+            _WriteViaCM33AP32(0xE000EDF0, 0xA05F0003);   // DHCSR, Halt CM33
+            reg = _ReadViaCM33AP32(0xE000EDF0);  //DHCSR
+            if(0 != (reg & 0x02))
+            {
+                JLINK_SYS_Report1("CM33 is halted now. CM33 DHCSR: ", reg);
+            }
+            else
+            {
+                JLINK_SYS_Report1("CM33 still running, halt failed. CM33 DHCSR: ", reg);
+            }
+        }
+        else
+        {
+            JLINK_SYS_Report1("CM33 is halted. CM33 DHCSR: ", reg);
+        }
+    }
+    else
+    {
+        JLINK_SYS_Report("Flash execution mode, leave CM33 run status as it was...");
+    }
+}
+
+void CM33_ClearNVIC(void) {
+    JLINK_SYS_Report("***************************************************");
+    JLINK_SYS_Report("Clear NVIC");
+    JLINK_SYS_Report("***************************************************");
+    JLINK_MEM_Fill(0xE000E180, 0x40, 0xFF);
+    JLINK_MEM_Fill(0xE000E280, 0x40, 0xFF);
+}
+
+int InitTarget(void)
+{
+    cpuID = _CM33_CPUID;
+
+    DAP_Init();
+    
+    if(cpuID == _CM7_CPUID)
+    {
+        CM33_Halt();
+        CM7_KickOff();
+    }
+
     return 0;
 }
 
@@ -83,20 +238,29 @@ void SetFlagInITCM()
     JLINK_SYS_Report("J-Link script: 0x5AA60FF1 has been written to address 0x1FFFFFFC");
 }
 
-/* SetupTarget */
-void SetupTarget(void) {
+int SetupTarget(void)
+{
+    SetFlagInITCM();
 
-    InitTCM();
-    ClearNVIC();
-    enableEraseFlash();
+    return 0;
+}
+
+void ResetTarget(void) {
+    JLINK_TARGET_Halt(); // Make sure that the CPU is halted when reset is called
+}
+
+int AfterResetTarget(void)
+{
+    U32 reg;
+
+    if(cpuID == _CM33_CPUID)
+    {
+        CM33_ClearNVIC();
+    }
 
     SetFlagInITCM();
 
     return 0;
 }
 
-/* AfterResetTarget */
-void AfterResetTarget(void) {
 
-    SetFlagInITCM();
-}

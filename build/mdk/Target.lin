@@ -13,7 +13,7 @@ PRG 0x1000 PI               ; Programming Functions
   }
 }
 
-DSCR +0                ; Device Description
+DSCR +0xB00                ; Device Description
 {
   DevDscr +0
   {
